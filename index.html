@@ -807,6 +807,7 @@
             <a href="#packages" class="nav-link">Packages</a>
             <a href="#sprint" class="nav-link">Sprint</a>
             <a href="#delivery" class="nav-link">Delivery</a>
+            <a href="#brand" class="nav-link">Brand</a>
         </div>
     </nav>
 
@@ -1427,20 +1428,219 @@
             </div>
         </section>
 
-        <div class="ratio-section">
-            <div class="ratio-label">Vertia Labs v8 — Color Ratio & Palette</div>
-            <div class="ratio-bar">
-                <div style="background:var(--base); flex:52; border-right:1px solid rgba(11,22,40,0.06);"></div>
-                <div style="background:var(--navy); flex:28;"></div>
-                <div style="background:var(--gradient-brand); flex:20;"></div>
+        <div class="grad-divider"></div>
+
+        <section id="brand">
+            <h2>Brand System & Design Specifications</h2>
+
+            <p class="subtitle">Vertia Labs v8 — Complete visual identity, color specifications, and technical implementation guide.</p>
+
+            <!-- COLOR PALETTE SECTION -->
+            <h3>Color Palette</h3>
+
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h4>Primary Colors</h4>
+                    <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div>
+                            <div style="width: 60px; height: 60px; background: #f1f2f8; border: 1px solid rgba(11,22,40,0.1); border-radius: 8px; margin-bottom: 0.5rem;"></div>
+                            <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Base</p>
+                            <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#f1f2f8</p>
+                        </div>
+                        <div>
+                            <div style="width: 60px; height: 60px; background: #0b1628; border-radius: 8px; margin-bottom: 0.5rem;"></div>
+                            <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Navy</p>
+                            <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#0b1628</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--stone); line-height: 1.6; margin-bottom: 0;">Cool off-white base (#f1f2f8) provides 52% of total palette. Dark navy (#0b1628) anchors secondary elements at 28%. Together they create a premium, accessible foundation.</p>
+                </div>
+
+                <div class="glass-card">
+                    <h4>Accent Gradient (20% of Palette)</h4>
+                    <div style="display: flex; gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div>
+                            <div style="width: 60px; height: 60px; background: #4f6ef7; border-radius: 8px; margin-bottom: 0.5rem;"></div>
+                            <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Indigo</p>
+                            <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#4f6ef7</p>
+                        </div>
+                        <div>
+                            <div style="width: 60px; height: 60px; background: #7c3aed; border-radius: 8px; margin-bottom: 0.5rem;"></div>
+                            <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Violet</p>
+                            <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#7c3aed</p>
+                        </div>
+                        <div>
+                            <div style="width: 60px; height: 60px; background: #d946a8; border-radius: 8px; margin-bottom: 0.5rem;"></div>
+                            <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Fuchsia</p>
+                            <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#d946a8</p>
+                        </div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--stone); line-height: 1.6; margin-bottom: 0;">The gradient accent flows indigo → violet → fuchsia. Indigo (#4f6ef7) is the blue anchor—key differentiator vs competitors (Nubank uses warm purple). Used for buttons, links, CTAs, and primary interactive elements.</p>
+                </div>
             </div>
-            <div class="ratio-legend">
-                <span class="rl"><span class="rl-dot" style="background:var(--base);border:1px solid rgba(11,22,40,0.1);"></span>Cool off-white 52%</span>
-                <span class="rl"><span class="rl-dot" style="background:var(--navy);"></span>Dark navy 28%</span>
-                <span class="rl"><span class="rl-dot" style="background:var(--gradient-brand);"></span>Gradient (indigo→violet→fuchsia) 20%</span>
+
+            <h3 style="margin-top: 2rem;">Supporting Colors</h3>
+
+            <div class="glass-card">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <div style="width: 100%; height: 40px; background: #e4e6f2; border-radius: 6px; margin-bottom: 0.75rem;"></div>
+                        <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Surface</p>
+                        <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#e4e6f2</p>
+                        <p style="font-size: 11px; color: var(--stone); margin-top: 0.5rem;">Hover states, secondary cards.</p>
+                    </div>
+                    <div>
+                        <div style="width: 100%; height: 40px; background: #636680; border-radius: 6px; margin-bottom: 0.75rem;"></div>
+                        <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Stone</p>
+                        <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#636680</p>
+                        <p style="font-size: 11px; color: var(--stone); margin-top: 0.5rem;">Body text, secondary copy.</p>
+                    </div>
+                    <div>
+                        <div style="width: 100%; height: 40px; background: #9496b0; border-radius: 6px; margin-bottom: 0.75rem;"></div>
+                        <p style="font-size: 12px; font-weight: 600; margin-bottom: 0.25rem;">Muted</p>
+                        <p style="font-size: 11px; color: var(--muted); font-family: monospace;">#9496b0</p>
+                        <p style="font-size: 11px; color: var(--stone); margin-top: 0.5rem;">Labels, tertiary text, disabled states.</p>
+                    </div>
+                </div>
             </div>
-            <p style="font-size: 13px; color: var(--muted); margin-top: 1.5rem; line-height: 1.6;">This document is a comprehensive strategic planning + execution reference. Every section is extracted from your source strategy and sprint docs. The one addition: Problem-Specific Review Discovery is positioned as a directional hypothesis with first-mover potential in South America. Validate with first 3 clients, document results, own the moat.</p>
-        </div>
+
+            <!-- COLOR RATIO -->
+            <h3 style="margin-top: 2rem;">Color Ratio</h3>
+
+            <div class="glass-card">
+                <p style="font-size: 13px; color: var(--muted); margin-bottom: 1rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;">52% Base · 28% Navy · 20% Gradient</p>
+                <div style="display: flex; border-radius: 8px; overflow: hidden; height: 20px; margin-bottom: 1.5rem; box-shadow: 0 4px 12px rgba(11, 22, 40, 0.1);">
+                    <div style="background: #f1f2f8; flex: 52; border-right: 2px solid white;"></div>
+                    <div style="background: #0b1628; flex: 28;"></div>
+                    <div style="background: linear-gradient(90deg, #4f6ef7, #7c3aed, #d946a8); flex: 20;"></div>
+                </div>
+                <p style="font-size: 13px; color: var(--stone); line-height: 1.6; margin-bottom: 0;">This ratio ensures the brand feels premium and spacious (cool base dominates), anchored by dark navy (establishes authority), with the gradient providing visual interest and brand recognition. The 20% accent ensures impact without overwhelming.</p>
+            </div>
+
+            <!-- TYPOGRAPHY -->
+            <h3 style="margin-top: 2rem;">Typography</h3>
+
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h4>Headlines: DM Serif Display</h4>
+                    <p style="font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--navy); line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.03em;">Get cited by AI.</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Family:</strong> DM Serif Display</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Usage:</strong> h1, h2, h3, section headers</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Weights:</strong> Regular (400), Italic (400i)</li>
+                        <li style="margin-bottom: 0;"><strong>Characteristics:</strong> Elegant, editorial, high contrast. Letter-spacing: -0.02em to -0.04em for tightness.</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card">
+                    <h4>Body & UI: DM Sans</h4>
+                    <p style="font-family: 'DM Sans', sans-serif; font-size: 16px; color: var(--stone); line-height: 1.6; margin-bottom: 1rem;">Strategic planning + execution framework for launching a productized AEO service.</p>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+                        <li style="margin-bottom: 0.5rem;"><strong>Family:</strong> DM Sans</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Usage:</strong> Body text, labels, buttons, UI elements</li>
+                        <li style="margin-bottom: 0.5rem;"><strong>Weights:</strong> Light (300), Regular (400), Medium (500)</li>
+                        <li style="margin-bottom: 0;"><strong>Characteristics:</strong> Friendly, geometric, highly legible. Pair with serif for contrast.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SPACING & SIZING -->
+            <h3 style="margin-top: 2rem;">Spacing & Sizing System</h3>
+
+            <div class="glass-card">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <p style="font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase;">Spacing Scale</p>
+                        <ul style="margin-left: 1.5rem; list-style: none; margin: 0;">
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">0.5rem</code> — micro gaps</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">1rem</code> — small elements</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">1.5rem</code> — component spacing</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">2rem</code> — section gaps</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">3–4rem</code> — major divisions</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p style="font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase;">Border Radius</p>
+                        <ul style="margin-left: 1.5rem; list-style: none; margin: 0;">
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">4px</code> — tight UI elements</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">8px</code> — badges, small cards</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">12px</code> — callouts, containers</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">16–20px</code> — large cards, sections</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">100px</code> — buttons, pills</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p style="font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 0.75rem; letter-spacing: 0.05em; text-transform: uppercase;">Typography Sizing</p>
+                        <ul style="margin-left: 1.5rem; list-style: none; margin: 0;">
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">h1: 72px</code> — hero titles</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">h2: 42px</code> — section headers</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">h3: 28px</code> — subsections</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">p: 16px</code> — body text</li>
+                            <li style="padding: 0.5rem 0; font-size: 13px; color: var(--stone);"><code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">label: 12–13px</code> — UI labels</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GLASS MORPHISM & EFFECTS -->
+            <h3 style="margin-top: 2rem;">Design System: Glass Morphism & Effects</h3>
+
+            <div class="glass-card">
+                <h4 style="margin-bottom: 1rem;">Glass Cards</h4>
+                <p style="font-size: 13px; color: var(--stone); line-height: 1.6; margin-bottom: 1rem;"><strong>Background:</strong> <code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">rgba(255, 255, 255, 0.6–0.8)</code> · <strong>Backdrop filter:</strong> <code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">blur(12–16px)</code> · <strong>Border:</strong> <code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">1px solid rgba(255, 255, 255, 0.8–0.9)</code></p>
+                <p style="font-size: 13px; color: var(--stone); line-height: 1.6; margin-bottom: 1rem;">Glass cards create depth and visual layering. Use sparingly—too much translucency breaks hierarchy. Combine with subtle shadows (0 10px 30px rgba(11, 22, 40, 0.04)) for floating effect.</p>
+                <h4 style="margin-bottom: 1rem; margin-top: 1rem;">Shadows</h4>
+                <p style="font-size: 13px; color: var(--stone); line-height: 1.6; margin-bottom: 0;"><strong>Subtle:</strong> <code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">0 10px 30px rgba(11, 22, 40, 0.04)</code> — default cards. <strong>Hover:</strong> <code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">0 20px 48px rgba(11, 22, 40, 0.08)</code> — on interaction. <strong>Accent:</strong> <code style="background: rgba(79,110,247,0.1); padding: 2px 6px; border-radius: 3px; font-family: monospace; font-size: 11px;">0 10px 24px rgba(124, 58, 237, 0.25)</code> — gradient elements.</p>
+            </div>
+
+            <!-- RESPONSIVE BREAKPOINTS -->
+            <h3 style="margin-top: 2rem;">Responsive Design</h3>
+
+            <div class="glass-card">
+                <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+                    <li style="margin-bottom: 0.75rem;"><strong>Desktop (≥1000px):</strong> Full multi-column layouts, generous spacing, large typography.</li>
+                    <li style="margin-bottom: 0.75rem;"><strong>Tablet (768px–999px):</strong> 2-column grids, medium typography (h1: 56px).</li>
+                    <li style="margin-bottom: 0;"><strong>Mobile (≤767px):</strong> Single column, stacked components, reduced padding (1rem instead of 2.5rem), optimized h1 (48px), nav links hidden (hamburger on desktop if needed).</li>
+                </ul>
+            </div>
+
+            <!-- USAGE EXAMPLES -->
+            <h3 style="margin-top: 2rem;">Usage Guidelines</h3>
+
+            <div class="grid-2">
+                <div class="glass-card accent-indigo">
+                    <h4>When to Use Indigo (#4f6ef7)</h4>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+                        <li>Primary buttons (CTAs)</li>
+                        <li>Active navigation links</li>
+                        <li>Primary accent for emphasis</li>
+                        <li>UI focus states</li>
+                        <li>Links and hypertext</li>
+                    </ul>
+                </div>
+
+                <div class="glass-card accent-violet">
+                    <h4>When to Use Violet & Fuchsia</h4>
+                    <ul style="margin-left: 1.5rem; margin-bottom: 0;">
+                        <li>Gradient overlays (indigo→violet→fuchsia)</li>
+                        <li>Secondary accent elements</li>
+                        <li>Timeline markers, milestones</li>
+                        <li>Featured cards or callouts</li>
+                        <li>Data visualization charts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout success">
+                <h4>Key Principle: The Blue Anchor</h4>
+                <p style="margin-bottom: 0;">Indigo (#4f6ef7) is the single most important color differentiator. It's blue-first, not purple-first. This separates Vertia Labs from competitors like Nubank (warm purple). Apply indigo consistently to primary interactive elements, headers, and brand highlights. Never swap it out for violet or fuchsia as a primary color.</p>
+            </div>
+
+        </section>
+
+        <div class="grad-divider"></div>
     </main>
 
     <footer>
@@ -1477,4 +1677,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
