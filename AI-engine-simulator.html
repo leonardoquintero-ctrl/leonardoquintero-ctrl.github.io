@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertia Labs | AI Citation Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --v-indigo: #1e1b4b;
+            --v-purple-light: #a78bfa;
+            --v-canvas: #f9fafb;
+            --v-grid: rgba(30, 27, 75, 0.04);
+        }
+
+        body {
+            background-color: var(--v-canvas);
+            background-image:
+                linear-gradient(var(--v-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--v-grid) 1px, transparent 1px);
+            background-size: 32px 32px;
+            color: var(--v-indigo);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to bottom right, var(--v-indigo), var(--v-purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* "Labs" logo gradient — #32127a to #7a5ea0 */
+        .nav-labs {
+            background: linear-gradient(135deg, #32127a, #7a5ea0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 400;
+        }
+
+        .blueprint-bg {
+            background-image: radial-gradient(var(--v-purple-light) 0.5px, transparent 0.5px);
+            background-size: 16px 16px;
+            opacity: 0.2;
+        }
+
+        /* Fixed chart wrapper — hard pixel height prevents infinite expansion */
+        .chart-outer {
+            position: relative;
+            width: 100%;
+            height: 340px;
+        }
+        .chart-outer canvas {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .nav-logo {
+            letter-spacing: -0.05em;
+            font-weight: 800;
+        }
+
+        .card-flat {
+            background: white;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px -10px rgba(30, 27, 75, 0.05);
+        }
+
+        .btn-primary {
+            background: var(--v-indigo);
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -6px rgba(167, 139, 250, 0.4);
+        }
+
+        .font-mono-tech { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="h-20 bg-white/70 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
+            <div class="flex items-center space-x-1 text-2xl">
+                <span class="nav-logo uppercase">VERTIA</span>
+                <span class="nav-labs">Labs</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-[11px] font-bold uppercase tracking-widest text-gray-400">
+                <a href="#logic" class="hover:text-indigo-900 transition-colors">The Logic</a>
+                <a href="#metrics" class="hover:text-indigo-900 transition-colors">Metrics</a>
+                <a href="#sandbox" class="hover:text-indigo-900 transition-colors">Simulator</a>
+                <span class="text-gray-200">|</span>
+                <button class="text-indigo-900 border-b-2 border-purple-300 pb-0.5">Contact Research</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-32 pb-24 overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full blueprint-bg"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="inline-flex items-center space-x-2 bg-indigo-50 px-3 py-1 rounded mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+                <span class="text-[10px] font-mono-tech text-indigo-900 font-bold tracking-widest">LLM_OPTIMIZATION_PROTOCOL_2.5</span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-10 max-w-4xl">
+                <span class="text-indigo-950">Get cited by AI.</span><br/>
+                <span class="text-gradient">Without PR.</span>
+            </h1>
+            <p class="max-w-xl text-xl text-gray-500 font-light leading-relaxed mb-12">
+                Traditional PR is dead weight. We engineer your information architecture so Large Language Models prioritize your data as the 'Single Source of Truth'.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                <button class="btn-primary px-10 py-4 rounded-full text-sm font-bold uppercase tracking-[0.2em]">Start Research</button>
+                <div class="flex items-center space-x-3 text-xs font-mono-tech text-gray-400">
+                    <span class="block w-8 h-px bg-gray-200"></span>
+                    <span>LATENCY: 42ms // CORE_WEB_VITALS: PASS</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-20 space-y-32">
+
+        <!-- Logic Section -->
+        <section id="logic" class="grid lg:grid-cols-12 gap-16 items-center overflow-hidden">
+            <div class="lg:col-span-5 space-y-8 min-w-0">
+                <div class="space-y-4">
+                    <h2 class="text-3xl font-bold tracking-tight text-indigo-950">Typographic Authority</h2>
+                    <p class="text-gray-500 leading-relaxed font-light">
+                        When AI agents crawl your site, they don't just see text—they analyze structural hierarchy. We use semantic CSS and optimized font stacks to ensure your key takeaways are weighted correctly in their context windows.
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded bg-indigo-950 flex items-center justify-center text-white font-mono-tech">01</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm">Semantic Weighting</h4>
+                            <p class="text-xs text-gray-400 mt-1">H1-H4 hierarchies mapped to LLM attention heads.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="w-10 h-10 rounded bg-purple-400 flex items-center justify-center text-white font-mono-tech">02</div>
+                        <div class="flex-1">
+                            <h4 class="font-bold text-sm">Data Extraction Cleanliness</h4>
+                            <p class="text-xs text-gray-400 mt-1">Zero-noise layouts that favor RAG (Retrieval-Augmented Generation).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 min-w-0">
+                <div class="card-flat rounded-3xl overflow-hidden p-12 relative">
+                    <div class="absolute top-0 right-0 p-4 font-mono-tech text-[10px] text-gray-300 truncate max-w-full">FIG_042 // STRUCTURE_MAP</div>
+                    <div class="space-y-6">
+                        <div class="h-8 w-2/3 bg-indigo-950 rounded opacity-10"></div>
+                        <div class="h-4 w-full bg-indigo-950 rounded opacity-5"></div>
+                        <div class="h-4 w-full bg-indigo-950 rounded opacity-5"></div>
+                        <div class="h-4 w-4/5 bg-indigo-950 rounded opacity-5"></div>
+                        <div class="grid grid-cols-3 gap-4 pt-4">
+                            <div class="h-20 bg-purple-100 border border-purple-200 rounded-xl flex items-center justify-center">
+                                <span class="font-mono-tech text-[10px] text-purple-600">NODE_A</span>
+                            </div>
+                            <div class="h-20 bg-indigo-50 border border-indigo-100 rounded-xl flex items-center justify-center">
+                                <span class="font-mono-tech text-[10px] text-indigo-400">NODE_B</span>
+                            </div>
+                            <div class="h-20 bg-purple-50 border border-purple-100 rounded-xl flex items-center justify-center">
+                                <span class="font-mono-tech text-[10px] text-purple-400">NODE_C</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Metrics Dashboard -->
+        <section id="metrics" class="space-y-12">
+            <div class="text-center space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-[0.4em] text-purple-400">Benchmark Intelligence</h3>
+                <h2 class="text-4xl font-extrabold text-indigo-950">AI Indexing Probability</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="card-flat rounded-[2rem] p-10">
+                    <h4 class="text-lg font-bold mb-8">LLM Visibility Index</h4>
+                    <!-- Fixed-height wrapper — prevents infinite vertical expansion -->
+                    <div class="chart-outer">
+                        <canvas id="visibilityChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-8">
+                    <div class="card-flat rounded-2xl p-8 border-l-4 border-indigo-950">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Growth Vector</span>
+                            <span class="text-indigo-900 font-bold font-mono-tech">+214%</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Synthetic Citation Frequency</h4>
+                        <p class="text-sm text-gray-500 font-light">Measured increase in GPT-4 and Perplexity citations after implementing Vertia Labs Typography Protocol.</p>
+                    </div>
+                    <div class="card-flat rounded-2xl p-8 border-l-4 border-purple-400">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Truth Score</span>
+                            <span class="text-purple-600 font-bold font-mono-tech">98.2/100</span>
+                        </div>
+                        <h4 class="font-bold mb-2">Source Reliability Perception</h4>
+                        <p class="text-sm text-gray-500 font-light">Human-led studies on brand authority based purely on typographic clean-room environments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sandbox -->
+        <section id="sandbox" class="relative">
+            <div class="bg-indigo-950 rounded-[3rem] p-12 md:p-24 text-white overflow-hidden relative">
+                <div class="absolute inset-0 blueprint-bg opacity-10"></div>
+                <div class="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <h2 class="text-4xl font-extrabold leading-tight">The AI-Friendly<br/>Simulator.</h2>
+                        <p class="text-indigo-300 font-light text-lg">
+                            Adjust the typographic 'gravity' to see how it influences AI attention scores. More weight on headings increases "Citeability" but may impact reading flow.
+                        </p>
+                        <div class="space-y-6 pt-4">
+                            <div>
+                                <label class="text-[10px] uppercase tracking-widest text-indigo-400 block mb-4">Citation Weight</label>
+                                <input type="range" min="100" max="900" step="100" value="700" class="w-full accent-purple-400" oninput="updateLab(this.value)">
+                            </div>
+                            <div class="flex justify-between text-[10px] font-mono-tech text-indigo-500">
+                                <span>MIN_INDEX</span>
+                                <span>MAX_AUTHORITY</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-8 md:p-12 text-indigo-950 shadow-2xl relative">
+                        <div class="absolute -top-4 -right-4 bg-purple-500 text-white text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest shadow-lg">Live Result</div>
+                        <article class="space-y-6">
+                            <h1 id="lab-heading" class="text-3xl font-extrabold tracking-tighter transition-all duration-300" style="font-weight: 700">How AI perceives your brand value.</h1>
+                            <p class="text-sm text-gray-500 leading-relaxed font-light">
+                                In an era where 70% of B2B research is handled by AI agents before a human ever visits your site, the "PR-First" model is a liability. Vertia Labs ensures your content is indexed as a primary fact, not a secondary opinion.
+                            </p>
+                            <div class="pt-6 border-t border-gray-100 flex items-center justify-between">
+                                <span class="text-[10px] font-mono-tech text-purple-500">CITE_PROBABILITY: <span id="prob-val">84</span>%</span>
+                                <button class="text-xs font-bold uppercase tracking-widest text-indigo-950 border-b-2 border-indigo-950">Export Config</button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-white py-24 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+                <div class="space-y-6 max-w-sm">
+                    <div class="flex items-center space-x-1 text-2xl">
+                        <span class="nav-logo uppercase">VERTIA</span>
+                        <span class="nav-labs">Labs</span>
+                    </div>
+                    <p class="text-xs font-bold uppercase tracking-[0.3em] text-indigo-900">Get cited by AI. Without PR.</p>
+                    <p class="text-sm text-gray-400 font-light leading-relaxed">
+                        Vertia Labs Research Group. Engineering technical authority for a post-search world.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-16">
+                    <div>
+                        <h5 class="text-xs font-bold uppercase tracking-widest text-gray-950 mb-6">Protocols</h5>
+                        <ul class="text-xs space-y-4 text-gray-400 font-light">
+                            <li><a href="#" class="hover:text-indigo-900 transition-colors">Semantic Indexing</a></li>
+                            <li><a href="#" class="hover:text-indigo-900 transition-colors">RAG Optimization</a></li>
+                            <li><a href="#" class="hover:text-indigo-900 transition-colors">Type Authority</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-xs font-bold uppercase tracking-widest text-gray-950 mb-6">Network</h5>
+                        <ul class="text-xs space-y-4 text-gray-400 font-light">
+                            <li><a href="#" class="hover:text-indigo-900 transition-colors">Research Portal</a></li>
+                            <li><a href="#" class="hover:text-indigo-900 transition-colors">API Keys</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-20 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-[10px] font-mono-tech text-gray-300 uppercase tracking-widest">
+                    &copy; 2026 Vertia Research. System ID: V-LABS-ALPHA
+                </div>
+                <div class="flex space-x-8 text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    <span>Columbus</span>
+                    <span>Bogotá</span>
+                    <span>Mexico City</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function updateLab(val) {
+            document.getElementById('lab-heading').style.fontWeight = val;
+            var probability = Math.round(40 + (val - 100) / 800 * 58);
+            document.getElementById('prob-val').innerText = probability;
+        }
+
+        window.addEventListener('load', function () {
+            var ctx = document.getElementById('visibilityChart').getContext('2d');
+
+            Chart.defaults.color = '#94a3b8';
+            Chart.defaults.font.family = "'JetBrains Mono', monospace";
+
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Semantic Clarity', 'RAG Affinity', 'Indexing Speed', 'Trust Weight', 'Node Authority', 'Context Density'],
+                    datasets: [{
+                        label: 'Vertia Protocol',
+                        data: [94, 98, 88, 92, 95, 90],
+                        backgroundColor: 'rgba(167, 139, 250, 0.2)',
+                        borderColor: '#a78bfa',
+                        pointBackgroundColor: '#1e1b4b',
+                        borderWidth: 2,
+                        fill: true
+                    }, {
+                        label: 'Standard Web',
+                        data: [60, 45, 70, 55, 50, 65],
+                        backgroundColor: 'rgba(30, 27, 75, 0.05)',
+                        borderColor: 'rgba(30, 27, 75, 0.2)',
+                        borderWidth: 1,
+                        borderDash: [5, 5]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#f1f5f9' },
+                            grid: { color: '#f1f5f9' },
+                            pointLabels: { font: { size: 10 } },
+                            ticks: { display: false, stepSize: 20 }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { padding: 20, font: { size: 11, weight: 'bold' } }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
