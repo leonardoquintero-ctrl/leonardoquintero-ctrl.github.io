@@ -651,6 +651,62 @@
             border-radius: 3px;
         }
 
+        /* CHECKLIST */
+.checklist {
+    list-style: none;
+    margin-left: 0;
+}
+
+.checklist li {
+    position: relative;
+    padding: 1rem 1rem 1rem 2.5rem;
+    margin-bottom: 0.75rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(79, 110, 247, 0.15);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--navy);
+    transition: all 0.2s ease;
+}
+
+.checklist li:hover {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 12px rgba(11, 22, 40, 0.03);
+}
+
+.checklist li:before {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 1.2rem;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--indigo);
+    border-radius: 3px;
+}
+
+/* CHECKED STATE */
+.checklist li.done:before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--indigo);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    border: none;
+}
+
+.checklist li.done {
+    opacity: 0.5;
+    color: var(--muted);
+}
+
+.checklist li.done .owner {
+    opacity: 0.7;
+}
+
         /* TIMELINE */
         .timeline {
             position: relative;
@@ -1144,7 +1200,7 @@
             <div class="glass-card accent-indigo">
                 <h4>Partner's Track (Business Setup, HubSpot)</h4>
                 <ul class="checklist">
-                    <li><span class="owner owner-partner">Partner</span> Buy domain once name is locked</li>
+                    <li class="done"><span class="owner owner-partner">Partner</span> Buy domain once name is locked</li>
                     <li><span class="owner owner-partner">Partner</span> Set up Google Workspace on domain</li>
                     <li><span class="owner owner-partner">Partner</span> Form business entity (Delaware LLC or equivalent)</li>
                     <li><span class="owner owner-partner">Partner</span> Apply for EIN (US) or local equivalent</li>
