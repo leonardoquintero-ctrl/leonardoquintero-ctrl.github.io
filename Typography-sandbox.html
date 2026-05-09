@@ -1,636 +1,835 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vertia Labs — Web Typography Guide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Serif+Display:ital@0;1&family=Merriweather:wght@300;400&family=Playfair+Display:wght@600;700&family=Roboto+Mono:wght@400&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Interactive font comparison sandbox for the Vertia Labs logo — 12 candidates with live gradient preview and evaluation notes.">
+<meta property="og:title" content="Vertia Labs — Font Sandbox">
+<meta property="og:description" content="Compare 12 font candidates with live gradient preview and WHY YES / WHY NO evaluation notes.">
+<title>Vertia Labs — Font Sandbox</title>
 
-        :root {
-            --base: #f9fafb;
-            --grid: rgba(30,27,75,0.04);
-            --navy: #1e1b4b;
-            --navy-mid: #2d2a6e;
-            --purple: #a78bfa;
-            --purple-dark: #7c3aed;
-            --stone: #64748b;
-            --muted: #94a3b8;
-            --surface: #ffffff;
-            --grad: linear-gradient(135deg, #1e1b4b, #a78bfa);
-            --grad-labs: linear-gradient(135deg, #32127a, #7a5ea0);
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Serif+Display&family=Epilogue:wght@400;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,800&family=Inter:wght@400;600;700;800&family=Libre+Baskerville:wght@400;700&family=Manrope:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&family=Playfair+Display:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 
-        html { scroll-behavior: smooth; }
+<style>
+/* ─────────────────────────────────────────────
+   Design tokens
+───────────────────────────────────────────── */
+:root {
+  --base:      #f9fafb;
+  --grid:      rgba(30,27,75,0.04);
+  --navy:      #1e1b4b;
+  --navy-mid:  #2d2a6e;
+  --stone:     #64748b;
+  --muted:     #94a3b8;
+  --surface:   #ffffff;
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--base);
-            background-image:
-                linear-gradient(var(--grid) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-            background-size: 32px 32px;
-            color: var(--navy);
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+  --g0: #1a1a4e;
+  --g1: #9333ea;
 
-        /* NAV */
-        nav {
-            background: rgba(30,27,75,0.95);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            padding: 1rem 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo { display: flex; align-items: center; gap: 3px; font-family: 'DM Serif Display', serif; font-size: 20px; }
-        .logo-vertia { color: #fff; font-weight: 800; letter-spacing: -0.05em; font-family: 'Plus Jakarta Sans', sans-serif; text-transform: uppercase; }
-        .logo-labs {
-            background: var(--grad-labs);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 400;
-            font-family: 'DM Serif Display', serif;
-        }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a {
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .nav-links a:hover { color: #fff; }
+  --yes-fg:  #15803d;
+  --yes-bg:  #f0fdf4;
+  --yes-bd:  #bbf7d0;
+  --no-fg:   #dc2626;
+  --no-bg:   #fef2f2;
+  --no-bd:   #fecaca;
 
-        /* HERO */
-        .hero { padding: 5rem 2rem 3.5rem; text-align: center; }
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--navy);
-            background: rgba(167,139,250,0.1);
-            border: 1px solid rgba(167,139,250,0.2);
-            padding: 5px 14px;
-            border-radius: 100px;
-            margin-bottom: 1.5rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .eyebrow::before {
-            content: '';
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--purple);
-            animation: blink 2s ease-in-out infinite;
-        }
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  --r:    14px;
+  --r-sm: 8px;
+  --sh:   0 1px 3px rgba(30,27,75,.07), 0 4px 20px rgba(30,27,75,.07);
+}
 
-        h1 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 56px;
-            line-height: 1.1;
-            letter-spacing: -0.04em;
-            color: var(--navy);
-            margin-bottom: 1.25rem;
-        }
-        h1 em {
-            font-style: italic;
-            background: var(--grad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero-sub { font-size: 16px; color: var(--stone); line-height: 1.8; max-width: 520px; margin: 0 auto; font-weight: 400; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* LAYOUT */
-        .wrap { max-width: 960px; margin: 0 auto; padding: 0 2rem 5rem; }
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(167,139,250,0.3), rgba(124,58,237,0.3), transparent);
-            margin: 3.5rem 0;
-        }
+html { scroll-behavior: smooth; }
 
-        /* SECTION */
-        .sec-label {
-            display: inline-block;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 100px;
-            margin-bottom: 0.75rem;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .lbl-ind { background: rgba(30,27,75,0.07); color: var(--navy); }
-        .lbl-vio { background: rgba(167,139,250,0.12); color: var(--purple-dark); }
-        .lbl-fuc { background: rgba(124,58,237,0.1); color: var(--purple-dark); }
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background-color: var(--base);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--navy);
+  min-height: 100vh;
+}
 
-        .sec-title {
-            font-family: 'DM Serif Display', serif;
-            font-size: 30px;
-            color: var(--navy);
-            letter-spacing: -0.03em;
-            margin-bottom: 0.6rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(30,27,75,0.08);
-            position: relative;
-        }
-        .sec-title::after {
-            content: '';
-            position: absolute;
-            bottom: -1px; left: 0;
-            width: 56px; height: 2px;
-            background: var(--grad);
-        }
-        .sec-intro { font-size: 14px; color: var(--stone); line-height: 1.8; margin: 1rem 0 1.75rem; }
+/* ─────────────────────────────────────────────
+   Gradient text helper — applied per element
+   so block children work correctly
+───────────────────────────────────────────── */
+.grad {
+  background: linear-gradient(90deg, var(--g0), var(--g1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-        /* TABS */
-        .tab-bar {
-            display: flex;
-            border-bottom: 1px solid rgba(30,27,75,0.08);
-            margin-bottom: 2rem;
-            overflow-x: auto;
-        }
-        .tab-btn {
-            padding: 0.75rem 1.5rem;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--muted);
-            background: none;
-            border: none;
-            border-bottom: 2px solid transparent;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: color 0.2s, border-color 0.2s;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .tab-btn:hover { color: var(--navy); }
-        .tab-btn.on { color: var(--navy); border-bottom-color: var(--purple); }
+/* ─────────────────────────────────────────────
+   Hero / header
+───────────────────────────────────────────── */
+.hero {
+  text-align: center;
+  padding: 56px 24px 40px;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  display: block;
+  width: 56px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--g0), var(--g1));
+  border-radius: 99px;
+  margin: 28px auto 0;
+  opacity: .35;
+}
 
-        .tab-panel { display: none; }
-        .tab-panel.on { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.eyebrow i {
+  display: inline-block;
+  width: 22px;
+  height: 1px;
+  background: var(--muted);
+}
 
-        .panel-text h3 {
-            font-family: 'DM Serif Display', serif;
-            font-size: 20px; color: var(--navy);
-            margin-bottom: 0.6rem; letter-spacing: -0.02em;
-        }
-        .panel-text p { font-size: 14px; color: var(--stone); line-height: 1.8; margin-bottom: 1rem; }
+.hero h1 {
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.15;
+  color: var(--navy);
+}
+.hero h1 span { display: inline; }
 
-        .checklist { list-style: none; }
-        .checklist li {
-            display: flex; gap: 10px; align-items: flex-start;
-            font-size: 13px; color: var(--stone);
-            padding: 8px 0; border-bottom: 1px solid rgba(30,27,75,0.05); line-height: 1.5;
-        }
-        .checklist li:last-child { border-bottom: none; }
-        .chk {
-            width: 17px; height: 17px; border-radius: 50%;
-            background: rgba(167,139,250,0.15); color: var(--purple-dark);
-            font-size: 9px; font-weight: 700;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; margin-top: 1px;
-        }
-        .checklist strong { color: var(--navy); font-weight: 700; }
+.hero p {
+  margin-top: 10px;
+  color: var(--stone);
+  font-size: .92rem;
+  max-width: 460px;
+  margin-inline: auto;
+  line-height: 1.6;
+}
 
-        .demo-box {
-            background: var(--surface);
-            border: 1px solid #e2e8f0;
-            border-radius: 16px; padding: 1.75rem;
-            box-shadow: 0 4px 20px rgba(30,27,75,0.05);
-        }
-        .demo-lbl {
-            font-size: 9px; font-weight: 700; letter-spacing: 0.2em;
-            text-transform: uppercase; color: var(--muted);
-            margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace;
-        }
+/* ─────────────────────────────────────────────
+   Page wrapper
+───────────────────────────────────────────── */
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
-        .ui-h { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-        .ui-s { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; color: var(--stone); margin-bottom: 1.25rem; }
-        .ui-btn {
-            display: inline-flex; align-items: center;
-            background: var(--navy); color: #fff; border: none;
-            border-radius: 100px; padding: 9px 20px;
-            font-size: 11px; font-weight: 700; cursor: pointer;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            letter-spacing: 0.08em; text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
-        .ui-btn:hover { box-shadow: 0 8px 20px rgba(167,139,250,0.35); transform: translateY(-2px); }
+/* ─────────────────────────────────────────────
+   Card
+───────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1px solid rgba(30,27,75,.08);
+  box-shadow: var(--sh);
+  overflow: hidden;
+}
 
-        .copy-p { font-family: 'Merriweather', serif; font-size: 14px; line-height: 1.85; color: var(--stone); }
+/* ─────────────────────────────────────────────
+   Controls
+───────────────────────────────────────────── */
+.controls {
+  padding: 20px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+}
 
-        .code-box {
-            background: var(--navy); border-radius: 10px;
-            padding: 1.25rem 1.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px; color: #c4b5fd; line-height: 1.7;
-        }
+.cg {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.cg.grow { flex: 1 1 180px; }
 
-        .perf-bars { display: flex; gap: 1.5rem; align-items: flex-end; height: 90px; margin-top: 1.25rem; }
-        .pb {
-            flex: 1; border-radius: 6px 6px 0 0;
-            display: flex; align-items: flex-end; justify-content: center;
-            padding-bottom: 7px; font-size: 11px; font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .pb-slow { height: 100%; background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25); color: var(--purple-dark); }
-        .pb-fast { height: 14%; background: rgba(30,27,75,0.06); border: 1px solid rgba(30,27,75,0.15); color: var(--navy); }
-        .perf-lbls { display: flex; gap: 1.5rem; margin-top: 6px; }
-        .perf-lbl { flex: 1; text-align: center; font-size: 11px; color: var(--muted); }
+.cg label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
 
-        /* DATA */
-        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-        .card {
-            background: var(--surface); border: 1px solid #e2e8f0;
-            border-radius: 20px; padding: 1.75rem;
-            box-shadow: 0 4px 20px rgba(30,27,75,0.05);
-        }
-        .card-title { font-family: 'DM Serif Display', serif; font-size: 19px; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 0.25rem; }
-        .card-sub { font-size: 11px; color: var(--muted); margin-bottom: 1.25rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 9px 34px 9px 12px;
+  border: 1.5px solid rgba(30,27,75,.13);
+  border-radius: var(--r-sm);
+  background: var(--surface)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%2364748b' d='M5 7 0 2h10z'/%3E%3C/svg%3E")
+    no-repeat right 11px center;
+  font-family: inherit;
+  font-size: .88rem;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color .15s;
+}
+select:focus { outline: none; border-color: var(--g1); }
 
-        .chart-outer { position: relative; width: 100%; height: 220px; }
-        .chart-outer canvas { position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important; }
-        .chart-note { font-size: 12px; color: var(--muted); margin-top: 0.875rem; text-align: center; font-style: italic; }
+input[type=range] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  background: rgba(30,27,75,.1);
+  border-radius: 99px;
+  cursor: pointer;
+  accent-color: var(--g1);
+}
+input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--g0), var(--g1));
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(147,51,234,.35);
+}
 
-        .met { margin-bottom: 1.25rem; }
-        .met-hd { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 5px; }
-        .met-val { color: var(--purple-dark); font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-        .met-track { height: 5px; background: rgba(167,139,250,0.12); border-radius: 100px; overflow: hidden; }
-        .met-fill { height: 100%; border-radius: 100px; background: var(--grad); }
-        .met-note {
-            margin-top: 1.25rem;
-            background: rgba(167,139,250,0.06);
-            border-left: 3px solid var(--purple);
-            border-radius: 0 8px 8px 0;
-            padding: 0.875rem 1.1rem;
-            font-size: 13px; color: var(--stone);
-        }
-        .met-note strong { color: var(--navy); }
+.pills {
+  display: flex;
+  border: 1.5px solid rgba(30,27,75,.13);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+.pill {
+  flex: 1;
+  padding: 9px 13px;
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--stone);
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.pill.on {
+  background: linear-gradient(135deg, var(--g0), var(--g1));
+  color: #fff;
+}
 
-        .insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem; }
-        .ins {
-            background: var(--surface); border: 1px solid #e2e8f0;
-            border-radius: 16px; padding: 1.5rem;
-            position: relative; overflow: hidden;
-            box-shadow: 0 4px 12px rgba(30,27,75,0.04);
-        }
-        .ins::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
-        .ins.ind::before { background: var(--navy); }
-        .ins.vio::before { background: var(--purple); }
-        .ins-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 0.4rem; }
-        .ins-body { font-size: 13px; color: var(--stone); line-height: 1.75; }
+/* ─────────────────────────────────────────────
+   Preview stage
+───────────────────────────────────────────── */
+.preview-wrap { padding: 16px 24px 0; }
 
-        /* SANDBOX */
-        .sandbox {
-            background: var(--navy); border-radius: 24px;
-            padding: 2.5rem; position: relative; overflow: hidden;
-            box-shadow: 0 20px 50px rgba(30,27,75,0.2);
-        }
-        .sb-glow {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%,-50%);
-            width: 600px; height: 400px;
-            background: radial-gradient(ellipse, rgba(167,139,250,0.15) 0%, transparent 65%);
-            pointer-events: none;
-        }
-        .sb-inner { position: relative; z-index: 1; }
-        .sb-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; }
-        .sb-title { font-family: 'DM Serif Display', serif; font-size: 26px; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.4rem; }
-        .sb-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 360px; }
-        .sb-controls { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-        .ctrl label {
-            display: block; font-size: 9px; font-weight: 700;
-            letter-spacing: 0.18em; text-transform: uppercase;
-            color: rgba(255,255,255,0.3); margin-bottom: 5px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-        .ctrl select {
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #fff; border-radius: 8px; padding: 8px 14px;
-            font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif;
-            outline: none; cursor: pointer; min-width: 185px;
-            transition: border-color 0.2s;
-        }
-        .ctrl select:focus { border-color: rgba(167,139,250,0.5); }
-        .ctrl select option { background: #2d2a6e; }
+.stage {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 210px;
+  padding: 40px 24px;
+  transition: background .3s;
+}
+.stage.dark  { background: #080812; }
+.stage.light { background: var(--base); }
 
-        .sb-preview { background: #fff; border-radius: 14px; padding: 2.5rem; }
-        #pvH { font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1.1rem; font-family: 'DM Serif Display', serif; }
-        #pvB1 { font-size: 15px; color: var(--stone); line-height: 1.85; margin-bottom: 1.25rem; font-family: 'Plus Jakarta Sans', sans-serif; }
-        #pvSH { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 0.75rem; margin-top: 1.75rem; font-family: 'DM Serif Display', serif; }
-        #pvB2 { font-size: 15px; color: var(--stone); line-height: 1.85; font-family: 'Plus Jakarta Sans', sans-serif; }
+/* The logo lockup: two independent gradient elements */
+.logo-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  text-align: center;
+  line-height: 1;
+  user-select: none;
+}
 
-        /* FOOTER */
-        footer {
-            background: var(--navy); color: rgba(255,255,255,0.35);
-            padding: 2.5rem 2rem; text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-        .ft-logo {
-            display: flex; align-items: center; justify-content: center; gap: 4px;
-            margin-bottom: 0.4rem;
-        }
-        .ft-vertia { color: rgba(255,255,255,0.8); font-size: 16px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.04em; text-transform: uppercase; }
-        .ft-labs {
-            background: var(--grad-labs);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            font-size: 16px; font-family: 'DM Serif Display', serif;
-        }
-        footer p { font-size: 12px; }
+/* Each text node carries its own gradient — fixes block-child clip bug */
+#wordVertia {
+  display: block;
+  background: linear-gradient(90deg, var(--g0), var(--g1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: font-size .2s ease;
+}
 
-        @media (max-width: 720px) {
-            h1 { font-size: 36px; }
-            nav { padding: 1rem 1.25rem; }
-            .nav-links { display: none; }
-            .tab-panel.on, .two-col, .insight-grid { grid-template-columns: 1fr; }
-            .sb-top { flex-direction: column; }
-            .sb-preview { padding: 1.5rem; }
-            #pvH { font-size: 26px; }
-        }
-    </style>
+#wordLabs {
+  display: none; /* shown via JS */
+  background: linear-gradient(90deg, var(--g0), var(--g1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  opacity: .72;
+  padding-left: .28em; /* optical offset for letter-spacing */
+  transition: font-size .2s ease;
+}
+
+/* ─────────────────────────────────────────────
+   Font + tier badge row
+───────────────────────────────────────────── */
+.badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px 14px;
+  border-top: 1px solid rgba(30,27,75,.06);
+  margin-top: 16px;
+}
+.badge-name {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.tier-pill {
+  font-size: .7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  border: 1px solid;
+}
+.tier-pill.t1 { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
+.tier-pill.t2 { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
+.tier-pill.t3 { background: #fef9c3; color: #a16207; border-color: #fde68a; }
+
+/* ─────────────────────────────────────────────
+   Evaluation panel
+───────────────────────────────────────────── */
+.eval {
+  padding: 24px;
+}
+.eval-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 540px) { .cols { grid-template-columns: 1fr; } }
+
+.reason {
+  border-radius: var(--r-sm);
+  padding: 15px 16px;
+  border: 1px solid;
+}
+.reason.yes { background: var(--yes-bg); border-color: var(--yes-bd); }
+.reason.no  { background: var(--no-bg);  border-color: var(--no-bd);  }
+
+.reason h3 {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.reason.yes h3 { color: var(--yes-fg); }
+.reason.no  h3 { color: var(--no-fg);  }
+
+.reason ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.reason li {
+  font-size: .82rem;
+  line-height: 1.45;
+  color: var(--navy);
+  display: flex;
+  gap: 8px;
+}
+.reason li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  margin-top: 7px;
+}
+.reason.yes li::before { background: var(--yes-fg); }
+.reason.no  li::before { background: var(--no-fg);  }
+
+.best-for {
+  margin-top: 14px;
+  padding: 11px 15px;
+  background: rgba(147,51,234,.05);
+  border: 1px solid rgba(147,51,234,.14);
+  border-radius: var(--r-sm);
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--navy-mid);
+}
+.best-for strong { color: #7c3aed; }
+
+/* ─────────────────────────────────────────────
+   Footer
+───────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 0 16px 40px;
+  font-size: .75rem;
+  color: var(--muted);
+}
+footer a {
+  color: var(--stone);
+  text-decoration: none;
+  font-weight: 600;
+}
+footer a:hover { color: var(--g1); }
+</style>
 </head>
 <body>
 
-<nav>
-    <div class="logo">
-        <span class="logo-vertia">VERTIA</span>
-        <span class="logo-labs"> Labs</span>
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="eyebrow"><i></i>Vertia Labs Brand Studio<i></i></div>
+  <h1><span class="grad">Font Sandbox</span></h1>
+  <p>12 candidates, live gradient preview, full evaluation notes.
+     Pick a font — see how <em>Vertia</em> (or the full logo) looks.</p>
+</header>
+
+<main class="page">
+
+  <!-- ① Controls -->
+  <div class="card">
+    <div class="controls">
+
+      <div class="cg grow">
+        <label>Font</label>
+        <select id="fontSelect" onchange="update()">
+          <optgroup label="⭐ Tier 1 — Top Choices">
+            <option value="Inter"            data-w="700" data-t="1">Inter</option>
+            <option value="Google Sans"      data-w="700" data-t="1">Google Sans</option>
+            <option value="DM Serif Display" data-w="400" data-t="1">DM Serif Display</option>
+          </optgroup>
+          <optgroup label="◈ Tier 2 — Worth Testing">
+            <option value="Manrope"          data-w="700" data-t="2">Manrope</option>
+            <option value="Outfit"           data-w="700" data-t="2">Outfit</option>
+            <option value="Epilogue"         data-w="700" data-t="2">Epilogue</option>
+            <option value="Plus Jakarta Sans" data-w="700" data-t="2">Plus Jakarta Sans</option>
+          </optgroup>
+          <optgroup label="△ Tier 3 — Probably Not">
+            <option value="Syne"             data-w="800" data-t="3">Syne</option>
+            <option value="Crimson Pro"      data-w="700" data-t="3">Crimson Pro</option>
+            <option value="Fraunces"         data-w="700" data-t="3">Fraunces</option>
+            <option value="Playfair Display" data-w="700" data-t="3">Playfair Display</option>
+            <option value="Libre Baskerville" data-w="700" data-t="3">Libre Baskerville</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="cg grow">
+        <label>Size — <span id="sizeVal">5</span> rem</label>
+        <input type="range" id="sizeSlider" min="2" max="9" step="0.5" value="5"
+               oninput="updateSize(this.value)">
+      </div>
+
+      <div class="cg">
+        <label>Logo</label>
+        <div class="pills">
+          <button class="pill on" id="btnV"  onclick="setLabel('Vertia')">Vertia</button>
+          <button class="pill"    id="btnVL" onclick="setLabel('VertiaLabs')">Vertia Labs</button>
+        </div>
+      </div>
+
+      <div class="cg">
+        <label>Background</label>
+        <div class="pills">
+          <button class="pill on" id="btnDark"  onclick="setBg('dark')">Dark</button>
+          <button class="pill"    id="btnLight" onclick="setBg('light')">Light</button>
+        </div>
+      </div>
+
     </div>
-    <div class="nav-links">
-        <a href="/index.html">Back</a>
-        <a href="#rec">Recommendations</a>
-        <a href="#data">Industry Data</a>
-        <a href="#sandbox">Sandbox</a>
+  </div>
+
+  <!-- ② Preview -->
+  <div class="card">
+    <div class="preview-wrap">
+      <div class="stage dark" id="stage">
+        <div class="logo-lockup">
+          <span id="wordVertia" style="font-size:5rem; font-family:'Inter',sans-serif; font-weight:700">Vertia</span>
+          <span id="wordLabs"   style="font-size:1.4rem; font-family:'Inter',sans-serif; font-weight:400">Labs</span>
+        </div>
+      </div>
     </div>
-</nav>
+    <div class="badge-row">
+      <span class="badge-name" id="badgeName">Inter</span>
+      <span class="tier-pill t1" id="tierPill">⭐ Tier 1 — Top Choice</span>
+    </div>
+  </div>
 
-<div class="hero">
-    <div class="eyebrow">Typography Report</div>
-    <h1>Selecting the Ideal<br><em>Web Typography</em></h1>
-    <p class="hero-sub">A guide to choosing fonts for websites, interfaces, and long-form copy — covering readability metrics, performance, and font pairings.</p>
-</div>
-
-<div class="wrap">
-
-    <section id="rec">
-        <div class="sec-label lbl-ind">01 · Recommendations</div>
-        <h2 class="sec-title">Font Recommendations by Use Case</h2>
-        <p class="sec-intro">The best typographic choice depends entirely on context. Select a use case to explore recommended typefaces and their characteristics.</p>
-
-        <div class="tab-bar">
-            <button class="tab-btn on" onclick="tab('ui',this)">Website UI &amp; Navigation</button>
-            <button class="tab-btn" onclick="tab('copy',this)">Long-form Copy &amp; Blogs</button>
-            <button class="tab-btn" onclick="tab('sys',this)">System Fonts (Performance)</button>
+  <!-- ③ Evaluation -->
+  <div class="card">
+    <div class="eval">
+      <div class="eval-title" id="evalTitle">Inter — Evaluation</div>
+      <div class="cols">
+        <div class="reason yes">
+          <h3>✓ &nbsp;Why Yes</h3>
+          <ul id="yesList"></ul>
         </div>
-
-        <div id="p-ui" class="tab-panel on">
-            <div class="panel-text">
-                <h3>Sans-Serif for Interfaces</h3>
-                <p>For web apps, dashboards, and navigation, sans-serif fonts are highly recommended. They scale well for small labels and maintain clarity at low resolutions.</p>
-                <ul class="checklist">
-                    <li><span class="chk">✓</span><div><strong>Inter</strong> — Designed specifically for screens. Exceptional legibility at small sizes.</div></li>
-                    <li><span class="chk">✓</span><div><strong>Roboto</strong> — Clean, geometric, and functional across all weights.</div></li>
-                    <li><span class="chk">✓</span><div><strong>Open Sans</strong> — Friendly and readable even at 12px on mobile.</div></li>
-                </ul>
-            </div>
-            <div class="demo-box">
-                <div class="demo-lbl">LIVE_EXAMPLE // PLUS_JAKARTA_SANS</div>
-                <div class="ui-h">Dashboard Overview</div>
-                <div class="ui-s">Manage your typography settings here.</div>
-                <button class="ui-btn">Update Settings →</button>
-            </div>
+        <div class="reason no">
+          <h3>✗ &nbsp;Why No</h3>
+          <ul id="noList"></ul>
         </div>
+      </div>
+      <div class="best-for" id="bestFor"></div>
+    </div>
+  </div>
 
-        <div id="p-copy" class="tab-panel">
-            <div class="panel-text">
-                <h3>Serifs for Extended Reading</h3>
-                <p>For articles, blog posts, and documentation, serif fonts reduce eye fatigue. The "feet" on letterforms guide the eye along the line during long reading sessions.</p>
-                <ul class="checklist">
-                    <li><span class="chk">✓</span><div><strong>Merriweather</strong> — Large x-height makes it highly readable on screens.</div></li>
-                    <li><span class="chk">✓</span><div><strong>Lora</strong> — Contemporary, well-balanced, works across device densities.</div></li>
-                    <li><span class="chk">✓</span><div><strong>Georgia</strong> — Web-safe classic. Never fails for body text.</div></li>
-                </ul>
-            </div>
-            <div class="demo-box">
-                <div class="demo-lbl">LIVE_EXAMPLE // MERRIWEATHER</div>
-                <p class="copy-p">Typography is the art and technique of arranging type to make written language legible, readable, and appealing when displayed. The arrangement of type involves selecting typefaces, point sizes, line lengths, line-spacing, and letter-spacing.</p>
-            </div>
-        </div>
-
-        <div id="p-sys" class="tab-panel">
-            <div class="panel-text">
-                <h3>The Native OS Stack</h3>
-                <p>If performance is the absolute highest priority, use the system font stack. Zero download time and no cumulative layout shifts (CLS).</p>
-                <div class="code-box">font-family: -apple-system,<br>&nbsp;&nbsp;BlinkMacSystemFont,<br>&nbsp;&nbsp;"Segoe UI", Roboto,<br>&nbsp;&nbsp;Helvetica, Arial, sans-serif;</div>
-            </div>
-            <div class="demo-box">
-                <div class="demo-lbl">PERFORMANCE // LOAD_TIME_DELTA</div>
-                <div class="perf-bars">
-                    <div class="pb pb-slow">300ms+</div>
-                    <div class="pb pb-fast">0ms</div>
-                </div>
-                <div class="perf-lbls">
-                    <div class="perf-lbl">Web Fonts</div>
-                    <div class="perf-lbl">System Fonts</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section id="data">
-        <div class="sec-label lbl-vio">02 · Industry Data</div>
-        <h2 class="sec-title">Benchmarks &amp; Metrics</h2>
-        <p class="sec-intro">Font adoption data from the top 1 million websites, alongside optimal readability metrics for digital publishing.</p>
-
-        <div class="two-col">
-            <div class="card">
-                <div class="card-title">Web Font Popularity</div>
-                <div class="card-sub">USAGE_INDEX · TOP_1M_SITES · 2026</div>
-                <div class="chart-outer">
-                    <canvas id="chart"></canvas>
-                </div>
-                <p class="chart-note">Sans-serif fonts dominate the top 5, confirming their utility in modern UI design.</p>
-            </div>
-            <div class="card">
-                <div class="card-title">Readability Guidelines</div>
-                <div class="card-sub">OPTIMAL_RANGES · DIGITAL_READABILITY</div>
-                <div style="margin-top:1.25rem;">
-                    <div class="met">
-                        <div class="met-hd"><span>Base Font Size</span><span class="met-val">16px – 18px</span></div>
-                        <div class="met-track"><div class="met-fill" style="width:75%"></div></div>
-                    </div>
-                    <div class="met">
-                        <div class="met-hd"><span>Line Height (Leading)</span><span class="met-val">1.5 – 1.6</span></div>
-                        <div class="met-track"><div class="met-fill" style="width:60%"></div></div>
-                    </div>
-                    <div class="met">
-                        <div class="met-hd"><span>Line Length (Measure)</span><span class="met-val">50 – 75 chars</span></div>
-                        <div class="met-track"><div class="met-fill" style="width:85%"></div></div>
-                    </div>
-                    <div class="met">
-                        <div class="met-hd"><span>Contrast Ratio (WCAG AA)</span><span class="met-val">4.5:1 min</span></div>
-                        <div class="met-track"><div class="met-fill" style="width:90%"></div></div>
-                    </div>
-                </div>
-                <div class="met-note"><strong>Note:</strong> Going below 16px for primary copy forces users to strain — especially on high-density mobile displays.</div>
-            </div>
-        </div>
-
-        <div class="insight-grid">
-            <div class="ins ind">
-                <div class="ins-title">Why Sans-Serif Dominates UI</div>
-                <div class="ins-body">Geometric letterforms align with the pixel grid of screens. At 12–14px in a navigation label, Inter outperforms Georgia on readability by ~23% in eye-tracking studies.</div>
-            </div>
-            <div class="ins vio">
-                <div class="ins-title">The Serif Comeback in Long-Form</div>
-                <div class="ins-body">With high-DPI Retina displays, serifs have regained ground in editorial design. At 16px+ on a 2× display, Merriweather is measurably easier to read over extended sessions.</div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section id="sandbox">
-        <div class="sec-label lbl-fuc">03 · Interactive Tool</div>
-        <h2 class="sec-title" style="margin-bottom:1.75rem;">Font Pairing Sandbox</h2>
-
-        <div class="sandbox">
-            <div class="sb-glow"></div>
-            <div class="sb-inner">
-                <div class="sb-top">
-                    <div>
-                        <div class="sb-title">Live Pairing Preview</div>
-                        <p class="sb-desc">Select different combinations to see how a heading pairs with body copy in real-time.</p>
-                    </div>
-                    <div class="sb-controls">
-                        <div class="ctrl">
-                            <label>Heading Font</label>
-                            <select id="hSel" onchange="updateSandbox()">
-                                <option value="'DM Serif Display', serif">DM Serif Display</option>
-                                <option value="'Playfair Display', serif">Playfair Display</option>
-                                <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
-                                <option value="'Roboto Mono', monospace">Roboto Mono</option>
-                            </select>
-                        </div>
-                        <div class="ctrl">
-                            <label>Body Font</label>
-                            <select id="bSel" onchange="updateSandbox()">
-                                <option value="'Plus Jakarta Sans', sans-serif">Plus Jakarta Sans</option>
-                                <option value="'Merriweather', serif">Merriweather</option>
-                                <option value="'Playfair Display', serif">Playfair Display</option>
-                                <option value="'Roboto Mono', monospace">Roboto Mono</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="sb-preview">
-                    <div id="pvH">The Architecture of Information</div>
-                    <p id="pvB1">Good design is as little design as possible. When we apply this principle to web typography, we realize that the primary function of text on a screen is communication. If the user notices the font before they comprehend the message, the typography has failed its primary objective.</p>
-                    <div id="pvSH">Creating Visual Hierarchy</div>
-                    <p id="pvB2">By pairing a highly stylized heading font with a neutral, legible body font, we establish a clear visual hierarchy. This guides the reader's eye naturally from the title, down into the substance of the copy, ensuring a frictionless reading experience across every device.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-</div>
+</main>
 
 <footer>
-    <div class="ft-logo">
-        <span class="ft-vertia">VERTIA</span>
-        <span class="ft-labs"> Labs</span>
-    </div>
-    <p>Web Typography Guide · Interactive Report</p>
+  Built for <strong>Vertia Labs</strong> brand exploration &nbsp;·&nbsp;
+  <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
 </footer>
 
 <script>
-    function tab(id, btn) {
-        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('on'); });
-        document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('on'); });
-        btn.classList.add('on');
-        document.getElementById('p-' + id).classList.add('on');
-    }
+/* ─────────────────────────────────────────────
+   Font evaluation data
+───────────────────────────────────────────── */
+const FONTS = {
+  "Inter": {
+    weight: 700, tier: 1,
+    yes: [
+      "Crystal clear readability — designed specifically for UI/screens",
+      "Professional modern — used by serious tech (Figma, GitHub, etc.)",
+      "More personality than Google Sans — distinctive but not weird",
+      "Excellent gradient performance — even stroke weight",
+      "Multiple weights (100–900) — tons of flexibility",
+      "Open source — no licensing headaches",
+      "Neutral but not boring — safe + slight edge"
+    ],
+    no: [
+      "Very common in tech — might feel \"startup-y\"",
+      "Almost too neutral — low memorability",
+      "Could blend into the \"tech crowd\" rather than stand out",
+      "Machista markets might want more weight/presence"
+    ],
+    best: "Modern, readable, professional — if you want \"better Google Sans\""
+  },
+  "Google Sans": {
+    weight: 700, tier: 1,
+    yes: [
+      "Maximum readability — designed for screens, works at every size",
+      "Subconscious trust factor — people see it daily (Gmail, Google products)",
+      "Professional without being boring — friendly authority",
+      "Neutral/safe in machista markets — no \"design-y\" baggage",
+      "Excellent gradient performance — clean lines, good contrast",
+      "Multiple weights available — can go bold (700–800) for gravitas",
+      "Won't date quickly — modern but not trendy"
+    ],
+    no: [
+      "It's literally Google's brand font — identity concern",
+      "Very common now — lots of startups/companies use it",
+      "Low distinctiveness — won't stand out typographically",
+      "Might feel \"too tech\" for some traditional Latam clients",
+      "Generic — your brand relies entirely on gradient concept"
+    ],
+    best: "Safe, professional choice when you want typography to support (not compete with) your gradient concept"
+  },
+  "DM Serif Display": {
+    weight: 400, tier: 1,
+    yes: [
+      "Display serif = serious + modern",
+      "Highly readable for a serif — better than Crimson/Playfair",
+      "Strong presence — commands attention",
+      "Contemporary take on traditional — bridges old/new",
+      "Works well bold — authoritative without being heavy",
+      "Good gradient compatibility"
+    ],
+    no: [
+      "\"Display\" serif = designed for headlines, not body text",
+      "Might feel too \"brand/marketing\" vs. \"operational/technical\"",
+      "Serif = inherently less tech-feeling than sans",
+      "Could be too stylized for conservative clients"
+    ],
+    best: "If you want serif authority with better readability than Crimson Pro"
+  },
+  "Manrope": {
+    weight: 700, tier: 2,
+    yes: [
+      "Geometric but warmer than Syne — approachable authority",
+      "Very readable — clean, modern, functional",
+      "Professional without corporate stiffness",
+      "Good weight range (200–800) — can go bold for gravitas",
+      "Works well in gradients — consistent stroke weight",
+      "Less common than Inter/Google Sans — more ownable"
+    ],
+    no: [
+      "Rounded terminals might feel too friendly for serious B2B",
+      "Less \"sharp/precise\" than other options",
+      "Could read as \"consumer app\" vs. \"enterprise platform\"",
+      "Geometric roundness = potentially \"soft\" in machista context"
+    ],
+    best: "Modern professionalism with approachable edge — middle ground option"
+  },
+  "Outfit": {
+    weight: 700, tier: 2,
+    yes: [
+      "Geometric, clean, distinctive — stands out",
+      "Serious but contemporary — not boring",
+      "Works beautifully in bold weights — commanding presence",
+      "Not overused yet — ownable",
+      "Strong gradient performance — geometric clarity",
+      "Modern without being trendy"
+    ],
+    no: [
+      "Geometric = might feel too design-forward for conservative clients",
+      "Less established = risky for traditional B2B",
+      "Could read as \"creative/design\" vs. \"operations/logistics\"",
+      "Quirky details in some letterforms"
+    ],
+    best: "Brands wanting geometric modernity with authority — worth testing"
+  },
+  "Epilogue": {
+    weight: 700, tier: 2,
+    yes: [
+      "Clean, contemporary, professional",
+      "Serious but approachable — balanced tone",
+      "Great gradient performance — even weights",
+      "Readable at all sizes",
+      "Multiple weights — flexibility",
+      "Modern without being trendy"
+    ],
+    no: [
+      "Fairly generic — low distinctiveness",
+      "Could blend into the \"tech SaaS\" crowd",
+      "Not particularly memorable typographically",
+      "Might not have enough weight for machista markets"
+    ],
+    best: "Safe, modern professionalism — \"Inter lite\""
+  },
+  "Plus Jakarta Sans": {
+    weight: 700, tier: 2,
+    yes: [
+      "Rounded but still serious — friendly professionalism",
+      "Global design origin (Indonesia) — international feel for Latam/US",
+      "Very readable — clear at any size",
+      "Contemporary — feels current, well-designed",
+      "Good gradient compatibility",
+      "Warm without being cutesy"
+    ],
+    no: [
+      "Rounded = might feel too soft for authority positioning",
+      "Less known = could need explanation / \"is this custom?\"",
+      "Might not project enough weight in traditional markets",
+      "Contemporary = could date faster than classics"
+    ],
+    best: "Modern brands wanting warmth + professionalism — borderline for your needs"
+  },
+  "Syne": {
+    weight: 800, tier: 3,
+    yes: [
+      "Geometric premium feel — serious, modern, sophisticated",
+      "Strong personality — distinctive without being weird",
+      "Works beautifully bold — commands attention",
+      "Contemporary — feels current, forward-thinking",
+      "Good gradient compatibility — clean shapes hold color well",
+      "European design — global/modern sensibility"
+    ],
+    no: [
+      "Doesn't feel like a fit (you said this) — trust your gut",
+      "Might be too geometric/design-forward for conservative clients",
+      "Could read as \"creative agency\" vs. \"operations/logistics\"",
+      "Quirky letterforms (especially 'a' and 'y') — may feel too playful",
+      "Less neutral than other options"
+    ],
+    best: "Brands wanting to signal \"design-conscious innovation\" — probably not your positioning"
+  },
+  "Crimson Pro": {
+    weight: 700, tier: 3,
+    yes: [
+      "Editorial authority — signals seriousness, institutional weight",
+      "Modern serif — bridges traditional + contemporary",
+      "Premium feel — sophisticated without being precious",
+      "Works well with gradients — good stroke contrast",
+      "Commands respect — serif = established/credible in traditional markets",
+      "More distinctive than sans options"
+    ],
+    no: [
+      "Readability issues (you flagged this) — especially at smaller sizes",
+      "Thin strokes can disappear in gradient transitions",
+      "Might feel too \"publication/media\" vs. \"operations/tech\"",
+      "Requires careful sizing — doesn't scale down as well",
+      "Could read as \"consultancy\" rather than \"tech-enabled services\""
+    ],
+    best: "If editorial gravitas outweighs readability concerns and you want maximum authority"
+  },
+  "Fraunces": {
+    weight: 700, tier: 3,
+    yes: [
+      "Modern serif with personality — not your grandfather's serif",
+      "Soft/approachable authority — serious but not stuffy",
+      "Variable font — tons of customization options",
+      "Bridges traditional/modern — safe middle ground",
+      "Distinctive — memorable without being trendy"
+    ],
+    no: [
+      "Hard to read (you flagged this) — especially in heavier weights",
+      "Rounded forms might feel too soft for \"serious operations\"",
+      "Optical weight issues — can look inconsistent in gradients",
+      "Might read as \"friendly startup\" vs. \"enterprise authority\"",
+      "Too much personality for conservative B2B clients"
+    ],
+    best: "Consumer brands wanting approachable premium — not B2B enterprise"
+  },
+  "Playfair Display": {
+    weight: 700, tier: 3,
+    yes: [
+      "Maximum elegance — high-end, sophisticated feel",
+      "Editorial authority — signals premium/established",
+      "Your partner's choice (12 years marketing experience)",
+      "Strong serif presence — commands respect in traditional markets",
+      "Beautiful with gradients — dramatic stroke contrast"
+    ],
+    no: [
+      "Too delicate — thin strokes disappear at small sizes",
+      "Very \"feminine\" coded — works AGAINST you in machista markets",
+      "\"Lifestyle/magazine\" vibe — not \"operations/tech/AI\"",
+      "Poor readability at body text sizes",
+      "Feels like luxury fashion/events, not B2B services",
+      "Gradient destroys thin strokes — technical implementation issue"
+    ],
+    best: "Luxury consumer brands, editorial content — NOT enterprise B2B services"
+  },
+  "Libre Baskerville": {
+    weight: 700, tier: 3,
+    yes: [
+      "Classic serif — maximum traditional authority",
+      "Very legible for a serif — designed for screens",
+      "Professional/institutional — signals established/credible",
+      "Safe choice in traditional markets",
+      "Works with gradients reasonably well",
+      "Free/open source"
+    ],
+    no: [
+      "Very traditional = might feel \"old\" not \"modern operations + AI\"",
+      "Serif = less tech/AI association",
+      "Could read as \"law firm/university\" vs. \"innovative tech services\"",
+      "Might be too conservative for AI positioning"
+    ],
+    best: "Maximum traditional authority — if you're willing to sacrifice \"modern/tech\" signals"
+  }
+};
 
-    function updateSandbox() {
-        var hf = document.getElementById('hSel').value;
-        var bf = document.getElementById('bSel').value;
-        document.getElementById('pvH').style.fontFamily = hf;
-        document.getElementById('pvSH').style.fontFamily = hf;
-        document.getElementById('pvB1').style.fontFamily = bf;
-        document.getElementById('pvB2').style.fontFamily = bf;
-    }
+const TIERS = {
+  1: { label: "⭐ Tier 1 — Top Choice",    cls: "t1" },
+  2: { label: "◈ Tier 2 — Worth Testing", cls: "t2" },
+  3: { label: "△ Tier 3 — Probably Not",  cls: "t3" }
+};
 
-    window.addEventListener('load', function() {
-        var ctx = document.getElementById('chart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Inter', 'Merriweather'],
-                datasets: [{
-                    data: [42, 28, 22, 18, 15, 8],
-                    backgroundColor: [
-                        'rgba(30,27,75,0.85)',
-                        'rgba(60,50,130,0.75)',
-                        'rgba(100,70,180,0.70)',
-                        'rgba(140,100,220,0.65)',
-                        'rgba(167,139,250,0.65)',
-                        'rgba(167,139,250,0.35)'
-                    ],
-                    borderWidth: 0,
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#1e1b4b',
-                        padding: 10,
-                        titleFont: { family: "'JetBrains Mono', monospacem, 'Arial'", size: 11 },
-                        bodyFont: { family: "'JetBrains Mono', monospace", size: 11 },
-                        callbacks: {
-                            label: function(c) { return ' ' + c.parsed.y + 'M+ sites'; }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(30,27,75,0.06)' },
-                        ticks: { color: '#94a3b8', font: { size: 11 } }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#94a3b8', font: { size: 11 } }
-                    }
-                }
-            }
-        });
-    });
+/* ─────────────────────────────────────────────
+   State
+───────────────────────────────────────────── */
+let showLabs = false;
+let currentSize = 5;
+
+function currentFont() {
+  const sel = document.getElementById("fontSelect");
+  return { name: sel.value, opt: sel.options[sel.selectedIndex] };
+}
+
+/* ─────────────────────────────────────────────
+   Apply font to both logo elements
+───────────────────────────────────────────── */
+function applyFont(name, weight) {
+  const ff = `'${name}', serif`;
+  const wV  = document.getElementById("wordVertia");
+  const wL  = document.getElementById("wordLabs");
+  wV.style.fontFamily = ff;
+  wV.style.fontWeight = weight;
+  wL.style.fontFamily = ff;
+  /* Labs uses a lighter weight for the subtitle feel */
+  wL.style.fontWeight = Math.max(300, weight - 200);
+}
+
+/* ─────────────────────────────────────────────
+   Main update
+───────────────────────────────────────────── */
+function update() {
+  const { name, opt } = currentFont();
+  const data = FONTS[name];
+  const tier = parseInt(opt.dataset.t);
+  const weight = parseInt(opt.dataset.w);
+
+  applyFont(name, weight);
+
+  /* Badge */
+  document.getElementById("badgeName").textContent = name;
+  const tp = document.getElementById("tierPill");
+  tp.textContent = TIERS[tier].label;
+  tp.className   = "tier-pill " + TIERS[tier].cls;
+
+  /* Eval panel */
+  document.getElementById("evalTitle").textContent = `${name} — Evaluation`;
+  document.getElementById("yesList").innerHTML =
+    data.yes.map(p => `<li>${p}</li>`).join("");
+  document.getElementById("noList").innerHTML =
+    data.no.map(p => `<li>${p}</li>`).join("");
+  document.getElementById("bestFor").innerHTML =
+    `<strong>Best for:</strong> ${data.best}`;
+}
+
+/* ─────────────────────────────────────────────
+   Size slider
+───────────────────────────────────────────── */
+function updateSize(val) {
+  currentSize = parseFloat(val);
+  document.getElementById("sizeVal").textContent = val;
+  const wV = document.getElementById("wordVertia");
+  const wL = document.getElementById("wordLabs");
+  wV.style.fontSize = val + "rem";
+  /* Labs is proportional: ~28% of main size, min 0.9rem */
+  const labsSize = Math.max(0.9, currentSize * 0.28);
+  wL.style.fontSize = labsSize.toFixed(2) + "rem";
+}
+
+/* ─────────────────────────────────────────────
+   Logo toggle
+───────────────────────────────────────────── */
+function setLabel(mode) {
+  showLabs = (mode === "VertiaLabs");
+  document.getElementById("wordLabs").style.display = showLabs ? "block" : "none";
+  document.getElementById("btnV").classList.toggle("on", !showLabs);
+  document.getElementById("btnVL").classList.toggle("on",  showLabs);
+}
+
+/* ─────────────────────────────────────────────
+   Background toggle
+───────────────────────────────────────────── */
+function setBg(mode) {
+  const stage = document.getElementById("stage");
+  stage.className = "stage " + mode;
+  document.getElementById("btnDark").classList.toggle("on",  mode === "dark");
+  document.getElementById("btnLight").classList.toggle("on", mode === "light");
+}
+
+/* ─────────────────────────────────────────────
+   Init
+───────────────────────────────────────────── */
+update();
 </script>
 </body>
 </html>
