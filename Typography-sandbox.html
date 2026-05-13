@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Interactive font comparison sandbox for the Vertia Labs logo — 12 candidates with live gradient preview and evaluation notes.">
+<meta name="description" content="Interactive font comparison sandbox for the VertIA Labs logo — 10 curated fonts with live gradient preview and evaluation notes.">
 <meta property="og:title" content="VertIA Labs — Font Sandbox">
-<meta property="og:description" content="Compare 12 font candidates with live gradient preview and WHY YES / WHY NO evaluation notes.">
+<meta property="og:description" content="Compare 10 font candidates with live gradient preview and WHY YES / WHY NO evaluation notes.">
 <title>VertIA Labs — Font Sandbox</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Serif+Display&family=Epilogue:wght@400;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,800&family=Inter:wght@400;600;700;800&family=Libre+Baskerville:wght@400;700&family=Manrope:wght@400;600;700;800&family=Outfit:wght@400;600;700;800&family=Playfair+Display:wght@400;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Epilogue:wght@400;600;700;800&family=Lora:ital,wght@0,400..700;1,400..700&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&family=Manrope:wght@400;600;700;800&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
 
 <style>
 /* ─────────────────────────────────────────────
@@ -45,7 +45,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: system-ui, sans-serif;
   background-color: var(--base);
   background-image:
     linear-gradient(var(--grid) 1px, transparent 1px),
@@ -56,8 +56,7 @@ body {
 }
 
 /* ─────────────────────────────────────────────
-   Gradient text helper — applied per element
-   so block children work correctly
+   Gradient text helper
 ───────────────────────────────────────────── */
 .grad {
   background: linear-gradient(90deg, var(--g0), var(--g1));
@@ -249,7 +248,7 @@ input[type=range]::-webkit-slider-thumb {
 .stage.dark  { background: #080812; }
 .stage.light { background: var(--base); }
 
-/* The logo lockup: two independent gradient elements */
+/* The logo lockup */
 .logo-lockup {
   display: flex;
   flex-direction: column;
@@ -260,7 +259,6 @@ input[type=range]::-webkit-slider-thumb {
   user-select: none;
 }
 
-/* Each text node carries its own gradient — fixes block-child clip bug */
 #wordVertia {
   display: block;
   background: linear-gradient(90deg, var(--g0), var(--g1));
@@ -271,7 +269,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 #wordLabs {
-  display: none; /* shown via JS */
+  display: none;
   background: linear-gradient(90deg, var(--g0), var(--g1));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -279,7 +277,7 @@ input[type=range]::-webkit-slider-thumb {
   letter-spacing: .28em;
   text-transform: uppercase;
   opacity: .72;
-  padding-left: .28em; /* optical offset for letter-spacing */
+  padding-left: .28em;
   transition: font-size .2s ease;
 }
 
@@ -308,7 +306,6 @@ input[type=range]::-webkit-slider-thumb {
 }
 .tier-pill.t1 { background: #f0fdf4; color: #15803d; border-color: #bbf7d0; }
 .tier-pill.t2 { background: #eff6ff; color: #1d4ed8; border-color: #bfdbfe; }
-.tier-pill.t3 { background: #fef9c3; color: #a16207; border-color: #fde68a; }
 
 /* ─────────────────────────────────────────────
    Evaluation panel
@@ -405,8 +402,8 @@ footer a:hover { color: var(--g1); }
 <header class="hero">
   <div class="eyebrow"><i></i>VertIA Labs Brand Studio<i></i></div>
   <h1><span class="grad">Font Sandbox</span></h1>
-  <p>12 candidates, live gradient preview, full evaluation notes.
-     Pick a font — see how <em>VertIA</em> (or the full logo) looks.</p>
+  <p>10 curated fonts, live gradient preview, full evaluation notes.
+     Pick a font — see how <em>VertIA</em> (capital IA) looks with your locked gradient.</p>
 </header>
 
 <main class="page">
@@ -418,23 +415,19 @@ footer a:hover { color: var(--g1); }
       <div class="cg grow">
         <label>Font</label>
         <select id="fontSelect" onchange="update()">
-          <optgroup label="⭐ Tier 1 — Top Choices">
-            <option value="Inter"            data-w="700" data-t="1">Inter</option>
-            <option value="Google Sans"      data-w="700" data-t="1">Google Sans</option>
+          <optgroup label="⭐ Logo / Header Candidates">
             <option value="DM Serif Display" data-w="400" data-t="1">DM Serif Display</option>
-          </optgroup>
-          <optgroup label="◈ Tier 2 — Worth Testing">
             <option value="Manrope"          data-w="700" data-t="2">Manrope</option>
             <option value="Outfit"           data-w="700" data-t="2">Outfit</option>
             <option value="Epilogue"         data-w="700" data-t="2">Epilogue</option>
             <option value="Plus Jakarta Sans" data-w="700" data-t="2">Plus Jakarta Sans</option>
           </optgroup>
-          <optgroup label="△ Tier 3 — Probably Not">
-            <option value="Syne"             data-w="800" data-t="3">Syne</option>
-            <option value="Crimson Pro"      data-w="700" data-t="3">Crimson Pro</option>
-            <option value="Fraunces"         data-w="700" data-t="3">Fraunces</option>
-            <option value="Playfair Display" data-w="700" data-t="3">Playfair Display</option>
-            <option value="Libre Baskerville" data-w="700" data-t="3">Libre Baskerville</option>
+          <optgroup label="◈ Body Text / Pairing Options">
+            <option value="Georgia"          data-w="700" data-t="1">Georgia</option>
+            <option value="Literata"         data-w="700" data-t="1">Literata</option>
+            <option value="Lora"             data-w="700" data-t="2">Lora</option>
+            <option value="Merriweather"     data-w="700" data-t="2">Merriweather</option>
+            <option value="Source Serif 4"   data-w="700" data-t="2">Source Serif 4</option>
           </optgroup>
         </select>
       </div>
@@ -448,8 +441,8 @@ footer a:hover { color: var(--g1); }
       <div class="cg">
         <label>Logo</label>
         <div class="pills">
-          <button class="pill on" id="btnV"  onclick="setLabel('Vertia')">Vertia</button>
-          <button class="pill"    id="btnVL" onclick="setLabel('VertiaLabs')">Vertia Labs</button>
+          <button class="pill on" id="btnV"  onclick="setLabel('VertIA')">VertIA</button>
+          <button class="pill"    id="btnVL" onclick="setLabel('VertIALabs')">VertIA Labs</button>
         </div>
       </div>
 
@@ -469,21 +462,21 @@ footer a:hover { color: var(--g1); }
     <div class="preview-wrap">
       <div class="stage dark" id="stage">
         <div class="logo-lockup">
-          <span id="wordVertia" style="font-size:5rem; font-family:'Inter',sans-serif; font-weight:700">Vertia</span>
-          <span id="wordLabs"   style="font-size:1.4rem; font-family:'Inter',sans-serif; font-weight:400">Labs</span>
+          <span id="wordVertia" style="font-size:5rem; font-family:'DM Serif Display',serif; font-weight:400">VertIA</span>
+          <span id="wordLabs"   style="font-size:1.4rem; font-family:'DM Serif Display',serif; font-weight:400">Labs</span>
         </div>
       </div>
     </div>
     <div class="badge-row">
-      <span class="badge-name" id="badgeName">Inter</span>
-      <span class="tier-pill t1" id="tierPill">⭐ Tier 1 — Top Choice</span>
+      <span class="badge-name" id="badgeName">DM Serif Display</span>
+      <span class="tier-pill t1" id="tierPill">⭐ Top Choice for Logo</span>
     </div>
   </div>
 
   <!-- ③ Evaluation -->
   <div class="card">
     <div class="eval">
-      <div class="eval-title" id="evalTitle">Inter — Evaluation</div>
+      <div class="eval-title" id="evalTitle">DM Serif Display — Evaluation</div>
       <div class="cols">
         <div class="reason yes">
           <h3>✓ &nbsp;Why Yes</h3>
@@ -501,89 +494,48 @@ footer a:hover { color: var(--g1); }
 </main>
 
 <footer>
-  Built for <strong>Vertia Labs</strong> brand exploration &nbsp;·&nbsp;
-  <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+  Built for <strong>VertIA Labs</strong> brand exploration &nbsp;·&nbsp; Colors locked: #1a1a4e → #9333ea
 </footer>
 
 <script>
-/* ─────────────────────────────────────────────
-   Font evaluation data
-───────────────────────────────────────────── */
 const FONTS = {
-  "Inter": {
-    weight: 700, tier: 1,
-    yes: [
-      "Crystal clear readability — designed specifically for UI/screens",
-      "Professional modern — used by serious tech (Figma, GitHub, etc.)",
-      "More personality than Google Sans — distinctive but not weird",
-      "Excellent gradient performance — even stroke weight",
-      "Multiple weights (100–900) — tons of flexibility",
-      "Open source — no licensing headaches",
-      "Neutral but not boring — safe + slight edge"
-    ],
-    no: [
-      "Very common in tech — might feel \"startup-y\"",
-      "Almost too neutral — low memorability",
-      "Could blend into the \"tech crowd\" rather than stand out",
-      "Machista markets might want more weight/presence"
-    ],
-    best: "Modern, readable, professional — if you want \"better Google Sans\""
-  },
-  "Google Sans": {
-    weight: 700, tier: 1,
-    yes: [
-      "Maximum readability — designed for screens, works at every size",
-      "Subconscious trust factor — people see it daily (Gmail, Google products)",
-      "Professional without being boring — friendly authority",
-      "Neutral/safe in machista markets — no \"design-y\" baggage",
-      "Excellent gradient performance — clean lines, good contrast",
-      "Multiple weights available — can go bold (700–800) for gravitas",
-      "Won't date quickly — modern but not trendy"
-    ],
-    no: [
-      "It's literally Google's brand font — identity concern",
-      "Very common now — lots of startups/companies use it",
-      "Low distinctiveness — won't stand out typographically",
-      "Might feel \"too tech\" for some traditional Latam clients",
-      "Generic — your brand relies entirely on gradient concept"
-    ],
-    best: "Safe, professional choice when you want typography to support (not compete with) your gradient concept"
-  },
   "DM Serif Display": {
     weight: 400, tier: 1,
     yes: [
       "Display serif = serious + modern",
       "Highly readable for a serif — better than Crimson/Playfair",
-      "Strong presence — commands attention",
+      "Strong presence — commands attention with capital IA",
       "Contemporary take on traditional — bridges old/new",
       "Works well bold — authoritative without being heavy",
-      "Good gradient compatibility"
+      "Good gradient compatibility",
+      "Serif authority compensates for purple in machista markets"
     ],
     no: [
       "\"Display\" serif = designed for headlines, not body text",
       "Might feel too \"brand/marketing\" vs. \"operational/technical\"",
       "Serif = inherently less tech-feeling than sans",
-      "Could be too stylized for conservative clients"
+      "Could be too stylized for ultra-conservative clients"
     ],
-    best: "If you want serif authority with better readability than Crimson Pro"
+    best: "If you want serif authority with modern readability — perfect for logo/headers paired with sans or serif body"
   },
   "Manrope": {
     weight: 700, tier: 2,
     yes: [
-      "Geometric but warmer than Syne — approachable authority",
+      "Geometric but warmer — approachable authority",
       "Very readable — clean, modern, functional",
       "Professional without corporate stiffness",
       "Good weight range (200–800) — can go bold for gravitas",
       "Works well in gradients — consistent stroke weight",
-      "Less common than Inter/Google Sans — more ownable"
+      "Less common than big tech fonts — more ownable",
+      "Capital IA reads clearly and professionally"
     ],
     no: [
       "Rounded terminals might feel too friendly for serious B2B",
-      "Less \"sharp/precise\" than other options",
+      "Less \"sharp/precise\" than other geometric options",
       "Could read as \"consumer app\" vs. \"enterprise platform\"",
       "Geometric roundness = potentially \"soft\" in machista context"
     ],
-    best: "Modern professionalism with approachable edge — middle ground option"
+    best: "Modern professionalism with approachable edge — middle ground between friendly and authoritative"
   },
   "Outfit": {
     weight: 700, tier: 2,
@@ -591,9 +543,10 @@ const FONTS = {
       "Geometric, clean, distinctive — stands out",
       "Serious but contemporary — not boring",
       "Works beautifully in bold weights — commanding presence",
-      "Not overused yet — ownable",
+      "Not overused yet — ownable identity",
       "Strong gradient performance — geometric clarity",
-      "Modern without being trendy"
+      "Modern without being trendy",
+      "Capital letters have strong presence"
     ],
     no: [
       "Geometric = might feel too design-forward for conservative clients",
@@ -601,7 +554,7 @@ const FONTS = {
       "Could read as \"creative/design\" vs. \"operations/logistics\"",
       "Quirky details in some letterforms"
     ],
-    best: "Brands wanting geometric modernity with authority — worth testing"
+    best: "Brands wanting geometric modernity with authority — worth testing if you want distinctive but professional"
   },
   "Epilogue": {
     weight: 700, tier: 2,
@@ -611,138 +564,139 @@ const FONTS = {
       "Great gradient performance — even weights",
       "Readable at all sizes",
       "Multiple weights — flexibility",
-      "Modern without being trendy"
+      "Modern without being trendy",
+      "Safe choice that works everywhere"
     ],
     no: [
       "Fairly generic — low distinctiveness",
       "Could blend into the \"tech SaaS\" crowd",
       "Not particularly memorable typographically",
-      "Might not have enough weight for machista markets"
+      "Might not have enough weight/authority for machista markets"
     ],
-    best: "Safe, modern professionalism — \"Inter lite\""
+    best: "Safe, modern professionalism — clean and functional but not particularly distinctive"
   },
   "Plus Jakarta Sans": {
     weight: 700, tier: 2,
     yes: [
       "Rounded but still serious — friendly professionalism",
-      "Global design origin (Indonesia) — international feel for Latam/US",
+      "Global design (Indonesia) — international feel for Latam/US",
       "Very readable — clear at any size",
       "Contemporary — feels current, well-designed",
       "Good gradient compatibility",
-      "Warm without being cutesy"
+      "Warm without being cutesy",
+      "Humanist feel balances tech positioning"
     ],
     no: [
       "Rounded = might feel too soft for authority positioning",
-      "Less known = could need explanation / \"is this custom?\"",
+      "Less known = could raise \"is this custom?\" questions",
       "Might not project enough weight in traditional markets",
       "Contemporary = could date faster than classics"
     ],
-    best: "Modern brands wanting warmth + professionalism — borderline for your needs"
+    best: "Modern brands wanting warmth + professionalism — borderline for serious B2B but worth testing"
   },
-  "Syne": {
-    weight: 800, tier: 3,
+  "Georgia": {
+    weight: 700, tier: 1,
     yes: [
-      "Geometric premium feel — serious, modern, sophisticated",
-      "Strong personality — distinctive without being weird",
-      "Works beautifully bold — commands attention",
-      "Contemporary — feels current, forward-thinking",
-      "Good gradient compatibility — clean shapes hold color well",
-      "European design — global/modern sensibility"
+      "Designed for screens — incredibly readable",
+      "Serious, traditional, institutional authority",
+      "Free, widely available, universally recognized",
+      "Maximum safety for body text",
+      "NYT-style editorial credibility",
+      "Works perfectly as body text paired with DM Serif Display headers",
+      "Compensates for purple with traditional gravitas"
     ],
     no: [
-      "Doesn't feel like a fit (you said this) — trust your gut",
-      "Might be too geometric/design-forward for conservative clients",
-      "Could read as \"creative agency\" vs. \"operations/logistics\"",
-      "Quirky letterforms (especially 'a' and 'y') — may feel too playful",
-      "Less neutral than other options"
+      "Very common = low distinctiveness",
+      "Might feel \"default/system font\"",
+      "Not particularly exciting or memorable",
+      "Could feel dated to some audiences",
+      "Not ideal for logo (better for body text)"
     ],
-    best: "Brands wanting to signal \"design-conscious innovation\" — probably not your positioning"
+    best: "Body text champion — pairs with DM Serif Display for all-serif system with maximum readability"
   },
-  "Crimson Pro": {
-    weight: 700, tier: 3,
+  "Literata": {
+    weight: 700, tier: 1,
     yes: [
-      "Editorial authority — signals seriousness, institutional weight",
-      "Modern serif — bridges traditional + contemporary",
-      "Premium feel — sophisticated without being precious",
-      "Works well with gradients — good stroke contrast",
-      "Commands respect — serif = established/credible in traditional markets",
-      "More distinctive than sans options"
+      "Designed for Google Books = optimized for reading",
+      "Serious, scholarly, credible feel",
+      "Free via Google Fonts",
+      "More sophisticated than Georgia",
+      "Professional without being stuffy",
+      "Perfect body text to pair with DM Serif Display",
+      "Editorial authority for long-form content"
     ],
     no: [
-      "Readability issues (you flagged this) — especially at smaller sizes",
-      "Thin strokes can disappear in gradient transitions",
-      "Might feel too \"publication/media\" vs. \"operations/tech\"",
-      "Requires careful sizing — doesn't scale down as well",
-      "Could read as \"consultancy\" rather than \"tech-enabled services\""
+      "Less familiar than Georgia = might not have instant trust",
+      "Variable font = requires proper implementation",
+      "Could feel too \"bookish\" for operations/tech context",
+      "Not ideal for logo (designed for body text)"
     ],
-    best: "If editorial gravitas outweighs readability concerns and you want maximum authority"
+    best: "Body text pairing with DM Serif Display — scholarly credibility meets modern readability"
   },
-  "Fraunces": {
-    weight: 700, tier: 3,
+  "Lora": {
+    weight: 700, tier: 2,
     yes: [
-      "Modern serif with personality — not your grandfather's serif",
-      "Soft/approachable authority — serious but not stuffy",
-      "Variable font — tons of customization options",
-      "Bridges traditional/modern — safe middle ground",
-      "Distinctive — memorable without being trendy"
+      "Modern editorial serif with warmth",
+      "Very readable for body text",
+      "Slightly warmer than Georgia",
+      "Brushed/calligraphic details = premium feel",
+      "Free via Google Fonts",
+      "Good for long-form reading",
+      "Pairs well with DM Serif Display"
     ],
     no: [
-      "Hard to read (you flagged this) — especially in heavier weights",
-      "Rounded forms might feel too soft for \"serious operations\"",
-      "Optical weight issues — can look inconsistent in gradients",
-      "Might read as \"friendly startup\" vs. \"enterprise authority\"",
-      "Too much personality for conservative B2B clients"
+      "Calligraphic touches might feel too \"design-y\" for ultra-conservative",
+      "Warmer = potentially less \"serious\" than Georgia",
+      "Could read as \"lifestyle\" in wrong context",
+      "Not ideal for logo (body text font)"
     ],
-    best: "Consumer brands wanting approachable premium — not B2B enterprise"
+    best: "Body text with slight warmth — pairs with DM Serif Display for sophisticated serif system"
   },
-  "Playfair Display": {
-    weight: 700, tier: 3,
+  "Merriweather": {
+    weight: 700, tier: 2,
     yes: [
-      "Maximum elegance — high-end, sophisticated feel",
-      "Editorial authority — signals premium/established",
-      "Your partner's choice (12 years marketing experience)",
-      "Strong serif presence — commands respect in traditional markets",
-      "Beautiful with gradients — dramatic stroke contrast"
+      "Designed for screens with sturdy construction",
+      "Readable, professional body text",
+      "Slightly more personality than Georgia",
+      "Free, well-supported",
+      "Good middle ground between safe and distinctive",
+      "Works as body text with serif or sans headers"
     ],
     no: [
-      "Too delicate — thin strokes disappear at small sizes",
-      "Very \"feminine\" coded — works AGAINST you in machista markets",
-      "\"Lifestyle/magazine\" vibe — not \"operations/tech/AI\"",
-      "Poor readability at body text sizes",
-      "Feels like luxury fashion/events, not B2B services",
-      "Gradient destroys thin strokes — technical implementation issue"
+      "Heavy letterforms can feel \"chunky\" at large sizes",
+      "Might be too informal for ultra-serious contexts",
+      "Very common in blogs/content sites = less premium",
+      "Not ideal for logo (body text font)"
     ],
-    best: "Luxury consumer brands, editorial content — NOT enterprise B2B services"
+    best: "Body text option with personality — less formal than Georgia but still professional"
   },
-  "Libre Baskerville": {
-    weight: 700, tier: 3,
+  "Source Serif 4": {
+    weight: 700, tier: 2,
     yes: [
-      "Classic serif — maximum traditional authority",
-      "Very legible for a serif — designed for screens",
-      "Professional/institutional — signals established/credible",
-      "Safe choice in traditional markets",
-      "Works with gradients reasonably well",
-      "Free/open source"
+      "Clean, modern, highly readable body text",
+      "Professional without being stuffy",
+      "Free from Adobe, well-supported",
+      "Good middle ground serif",
+      "Variable font = flexibility",
+      "Contemporary serif feel",
+      "Pairs with DM Serif Display or sans headers"
     ],
     no: [
-      "Very traditional = might feel \"old\" not \"modern operations + AI\"",
-      "Serif = less tech/AI association",
-      "Could read as \"law firm/university\" vs. \"innovative tech services\"",
-      "Might be too conservative for AI positioning"
+      "Less \"editorial authority\" than Georgia/Literata",
+      "Could feel too neutral",
+      "Might not project enough weight for traditional markets",
+      "Less familiar to general audiences",
+      "Not ideal for logo (body text font)"
     ],
-    best: "Maximum traditional authority — if you're willing to sacrifice \"modern/tech\" signals"
+    best: "Body text pairing — contemporary serif that bridges traditional and modern"
   }
 };
 
 const TIERS = {
-  1: { label: "⭐ Tier 1 — Top Choice",    cls: "t1" },
-  2: { label: "◈ Tier 2 — Worth Testing", cls: "t2" },
-  3: { label: "△ Tier 3 — Probably Not",  cls: "t3" }
+  1: { label: "⭐ Top Choice", cls: "t1" },
+  2: { label: "◈ Worth Testing", cls: "t2" }
 };
 
-/* ─────────────────────────────────────────────
-   State
-───────────────────────────────────────────── */
 let showLabs = false;
 let currentSize = 5;
 
@@ -751,9 +705,6 @@ function currentFont() {
   return { name: sel.value, opt: sel.options[sel.selectedIndex] };
 }
 
-/* ─────────────────────────────────────────────
-   Apply font to both logo elements
-───────────────────────────────────────────── */
 function applyFont(name, weight) {
   const ff = `'${name}', serif`;
   const wV  = document.getElementById("wordVertia");
@@ -761,13 +712,9 @@ function applyFont(name, weight) {
   wV.style.fontFamily = ff;
   wV.style.fontWeight = weight;
   wL.style.fontFamily = ff;
-  /* Labs uses a lighter weight for the subtitle feel */
   wL.style.fontWeight = Math.max(300, weight - 200);
 }
 
-/* ─────────────────────────────────────────────
-   Main update
-───────────────────────────────────────────── */
 function update() {
   const { name, opt } = currentFont();
   const data = FONTS[name];
@@ -776,13 +723,11 @@ function update() {
 
   applyFont(name, weight);
 
-  /* Badge */
   document.getElementById("badgeName").textContent = name;
   const tp = document.getElementById("tierPill");
   tp.textContent = TIERS[tier].label;
   tp.className   = "tier-pill " + TIERS[tier].cls;
 
-  /* Eval panel */
   document.getElementById("evalTitle").textContent = `${name} — Evaluation`;
   document.getElementById("yesList").innerHTML =
     data.yes.map(p => `<li>${p}</li>`).join("");
@@ -792,33 +737,23 @@ function update() {
     `<strong>Best for:</strong> ${data.best}`;
 }
 
-/* ─────────────────────────────────────────────
-   Size slider
-───────────────────────────────────────────── */
 function updateSize(val) {
   currentSize = parseFloat(val);
   document.getElementById("sizeVal").textContent = val;
   const wV = document.getElementById("wordVertia");
   const wL = document.getElementById("wordLabs");
   wV.style.fontSize = val + "rem";
-  /* Labs is proportional: ~28% of main size, min 0.9rem */
   const labsSize = Math.max(0.9, currentSize * 0.28);
   wL.style.fontSize = labsSize.toFixed(2) + "rem";
 }
 
-/* ─────────────────────────────────────────────
-   Logo toggle
-───────────────────────────────────────────── */
 function setLabel(mode) {
-  showLabs = (mode === "VertiaLabs");
+  showLabs = (mode === "VertIALabs");
   document.getElementById("wordLabs").style.display = showLabs ? "block" : "none";
   document.getElementById("btnV").classList.toggle("on", !showLabs);
   document.getElementById("btnVL").classList.toggle("on",  showLabs);
 }
 
-/* ─────────────────────────────────────────────
-   Background toggle
-───────────────────────────────────────────── */
 function setBg(mode) {
   const stage = document.getElementById("stage");
   stage.className = "stage " + mode;
@@ -826,9 +761,6 @@ function setBg(mode) {
   document.getElementById("btnLight").classList.toggle("on", mode === "light");
 }
 
-/* ─────────────────────────────────────────────
-   Init
-───────────────────────────────────────────── */
 update();
 </script>
 </body>
