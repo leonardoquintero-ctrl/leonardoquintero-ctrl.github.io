@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEO Name Builder Engine</title>
+    <style>
+        :root {
+            --bg: #f4f4f9;
+            --surface: #ffffff;
+            --primary: #2563eb;
+            --text: #1e293b;
+            --border: #e2e8f0;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: auto;
+        }
+        h1, h2, h3 { margin-top: 0; }
+        .panel {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.8; }
+        .btn-primary { background: var(--primary); color: white; padding: 12px 24px; font-size: 16px;}
+        .btn-maybe { background: var(--warning); color: white; }
+        .btn-nogo { background: var(--border); color: var(--text); }
+        .btn-ban { background: var(--danger); color: white; font-size: 12px; padding: 4px 8px;}
+        .btn-edit { background: var(--primary); color: white; font-size: 12px; padding: 4px 8px;}
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .card {
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f8fafc;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .controls { display: flex; justify-content: space-between; gap: 5px; }
+        .ban-controls { display: flex; justify-content: space-between; gap: 5px; border-top: 1px solid var(--border); padding-top: 10px;}
+        
+        .sandbox-item, .nogo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        .sandbox-item input {
+            font-size: 1rem;
+            font-weight: bold;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 4px;
+        }
+        .vault-panel { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="header panel">
+        <div>
+            <h1>AEO Name Builder</h1>
+            <p>Bicultural • Phonetic Safe • Enterprise Screened</p>
+        </div>
+        <button class="btn-primary" onclick="generateBatch()">Generate Names</button>
+    </div>
+
+    <div class="panel">
+        <h2>Live Outputs</h2>
+        <p id="stats">Click generate to start.</p>
+        <div class="grid" id="output-grid"></div>
+    </div>
+
+    <div>
+        <div class="panel">
+            <h2>⭐ The Sandbox</h2>
+            <p style="font-size: 12px; color: gray;">Edit your favorites here.</p>
+            <div id="sandbox-list"></div>
+        </div>
+
+        <div class="panel vault-panel">
+            <h2>🚫 No-Go Vault</h2>
+            <div id="vault-list"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA DICTIONARIES ---
+        let list1_anchor = [
+            {word: "Nodo", starts_vowel: false, ends_vowel: true},
+            {word: "Nexus", starts_vowel: false, ends_vowel: false},
+            {word: "Base", starts_vowel: false, ends_vowel: true},
+            {word: "Grid", starts_vowel: false, ends_vowel: false},
+            {word: "Sello", starts_vowel: false, ends_vowel: true},
+            {word: "Puerto", starts_vowel: false, ends_vowel: true},
+            {word: "Vault", starts_vowel: false, ends_vowel: false},
+            {word: "Trust", starts_vowel: false, ends_vowel: false},
+            {word: "Logix", starts_vowel: false, ends_vowel: false},
+            {word: "Carga", starts_vowel: false, ends_vowel: true}
+        ];
+        
+        let list2_spark = [
+            {word: "Paso", starts_vowel: false, ends_vowel: true},
+            {word: "Via", starts_vowel: false, ends_vowel: true},
+            {word: "Flow", starts_vowel: false, ends_vowel: false},
+            {word: "Shift", starts_vowel: false, ends_vowel: false},
+            {word: "Trace", starts_vowel: false, ends_vowel: true},
+            {word: "Ruta", starts_vowel: false, ends_vowel: true},
+            {word: "Sync", starts_vowel: false, ends_vowel: false},
+            {word: "Cruz", starts_vowel: false, ends_vowel: false},
+            {word: "Link", starts_vowel: false, ends_vowel: false}
+        ];
+
+        let list3_lens = [
+            {word: "Vero", starts_vowel: false, ends_vowel: true},
+            {word: "Nova", starts_vowel: false, ends_vowel: true},
+            {word: "Terra", starts_vowel: false, ends_vowel: true},
+            {word: "Opti", starts_vowel: true, ends_vowel: true},
+            {word: "Altus", starts_vowel: true, ends_vowel: false},
+            {word: "Claro", starts_vowel: false, ends_vowel: true},
+            {word: "Omni", starts_vowel: true, ends_vowel: true},
+            {word: "Neo", starts_vowel: false, ends_vowel: true}
+        ];
+
+        let bannedRoots = ["Redshift", "Vertex", "Apex", "Snowflake", "Oracle", "Palantir", "Synergy"];
+        let noGoCombos = [];
+        let sandbox = [];
+        let currentGenerations = [];
+        const MAX_LENGTH = 12;
+
+        // --- CORE LOGIC ---
+        function generateCombos() {
+            let results = [];
+            
+            // Helper function to process pairs
+            function processPair(arrA, arrB) {
+                arrA.forEach(a => {
+                    arrB.forEach(b => {
+                        // 1. Enterprise Blocklist
+                        if (bannedRoots.includes(a.word) || bannedRoots.includes(b.word)) return;
+                        
+                        // 2. Vowel Collision Check
+                        if (a.ends_vowel && b.starts_vowel) return;
+                        
+                        let combinedName = a.word + b.word;
+                        
+                        // 3. Length Check
+                        if (combinedName.length > MAX_LENGTH) return;
+                        
+                        // 4. Memory Check
+                        if (noGoCombos.includes(combinedName)) return;
+
+                        results.push({ name: combinedName, wordA: a.word, wordB: b.word });
+                    });
+                });
+            }
+
+            // Formula A: Lens + Anchor
+            processPair(list3_lens, list1_anchor);
+            // Formula B: Spark + Anchor
+            processPair(list2_spark, list1_anchor);
+            // Formula C: Anchor + Spark
+            processPair(list1_anchor, list2_spark);
+
+            // Shuffle array to get random fresh results each click
+            return results.sort(() => 0.5 - Math.random());
+        }
+
+        // --- UI HANDLERS ---
+        function generateBatch() {
+            let allValid = generateCombos();
+            // Take top 12 random results for display
+            currentGenerations = allValid.slice(0, 12);
+            renderGrid();
+        }
+
+        function renderGrid() {
+            const grid = document.getElementById('output-grid');
+            grid.innerHTML = '';
+            document.getElementById('stats').innerText = `Showing ${currentGenerations.length} viable combinations.`;
+
+            currentGenerations.forEach((item, index) => {
+                grid.innerHTML += `
+                    <div class="card" id="card-${index}">
+                        <div class="card-title">${item.name}</div>
+                        <div class="controls">
+                            <button class="btn-maybe" onclick="moveToSandbox('${item.name}', ${index})">⭐ Maybe</button>
+                            <button class="btn-nogo" onclick="noGoCombo('${item.name}', ${index})">🚫 No-Go</button>
+                        </div>
+                        <div class="ban-controls">
+                            <button class="btn-ban" onclick="banRoot('${item.wordA}')">Ban '${item.wordA}'</button>
+                            <button class="btn-ban" onclick="banRoot('${item.wordB}')">Ban '${item.wordB}'</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- ACTIONS ---
+        function noGoCombo(name, index) {
+            noGoCombos.push(name);
+            document.getElementById(`card-${index}`).style.display = 'none';
+            renderVault();
+        }
+
+        function banRoot(word) {
+            bannedRoots.push(word);
+            // Re-generate the batch to instantly wipe the root from view
+            generateBatch();
+            renderVault();
+        }
+
+        function moveToSandbox(name, index) {
+            if (!sandbox.includes(name)) {
+                sandbox.push(name);
+                document.getElementById(`card-${index}`).style.display = 'none';
+                renderSandbox();
+            }
+        }
+
+        function updateSandboxItem(oldName, index, inputId) {
+            const newName = document.getElementById(inputId).value;
+            sandbox[index] = newName;
+            // Here you would hook up your Domain API checker
+            alert(`Saved! You could trigger an API check for: ${newName}.com`);
+            renderSandbox();
+        }
+
+        function removeFromSandbox(index) {
+            sandbox.splice(index, 1);
+            renderSandbox();
+        }
+
+        // --- RENDERING PANELS ---
+        function renderSandbox() {
+            const list = document.getElementById('sandbox-list');
+            list.innerHTML = '';
+            sandbox.forEach((name, index) => {
+                let inputId = `edit-box-${index}`;
+                list.innerHTML += `
+                    <div class="sandbox-item">
+                        <input type="text" id="${inputId}" value="${name}">
+                        <div>
+                            <button class="btn-edit" onclick="updateSandboxItem('${name}', ${index}, '${inputId}')">Save</button>
+                            <button class="btn-ban" onclick="removeFromSandbox(${index})">X</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderVault() {
+            const list = document.getElementById('vault-list');
+            list.innerHTML = `<strong>Banned Roots:</strong> <br><span style="font-size:12px; color:gray;">${bannedRoots.join(', ')}</span><br><br>`;
+            list.innerHTML += `<strong>Banned Combos:</strong> <br><span style="font-size:12px; color:gray;">${noGoCombos.join(', ')}</span>`;
+        }
+
+        // Initial render
+        renderVault();
+    </script>
+</body>
+</html>
