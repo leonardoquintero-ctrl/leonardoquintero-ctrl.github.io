@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEO Services for Startups and Small Businesses — Quint·IA Vantage</title>
+  <meta name="description" content="Productized AEO monthly retainers from $950 to $2,750. Three tiers, fixed scope, marketing and data strategist on every account. No PR markup. No custom-scope discovery cycle.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://quintiavantage.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://quintiavantage.com/services" }
+    ]
+  }
+  </script>
+
+  <!-- Service schema with Offers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://quintiavantage.com/services",
+    "name": "AEO Services for Startups and Small Businesses",
+    "description": "Productized monthly AEO retainers. Technical foundation, owned knowledge graph, content production, and off-site citation work for getting cited by ChatGPT, Claude, Perplexity, and Google AI Overviews.",
+    "provider": { "@type": "Organization", "name": "Quint·IA Vantage", "@id": "https://quintiavantage.com/#organization" },
+    "areaServed": "US",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Foundation",
+        "price": "950",
+        "priceCurrency": "USD",
+        "description": "AEO setup tier for bootstrapped founders and US SMBs. Schema specs, llms.txt, knowledge graph seed, 2 content pieces per month, monthly visibility report, quarterly strategy call.",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "950", "priceCurrency": "USD", "unitCode": "MON" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Momentum",
+        "price": "1750",
+        "priceCurrency": "USD",
+        "description": "AEO growth retainer for Series A/B B2B SaaS. Everything in Foundation plus 4-5 content pieces, glossary, Reddit/Quora calendar, publication shortlist, weekly visibility tracking.",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "1750", "priceCurrency": "USD", "unitCode": "MON" }
+      },
+      {
+        "@type": "Offer",
+        "name": "Citation Engine",
+        "price": "2750",
+        "priceCurrency": "USD",
+        "description": "Full-scale AEO for companies committed to AI search as a primary growth channel. Everything in Momentum plus FAQ deep program, comparison pages, YouTube scripts, weekly tracking across 4 engines.",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "2750", "priceCurrency": "USD", "unitCode": "MON" }
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQPage schema — 5 Q&As -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "How is this different from a typical SEO retainer?", "acceptedAnswer": { "@type": "Answer", "text": "SEO retainers focus on ranking pages in Google's blue-link results. Our retainers focus on being cited in AI-generated answers from ChatGPT, Claude, Perplexity, and Google AI Overviews. The technical foundation overlaps. The off-site work and the content shape are different." } },
+      { "@type": "Question", "name": "Can I switch tiers mid-engagement?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Most clients start at Foundation or Momentum and move up after 90 days as they see what is working. We do not lock tier assignments in the SOW." } },
+      { "@type": "Question", "name": "Do you white-label?", "acceptedAnswer": { "@type": "Answer", "text": "We white-label for a small number of agency partners. Email us if you are an agency considering adding AEO to your offer." } },
+      { "@type": "Question", "name": "How do you measure success?", "acceptedAnswer": { "@type": "Answer", "text": "Three metrics, reported monthly: prompt-level visibility (share of voice on a tracked prompt set), branded search volume (rising branded search is the leading indicator that AEO is working), and source attribution on inbound leads. As we do not have CRM access, we ask that our clients report the third number to us directly." } },
+      { "@type": "Question", "name": "Do you guarantee results?", "acceptedAnswer": { "@type": "Answer", "text": "No, and we are skeptical of any AEO agency that does. AI search measurement is too new for hard guarantees. We commit to measurable monthly deliverables and prompt-level reporting. Outcomes follow when execution is consistent." } }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ─── VARIABLES ──────────────────────────────────────── */
+    :root {
+      --bg-base:        #0B0E11;
+      --bg-surface:     #12151B;
+      --bg-elevated:    #161A22;
+      --indigo:         #4F6EF7;
+      --btn-indigo:     #4866F4;
+      --cyan:           #00D4FF;
+      --mint:           #34D399;
+      --text-primary:   #FAFBFC;
+      --text-secondary: #8B92A0;
+      --text-muted:     #747F8F;
+      --border-subtle:  rgba(255,255,255,0.07);
+      --border-medium:  rgba(255,255,255,0.12);
+      --border-bright:  rgba(255,255,255,0.16);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base); color: var(--text-primary);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+      background:
+        linear-gradient(120deg, transparent 44%, rgba(255,255,255,0.008) 47%, rgba(255,255,255,0.055) 50%, rgba(255,255,255,0.008) 53%, transparent 56%),
+        linear-gradient(120deg, transparent 63%, rgba(79,110,247,0.020) 65.5%, rgba(79,110,247,0.042) 67%, rgba(79,110,247,0.020) 68.5%, transparent 71%);
+      pointer-events: none; z-index: 9000;
+    }
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 480px;
+      background: radial-gradient(ellipse 70% 55% at 72% -8%, rgba(79,110,247,0.10) 0%, transparent 70%);
+      filter: blur(48px); pointer-events: none; z-index: 0;
+    }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
+    section, main > div { position: relative; z-index: 1; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      background: var(--btn-indigo); color: #fff;
+      font-size: 14px; font-weight: 600; padding: 10px 18px;
+      border-radius: 0 0 8px 8px; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 4px; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 800; height: 64px;
+      background: rgba(11,14,17,0.88);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      font-size: 15.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none; display: flex; align-items: baseline;
+    }
+    .logo .dot { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .logo .ia  { color: var(--indigo); }
+    .logo .vantage { color: var(--text-secondary); font-weight: 500; margin-left: 5px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13.5px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s; letter-spacing: -0.01em;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a[aria-current="page"] { color: var(--text-primary); }
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: inherit; font-size: 13.5px; font-weight: 600;
+      color: #fff; background: var(--btn-indigo); border: none;
+      padding: 8.5px 17px; border-radius: 7px; cursor: pointer;
+      text-decoration: none; transition: opacity 0.15s, transform 0.1s;
+      letter-spacing: -0.01em;
+    }
+    .btn-nav:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      color: #fff; background: var(--btn-indigo); border: none;
+      padding: 13px 24px; border-radius: 8px; cursor: pointer;
+      text-decoration: none; transition: opacity 0.15s, transform 0.12s;
+      letter-spacing: -0.01em;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 14px; font-weight: 500;
+      color: var(--text-secondary); background: transparent;
+      border: 1px solid var(--border-medium); padding: 11px 20px;
+      border-radius: 8px; cursor: pointer; text-decoration: none;
+      transition: border-color 0.15s, color 0.15s; letter-spacing: -0.01em;
+    }
+    .btn-ghost:hover { border-color: var(--border-bright); color: var(--text-primary); }
+
+    /* ─── EYEBROW ────────────────────────────────────────── */
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--indigo);
+    }
+
+    /* ─── ARTICLE HEADER ─────────────────────────────────── */
+    .article-header {
+      padding: 96px 0 80px; position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .header-glow {
+      position: absolute; top: -240px; right: -160px; width: 800px; height: 800px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.12) 0%, transparent 62%);
+      filter: blur(80px); pointer-events: none;
+    }
+    .article-header .breadcrumb {
+      font-size: 12px; color: var(--text-muted); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 8px; letter-spacing: -0.005em;
+    }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--text-secondary); }
+    .breadcrumb .sep { color: var(--text-muted); opacity: 0.5; }
+    .article-header h1 {
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 700; letter-spacing: -0.05em; line-height: 1.04;
+      color: var(--text-primary); max-width: 900px; margin-bottom: 20px;
+    }
+    .article-sub {
+      font-size: 18px; line-height: 1.65; color: var(--text-secondary);
+      max-width: 680px; letter-spacing: -0.01em;
+    }
+
+    /* ─── ANSWER FIRST ───────────────────────────────────── */
+    .answer-first {
+      padding: 72px 0; border-bottom: 1px solid var(--border-subtle);
+      position: relative; z-index: 1;
+    }
+    .answer-first-inner {
+      display: grid; grid-template-columns: 200px 1fr; gap: 64px; align-items: start;
+    }
+    .answer-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase; color: var(--indigo); padding-top: 6px;
+    }
+    .answer-text {
+      font-size: 18px; line-height: 1.72; color: var(--text-primary); letter-spacing: -0.015em;
+    }
+    .answer-text strong { color: var(--indigo); font-weight: 600; }
+
+    /* ─── CONTENT SECTION ────────────────────────────────── */
+    .content-section {
+      padding: 96px 0; border-bottom: 1px solid var(--border-subtle);
+      position: relative; z-index: 1;
+    }
+
+    /* ─── SECTION HEADING (full-width, no split) ─────────── */
+    .section-h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08;
+      color: var(--text-primary); margin-top: 16px; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 16px; line-height: 1.72; color: var(--text-secondary);
+      max-width: 720px; letter-spacing: -0.01em; margin-bottom: 56px;
+    }
+
+    /* ─── CLAIM / EVIDENCE ───────────────────────────────── */
+    .claim-evidence {
+      display: grid; grid-template-columns: 5fr 7fr; gap: 80px; align-items: start;
+    }
+    .claim h2 {
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08;
+      color: var(--text-primary); margin-top: 16px;
+    }
+    .evidence p {
+      font-size: 15px; line-height: 1.80; color: var(--text-secondary);
+      letter-spacing: -0.005em; margin-bottom: 20px;
+    }
+    .evidence p:last-child { margin-bottom: 0; }
+    .sub-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-subtle); }
+    .sub-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .sub-section h3 {
+      font-size: 16px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text-primary); margin-bottom: 12px; line-height: 1.3; font-style: italic;
+    }
+    .sub-section p {
+      font-size: 15px; line-height: 1.80; color: var(--text-secondary);
+      letter-spacing: -0.005em; margin-bottom: 14px;
+    }
+    .sub-section p:last-child { margin-bottom: 0; }
+
+    /* ─── STAT STRIP ─────────────────────────────────────── */
+    .stat-strip { margin-top: 64px; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+    .stat-strip-inner { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .strip-cell { padding: 36px 48px; position: relative; }
+    .strip-cell + .strip-cell::before {
+      content: ''; position: absolute; left: 0; top: 16%; bottom: 16%;
+      width: 1px; background: var(--border-subtle);
+    }
+    .strip-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 44px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1; margin-bottom: 8px;
+    }
+    .strip-label {
+      font-size: 13.5px; font-weight: 500; color: var(--text-primary);
+      line-height: 1.45; letter-spacing: -0.01em; margin-bottom: 5px;
+    }
+    .strip-source { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .sc-cy .strip-num { color: var(--cyan); }
+    .sc-in .strip-num { color: var(--indigo); }
+    .sc-mi .strip-num { color: var(--mint); }
+    .sc-or .strip-num { color: #FB923C; }
+    .sc-pk .strip-num { color: #F472B6; }
+
+    /* ─── CALLOUT ────────────────────────────────────────── */
+    .callout {
+      margin-top: 48px; padding: 24px 28px;
+      border-left: 3px solid var(--indigo); background: rgba(79,110,247,0.06);
+      border-radius: 0 10px 10px 0;
+    }
+    .callout p { font-size: 15.5px; line-height: 1.74; color: var(--text-secondary); letter-spacing: -0.01em; }
+    .callout strong { color: var(--text-primary); }
+    .callout.mint { border-left-color: var(--mint); background: rgba(52,211,153,0.05); }
+    .callout.orange { border-left-color: #FB923C; background: rgba(251,146,60,0.05); }
+
+    /* ════════════════ TIER GRID ════════════════════════ */
+    .tier-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border-medium); border-radius: 16px; overflow: hidden;
+    }
+    .tier-card {
+      background: var(--bg-surface); padding: 36px 32px;
+      border-right: 1px solid var(--border-subtle); position: relative;
+    }
+    .tier-card:last-child { border-right: none; }
+    .tier-card.featured { background: var(--bg-elevated); border-right-color: var(--border-medium); }
+    .tier-badge {
+      display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; background: rgba(79,110,247,0.14); color: var(--indigo);
+      padding: 3px 10px; border-radius: 4px; margin-bottom: 16px;
+    }
+    .tier-name {
+      font-size: 21px; font-weight: 700; letter-spacing: -0.03em;
+      color: var(--text-primary); margin-bottom: 8px;
+    }
+    .tier-price {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 38px; font-weight: 700; letter-spacing: -0.04em;
+      color: var(--text-primary); line-height: 1; margin-bottom: 4px;
+    }
+    .tier-price .per-mo { font-size: 14px; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
+    .tier-min { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+    .tier-target {
+      font-size: 13px; line-height: 1.65; color: var(--text-secondary);
+      padding: 14px 0; margin-bottom: 4px;
+      border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle);
+    }
+    .tier-features {
+      list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 10px; margin-top: 20px;
+    }
+    .tier-feature {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 13px; line-height: 1.55; color: var(--text-secondary);
+    }
+    .tier-check { color: var(--mint); flex-shrink: 0; padding-top: 1px; font-size: 12px; font-weight: 700; }
+    .tier-note {
+      font-size: 12px; color: var(--text-muted); font-style: italic;
+      margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-subtle);
+      line-height: 1.5;
+    }
+    .tier-link {
+      margin-top: 16px; display: block;
+      font-size: 13px; font-weight: 600; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .tier-link:hover { color: var(--text-primary); }
+    .tier-footnote {
+      font-size: 13px; color: var(--text-muted); margin-top: 24px; text-align: center;
+    }
+    .tier-footnote a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-subtle); transition: color 0.15s; }
+    .tier-footnote a:hover { color: var(--text-primary); }
+
+    /* ════════════════ WHO TAGS ════════════════════════ */
+    .who-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .who-tag {
+      font-size: 13px; font-weight: 500; letter-spacing: -0.01em;
+      color: var(--text-secondary); background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle); padding: 7px 14px; border-radius: 100px;
+    }
+
+    /* ════════════════ NOT LIST ════════════════════════ */
+    .not-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    .not-list li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 14.5px; line-height: 1.65; color: var(--text-secondary);
+    }
+    .x-mark { color: #F87171; flex-shrink: 0; font-size: 13px; font-weight: 700; padding-top: 2px; }
+
+    /* ════════════════ JOURNEY STEPS (engagement) ════════ */
+    .journey-steps { display: flex; flex-direction: column; gap: 0; list-style: none; padding: 0; }
+    .journey-step {
+      display: flex; gap: 24px; padding: 24px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .journey-step:first-child { padding-top: 0; }
+    .journey-step:last-child { border-bottom: none; }
+    .journey-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+      color: var(--indigo); min-width: 24px; padding-top: 2px; flex-shrink: 0;
+    }
+    .journey-text { font-size: 15px; line-height: 1.72; color: var(--text-secondary); letter-spacing: -0.005em; }
+    .journey-text em { color: var(--text-primary); font-style: normal; font-weight: 600; }
+
+    /* ════════════════ NOT FIT / NOT DO ROW ════════════════ */
+    .two-col-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;
+      margin-top: 64px; padding-top: 64px; border-top: 1px solid var(--border-subtle);
+    }
+    .two-col-head {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 16px;
+    }
+
+    /* ════════════════ CTA ════════════════════════════ */
+    .cta-section {
+      padding: 96px 0; border-bottom: 1px solid var(--border-subtle);
+      position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 800px; height: 360px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.10) 0%, transparent 65%);
+      filter: blur(64px); pointer-events: none;
+    }
+    .cta-inner { position: relative; z-index: 2; text-align: center; max-width: 680px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-size: clamp(28px, 3.2vw, 40px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
+      color: var(--text-primary); margin-bottom: 16px;
+    }
+    .cta-inner p {
+      font-size: 16px; line-height: 1.70; color: var(--text-secondary);
+      margin-bottom: 36px; letter-spacing: -0.01em;
+    }
+    .cta-checks { display: flex; justify-content: center; gap: 22px; margin-bottom: 36px; flex-wrap: wrap; }
+    .cta-check { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-secondary); }
+    .ck { color: var(--mint); }
+    .cta-sub { margin-top: 14px; font-size: 12.5px; color: var(--text-muted); }
+    .cta-sub a { color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+    .cta-sub a:hover { color: var(--text-primary); }
+
+    /* ════════════════ FAQ ════════════════════════════ */
+    .faq-section { padding: 96px 0; position: relative; z-index: 1; }
+    .faq-section-head { margin-bottom: 56px; }
+    .faq-section-head h2 {
+      font-size: clamp(26px, 2.8vw, 36px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.12;
+      color: var(--text-primary); margin-top: 14px;
+    }
+    .faq-section-head p {
+      font-size: 15px; line-height: 1.72; color: var(--text-secondary);
+      margin-top: 12px; max-width: 600px; letter-spacing: -0.005em;
+    }
+    .faq-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border: 1px solid var(--border-subtle);
+      border-radius: 14px; overflow: hidden;
+    }
+    .faq-entry {
+      padding: 32px 36px;
+      border-right: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .faq-entry:nth-child(2n) { border-right: none; }
+    .faq-entry:nth-last-child(1), .faq-entry:nth-last-child(2) { border-bottom: none; }
+    .faq-entry:last-child:nth-child(odd) { grid-column: 1 / -1; border-right: none; }
+    .faq-entry h3 {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text-primary); line-height: 1.35; margin-bottom: 12px;
+    }
+    .faq-entry p { font-size: 14px; line-height: 1.78; color: var(--text-secondary); letter-spacing: -0.005em; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer { border-top: 1px solid var(--border-subtle); padding: 40px 0; position: relative; z-index: 1; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo {
+      font-size: 14.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none; display: flex; align-items: baseline;
+    }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a { font-size: 12.5px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    @media (max-width: 1024px) {
+      .container { padding: 0 40px; }
+      .claim-evidence { grid-template-columns: 1fr; gap: 40px; }
+      .answer-first-inner { grid-template-columns: 1fr; gap: 16px; }
+      .tier-grid { grid-template-columns: 1fr; }
+      .tier-card { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+      .tier-card:last-child { border-bottom: none; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-entry:nth-child(2n) { border-right: 1px solid var(--border-subtle); }
+      .faq-entry:nth-last-child(2) { border-bottom: 1px solid var(--border-subtle); }
+      .faq-entry { border-right: none; }
+      .faq-entry:last-child { border-bottom: none; }
+      .stat-strip-inner { grid-template-columns: 1fr 1fr; }
+      .two-col-row { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 680px) {
+      .container { padding: 0 24px; }
+      .nav-links, .btn-nav { display: none; }
+      .article-header { padding: 64px 0 56px; }
+      .article-header h1 { font-size: 40px; }
+      .content-section { padding: 64px 0; }
+      .stat-strip-inner { grid-template-columns: 1fr; }
+      .strip-cell + .strip-cell::before { display: none; }
+      .strip-cell { padding: 24px 0; border-top: 1px solid var(--border-subtle); }
+      .strip-cell:first-child { border-top: none; }
+      .strip-num { font-size: 36px; }
+      .faq-section { padding: 64px 0; }
+      .cta-section { padding: 64px 0; }
+      .cta-checks { flex-direction: column; align-items: center; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Quint·IA Vantage — home">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage">Vantage</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="/why-aeo-matters">Why AEO Matters</a></li>
+        <li><a href="/how-aeo-works">How It Works</a></li>
+        <li><a href="/services" aria-current="page">Services</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+      </ul>
+      <a href="/quick-start-blueprint" class="btn-nav">
+        Get the Blueprint
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 6h7M6.5 3L9.5 6l-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="article-header">
+    <div class="header-glow" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">Services</span>
+      </nav>
+      <span class="eyebrow">AEO Services</span>
+      <h1>AEO services for startups and small businesses</h1>
+      <p class="article-sub">Productized monthly retainers from $950 to $2,750. Three tiers, fixed scope, marketing and data strategist on every account. No PR markup. No custom-scope discovery cycle. No SaaS dashboard pretending to be a service.</p>
+    </div>
+  </header>
+
+  <!-- ═══ ANSWER FIRST ═══ -->
+  <div class="answer-first">
+    <div class="container">
+      <div class="answer-first-inner">
+        <div class="answer-label" aria-label="What we do">What we do</div>
+        <p class="answer-text">We make startups and small businesses cited by ChatGPT, Claude, Perplexity, and Google AI Overviews. The work covers four pillars: a technically readable site (schema, llms.txt, owned knowledge graph), content shaped for AI extraction (comparison pages, FAQ libraries, glossary), citations from the surfaces LLMs actually read (Reddit, G2, YouTube, category-specific publications), and consistent prompt-level measurement. Our retainers are productized: <strong>fixed scope, fixed monthly fee, predictable monthly deliverables.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HOW OUR OFFER IS DIFFERENT ═══ -->
+  <section class="content-section" aria-labelledby="differentiators-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">How our offer is different</span>
+          <h2 id="differentiators-heading">Three things we do that most AEO providers don't</h2>
+        </div>
+        <div class="evidence">
+
+          <div class="sub-section">
+            <h3>We name community and UGC work as headline deliverables, not footnotes</h3>
+            <p>Most agencies monitor citations. Very few earn them. In our April 2026 scan of 19 AEO and GEO providers, only three named Reddit, Quora, or community work as an explicit deliverable. Quora, YouTube, and review-platform seeding were vanishingly rare as named services across the entire field.</p>
+            <p>Our retainers include these as core scope — Reddit and Quora posting calendars, G2/Capterra review activation, YouTube script production — not as add-ons or aspirational mentions.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>We build owned knowledge graphs, not Wikidata workarounds</h3>
+            <p>Most AEO offers stop at schema markup. We build a structured, machine-readable About / Team / Products / FAQ / Glossary surface on your own domain, all linked via JSON-LD. You own the entity layer. We maintain it. This is a meaningful AEO advantage that almost no competitor in the productized lane explicitly sells.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>We are honest about what fits in a retainer and what doesn't</h3>
+            <p>Most $2,000-per-month retainers promise "implementation" and cannot deliver it inside the monthly fee. The result is churn at the 90-day mark when clients realize the work did not happen.</p>
+            <p>Our retainers cover audit, specification, content production, and off-site citation work. Schema deployment, page rewrites, and owned knowledge graph buildout are scoped one-time projects priced on top. This protects margin and protects you from the bait-and-switch that creates churn.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stat-strip" aria-label="Key differentiator figures">
+        <div class="stat-strip-inner">
+          <div class="strip-cell sc-or">
+            <div class="strip-num">3/19</div>
+            <div class="strip-label">AEO agencies naming Reddit as an explicit deliverable</div>
+            <div class="strip-source">April 2026 scan of 19 AEO and GEO providers — Quint·IA analysis</div>
+          </div>
+          <div class="strip-cell sc-cy">
+            <div class="strip-num">$950</div>
+            <div class="strip-label">Entry retainer vs. $10,000+ at full-service AEO agencies</div>
+            <div class="strip-source">Productized scope, fixed deliverables, no custom-discovery cycle</div>
+          </div>
+          <div class="strip-cell sc-mi">
+            <div class="strip-num">$500</div>
+            <div class="strip-label">Blueprint fee credited toward month one of any retainer</div>
+            <div class="strip-source">Sign within 30 days of readout call — fee credit window is firm</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>Every retainer engagement starts with the $500 Quick-Start Blueprint. <strong>You see how we work before you commit to a monthly fee.</strong> The Blueprint fee credits toward month one if you sign within 30 days of the readout call.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ THREE RETAINER OPTIONS ═══ -->
+  <section class="content-section" aria-labelledby="tiers-heading">
+    <div class="container">
+
+      <span class="eyebrow">The Three Retainer Options</span>
+      <h2 class="section-h2" id="tiers-heading">Fixed scope. Predictable monthly deliverables. One question: what level of execution fits your team right now?</h2>
+      <p class="section-sub">Every retainer starts with the $500 Quick-Start Blueprint. The Blueprint audit drives the first month's priorities regardless of which tier you choose.</p>
+
+      <div class="tier-grid" role="list">
+
+        <!-- Foundation -->
+        <article class="tier-card" role="listitem" aria-labelledby="foundation-name">
+          <div class="tier-name" id="foundation-name">Foundation</div>
+          <div class="tier-price">$950<span class="per-mo"> / month</span></div>
+          <div class="tier-min">3-month minimum</div>
+          <p class="tier-target">For bootstrapped founders, US small businesses with 10–50 employees and $1M–$10M in revenue, and pre-seed startups. Sets the AEO foundation.</p>
+          <ul class="tier-features" aria-label="Foundation tier features">
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> One-time audit and prompt-visibility baseline</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Schema + llms.txt + robots.txt specifications</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Owned knowledge graph seed</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> 2 AEO-optimized content pieces / month</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Monthly visibility report</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Quarterly strategy call</li>
+          </ul>
+          <p class="tier-note">Not a growth tier — a setup tier. Establishes the technical and content foundation before scaling.</p>
+          <a href="/pricing" class="tier-link">See full scope on pricing page →</a>
+        </article>
+
+        <!-- Momentum (featured) -->
+        <article class="tier-card featured" role="listitem" aria-labelledby="momentum-name">
+          <span class="tier-badge">Recommended</span>
+          <div class="tier-name" id="momentum-name">Momentum</div>
+          <div class="tier-price">$1,750<span class="per-mo"> / month</span></div>
+          <div class="tier-min">6-month minimum</div>
+          <p class="tier-target">For Series A and B US B2B tech companies with $5M+ raised and 25–150 employees in active growth motion. The default retainer for funded growth-stage companies.</p>
+          <ul class="tier-features" aria-label="Momentum tier features">
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Everything in Foundation</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> 4–5 content pieces / month</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Glossary library cadence</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Reddit + Quora posting calendar</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Third-party publication shortlist</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Weekly visibility tracking + monthly strategy call</li>
+          </ul>
+          <p class="tier-note">The full four-pillar program at growth cadence — content, community, and measurement running in parallel.</p>
+          <a href="/pricing" class="tier-link">See full scope on pricing page →</a>
+        </article>
+
+        <!-- Citation Engine -->
+        <article class="tier-card" role="listitem" aria-labelledby="citation-engine-name">
+          <div class="tier-name" id="citation-engine-name">Citation Engine</div>
+          <div class="tier-price">$2,750<span class="per-mo"> / month</span></div>
+          <div class="tier-min">6-month minimum</div>
+          <p class="tier-target">For Series A+ tech companies committed to AI search as a primary growth channel. Everything in Momentum at higher cadence, plus deeper programs.</p>
+          <ul class="tier-features" aria-label="Citation Engine tier features">
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Everything in Momentum</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> FAQ deep program + comparison pages</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Statistical content + YouTube video scripts</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Weekly tracking across 4 AI engines</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Quarterly competitor teardowns</li>
+            <li class="tier-feature"><span class="tier-check" aria-hidden="true">✓</span> Quarterly executive review</li>
+          </ul>
+          <p class="tier-note">For companies where AI search visibility is a primary revenue lever, not a secondary channel.</p>
+          <a href="/pricing" class="tier-link">See full scope on pricing page →</a>
+        </article>
+
+      </div>
+
+      <p class="tier-footnote">Deliverable-by-deliverable comparison available on the <a href="/pricing">pricing page</a>. Deployment add-ons (schema implementation, knowledge graph buildout) are scoped separately.</p>
+
+    </div>
+  </section>
+
+  <!-- ═══ WHO WE WORK WITH ═══ -->
+  <section class="content-section" aria-labelledby="who-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">Who we work with</span>
+          <h2 id="who-heading">We are particularly good for companies whose buyers research via AI before they ever hit a vendor site</h2>
+        </div>
+        <div class="evidence">
+
+          <div class="sub-section">
+            <p>B2B founders and marketing leaders at:</p>
+            <div class="who-tags" role="list" aria-label="Types of companies we work with">
+              <span class="who-tag" role="listitem">Series A B2B SaaS</span>
+              <span class="who-tag" role="listitem">Series B B2B SaaS</span>
+              <span class="who-tag" role="listitem">Bootstrapped founders with revenue</span>
+              <span class="who-tag" role="listitem">US SMB 10–50 employees</span>
+              <span class="who-tag" role="listitem">$1M–$10M revenue</span>
+              <span class="who-tag" role="listitem">25–150 employees</span>
+              <span class="who-tag" role="listitem">Plateauing SEO programs</span>
+              <span class="who-tag" role="listitem">Teams quoted $10K+/mo elsewhere</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="two-col-row">
+
+        <div>
+          <div class="two-col-head">Who we are not the right fit for</div>
+          <ul class="not-list" aria-label="Who we are not the right fit for">
+            <li><span class="x-mark" aria-label="Not a fit">×</span> Pre-seed companies without revenue</li>
+            <li><span class="x-mark" aria-label="Not a fit">×</span> Consumer DTC brands</li>
+            <li><span class="x-mark" aria-label="Not a fit">×</span> Companies whose primary need is press relations or media coverage</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="two-col-head">What we will not do</div>
+          <ul class="not-list" aria-label="What we will not do">
+            <li><span class="x-mark" aria-label="Will not do">×</span> Pitch journalists, run HARO, or manage media relations</li>
+            <li><span class="x-mark" aria-label="Will not do">×</span> Promise rankings or click traffic numbers we cannot attribute</li>
+            <li><span class="x-mark" aria-label="Will not do">×</span> Bolt AEO onto an SEO retainer and pretend the bundle is the work</li>
+            <li><span class="x-mark" aria-label="Will not do">×</span> Run reviews schemes that violate G2 or Capterra terms of service</li>
+            <li><span class="x-mark" aria-label="Will not do">×</span> Take on custom scope at the productized price point</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ HOW AN ENGAGEMENT STARTS ═══ -->
+  <section class="content-section" aria-labelledby="engagement-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">How an engagement starts</span>
+          <h2 id="engagement-heading">Every retainer starts with the $500 Blueprint — you see the work before you commit to a monthly fee</h2>
+        </div>
+        <div class="evidence">
+          <p style="font-size: 15px; line-height: 1.80; color: var(--text-secondary); margin-bottom: 28px;">Five-to-ten business days from intake. We test 20 prompts in ChatGPT and Perplexity, audit your technical foundation, identify your top five content priorities, build a ranked third-party publication target list, draft a user-generated content plan, and deliver a 90-day prioritized action list with DIY-versus-done-for-you tagging on every item.</p>
+
+          <ol class="journey-steps" aria-label="Engagement start process">
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">01</span>
+              <p class="journey-text"><em>Buy the $500 Blueprint.</em> You receive an intake form within minutes of purchase.</p>
+            </li>
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">02</span>
+              <p class="journey-text"><em>Complete intake.</em> 15 minutes. Your domain, top three competitors, the buyer questions you most want to be cited for.</p>
+            </li>
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">03</span>
+              <p class="journey-text"><em>We build the Blueprint.</em> Five-to-ten business days. Prompt testing, technical audit, content priorities, 90-day action list with DIY-vs-done-for-you tags on every item.</p>
+            </li>
+            <li class="journey-step">
+              <span class="journey-num" aria-hidden="true">04</span>
+              <p class="journey-text"><em>Readout call.</em> 30 minutes. We walk through findings and discuss execution options. If you sign a retainer within 30 days, the $500 credits toward month one.</p>
+            </li>
+          </ol>
+
+          <div class="callout mint" style="margin-top: 32px;">
+            <p>The $500 Blueprint fee applies as a credit toward your first month on any retainer signed within 30 days of the readout call. <strong>Foundation effectively becomes $450 for month one. Momentum becomes $1,250. Citation Engine becomes $2,250.</strong></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-inner">
+        <span class="eyebrow">Start here</span>
+        <h2 id="cta-heading">Every retainer starts with the $500 Quick-Start Blueprint. Start there.</h2>
+        <p>Five-to-ten business days. Real diagnostic. Personalized 90-day action plan. Fee credits toward month one of any retainer signed within 30 days.</p>
+        <div class="cta-checks">
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> 20-prompt visibility baseline</div>
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> Schema + llms.txt gap audit</div>
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> 90-day action list, DIY tagged</div>
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> $500 credited toward month one</div>
+        </div>
+        <a href="/quick-start-blueprint" class="btn-primary">
+          Get the Blueprint — $500
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="cta-sub">Also see: <a href="/pricing">Full pricing and deliverable comparison →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="container">
+      <div class="faq-section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2 id="faq-heading">Common questions about our services</h2>
+        <p>Five questions we hear most often from founders and marketing leaders evaluating our retainer options.</p>
+      </div>
+      <div class="faq-grid" role="list">
+
+        <div class="faq-entry" role="listitem">
+          <h3>How is this different from a typical SEO retainer?</h3>
+          <p>SEO retainers focus on ranking pages in Google's blue-link results. Our retainers focus on being cited in AI-generated answers from ChatGPT, Claude, Perplexity, and Google AI Overviews. The technical foundation overlaps. The off-site work and the content shape are different.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>Can I switch tiers mid-engagement?</h3>
+          <p>Yes. Most clients start at Foundation or Momentum and move up after 90 days as they see what is working. We do not lock tier assignments in the SOW.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>Do you white-label?</h3>
+          <p>We white-label for a small number of agency partners. Email us if you are an agency considering adding AEO to your offer.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>How do you measure success?</h3>
+          <p>Three metrics, reported monthly: prompt-level visibility (share of voice on a tracked prompt set), branded search volume (rising branded search is the leading indicator that AEO is working), and source attribution on inbound leads. As we do not have CRM access, we ask that our clients report the third number to us directly.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>Do you guarantee results?</h3>
+          <p>No, and we are skeptical of any AEO agency that does. AI search measurement is too new for hard guarantees. We commit to measurable monthly deliverables and prompt-level reporting. Outcomes follow when execution is consistent.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="/" class="footer-logo" aria-label="Quint·IA Vantage — home">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <nav aria-label="Footer navigation">
+        <div class="footer-links">
+          <a href="/why-aeo-matters">Why AEO Matters</a>
+          <a href="/how-aeo-works">How It Works</a>
+          <a href="/services" aria-current="page">Services</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/quick-start-blueprint">Blueprint</a>
+        </div>
+      </nav>
+      <span class="footer-copy">© 2026 Quint·IA Vantage</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

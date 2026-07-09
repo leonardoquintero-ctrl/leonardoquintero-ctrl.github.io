@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Answer Engine Optimization Works — Quint·IA Vantage</title>
+  <meta name="description" content="There are four parts to making your business show up in AI-generated answers — technical site readability, owned knowledge graph, content shaped for extraction, and off-site citations. Here is the full methodology.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://quintiavantage.com/" },
+      { "@type": "ListItem", "position": 2, "name": "How AEO Works", "item": "https://quintiavantage.com/how-aeo-works" }
+    ]
+  }
+  </script>
+
+  <!-- Article schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": "https://quintiavantage.com/how-aeo-works",
+    "headline": "How answer engine optimization works",
+    "description": "There are four parts to making your business show up in AI-generated answers: technical site readability, owned knowledge graph, content shaped for extraction, and off-site citations. This page explains the full methodology.",
+    "datePublished": "2026-04-01",
+    "dateModified": "2026-06-01",
+    "author": { "@type": "Organization", "name": "Quint·IA Vantage", "@id": "https://quintiavantage.com/#organization" },
+    "publisher": { "@type": "Organization", "name": "Quint·IA Vantage", "@id": "https://quintiavantage.com/#organization" },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://quintiavantage.com/how-aeo-works" }
+  }
+  </script>
+
+  <!-- HowTo schema — four pillars -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to get cited by AI search engines (AEO methodology)",
+    "description": "The four-pillar AEO methodology for getting cited by ChatGPT, Claude, Perplexity, and Google AI Overviews.",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Make your site technically readable to AI",
+        "text": "Deploy schema markup via JSON-LD on every page type (Organization, Product, FAQPage, Person). Create an llms.txt file listing your canonical pages. Unblock AI crawlers in robots.txt — GPTBot, ClaudeBot, PerplexityBot, Google-Extended. Target a Largest Contentful Paint under 2 seconds so AI bots crawl your pages at full frequency."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Build an owned knowledge graph",
+        "text": "Create structured entity pages on your own domain: /about with Organization schema, /team with Person schema, /products with Product schema, /faq with FAQPage schema, /glossary with DefinedTerm schema. Cross-reference pages via sameAs properties so a crawler can walk your full entity graph machine-readably."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Produce content shaped for AI extraction",
+        "text": "Lead every page with a 2-3 sentence direct answer. Add FAQ blocks with FAQPage schema to every post. Build comparison and alternative pages, a /faq library with 30-60 entries, a /glossary with category vocabulary, and buyer's guides. Keep paragraphs short and use H2/H3 headings as questions."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Earn citations from the surfaces LLMs actually read",
+        "text": "Build credible Reddit presence on category subreddits with transparent participation 2-4 times per month. Run a structured review activation campaign targeting G2, Capterra, and Trustpilot. Create YouTube product overview and comparison videos with uploaded transcripts. Contribute substantive guest posts to category-specific publications."
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQPage schema — 8 Q&As -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do I need to do all four pillars at once?", "acceptedAnswer": { "@type": "Answer", "text": "No. Most companies get the technical foundation and content shape right first, then layer the off-site work on. If you only have budget for one pillar, start with the technical foundation — the off-site work has nowhere to point if your site is not readable." } },
+      { "@type": "Question", "name": "How is AEO different from SEO?", "acceptedAnswer": { "@type": "Answer", "text": "The technical pillar overlaps significantly with SEO. The content pillar overlaps partially — SEO rewards depth, AEO rewards extractability, and good content does both. The owned knowledge graph and off-site citation work are largely AEO-specific. SEO has its own off-site work (link building) which is mostly orthogonal." } },
+      { "@type": "Question", "name": "Why not just do digital PR?", "acceptedAnswer": { "@type": "Answer", "text": "Press coverage helps for the first few weeks after a story runs and produces backlinks. It does not produce the structured, durable citations LLMs prefer. The same budget spent on Reddit operations, review activation, and structured content produces more compounding AEO lift. We refer prospects to PR partners when their goals are PR-shaped, but we do not run PR ourselves." } },
+      { "@type": "Question", "name": "What does an llms.txt file look like?", "acceptedAnswer": { "@type": "Answer", "text": "It is a plain text file at /llms.txt that lists the canonical pages on your site for AI crawlers. Format is simple: a heading describing your business, then a list of page URLs grouped by category (Pricing, Products, FAQ, Documentation). Most companies can write theirs in 30 minutes." } },
+      { "@type": "Question", "name": "How do I write content that LLMs extract well?", "acceptedAnswer": { "@type": "Answer", "text": "Lead with a two-to-three-sentence direct answer at the top of every page. Use FAQ blocks at the bottom of every post. Use comparison tables for any X vs Y content. Add author bylines with Person schema. Keep paragraphs short. Use H2 and H3 headings as questions. Include relevant numbers and dates inline." } },
+      { "@type": "Question", "name": "Is Reddit really that important?", "acceptedAnswer": { "@type": "Answer", "text": "For most B2B categories, yes. The citation studies are consistent: Reddit is the single most-cited source in Perplexity and a top-three source in Google AI Overviews. The mechanics are not promotional posting — they are sustained, transparent participation in subs your buyers actually use." } },
+      { "@type": "Question", "name": "Can my dev team handle the technical implementation?", "acceptedAnswer": { "@type": "Answer", "text": "Yes if they are competent and have CMS access. Schema deployment is mostly templating work. llms.txt is a single static file. The owned knowledge graph requires more design and content work but is technically straightforward. Most of our clients deploy the technical foundation themselves and pay us for the spec, the content, and the off-site work." } },
+      { "@type": "Question", "name": "What is the difference between an audit and a strategy?", "acceptedAnswer": { "@type": "Answer", "text": "An audit tells you where you are. A strategy tells you where to go and in what order. A good AEO engagement starts with an audit (the diagnostic), produces a strategy (the prioritized plan), and then executes the plan. Skipping the audit means executing without context. Skipping the strategy means executing without prioritization." } }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ─── VARIABLES (same design system as homepage) ──────── */
+    :root {
+      --bg-base:        #0B0E11;
+      --bg-surface:     #12151B;
+      --bg-elevated:    #161A22;
+      --indigo:         #4F6EF7;
+      --btn-indigo:     #4866F4; /* 4.68:1 with white — WCAG AA */
+      --cyan:           #00D4FF;
+      --mint:           #34D399;
+      --text-primary:   #FAFBFC;
+      --text-secondary: #8B92A0;
+      --text-muted:     #747F8F; /* 4.77:1 on bg-base — WCAG AA */
+      --border-subtle:  rgba(255,255,255,0.07);
+      --border-medium:  rgba(255,255,255,0.12);
+      --border-bright:  rgba(255,255,255,0.16);
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─── GLOBAL GLOSS ───────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background:
+        linear-gradient(120deg, transparent 44%, rgba(255,255,255,0.008) 47%, rgba(255,255,255,0.055) 50%, rgba(255,255,255,0.008) 53%, transparent 56%),
+        linear-gradient(120deg, transparent 63%, rgba(79,110,247,0.020) 65.5%, rgba(79,110,247,0.042) 67%, rgba(79,110,247,0.020) 68.5%, transparent 71%);
+      pointer-events: none; z-index: 9000;
+    }
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; height: 480px;
+      background: radial-gradient(ellipse 70% 55% at 72% -8%, rgba(79,110,247,0.10) 0%, transparent 70%);
+      filter: blur(48px); pointer-events: none; z-index: 0;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 64px; }
+    section, main > div { position: relative; z-index: 1; }
+
+    /* ─── SKIP + FOCUS ───────────────────────────────────── */
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      background: var(--btn-indigo); color: #fff;
+      font-size: 14px; font-weight: 600;
+      padding: 10px 18px; border-radius: 0 0 8px 8px;
+      text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 4px; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 800; height: 64px;
+      background: rgba(11,14,17,0.88);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .logo {
+      font-size: 15.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none; display: flex; align-items: baseline;
+    }
+    .logo .dot    { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .logo .ia     { color: var(--indigo); }
+    .logo .vantage{ color: var(--text-secondary); font-weight: 500; margin-left: 5px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13.5px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s; letter-spacing: -0.01em;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a[aria-current="page"] { color: var(--text-primary); }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      color: #fff; background: var(--btn-indigo); border: none;
+      padding: 13px 24px; border-radius: 8px; cursor: pointer;
+      text-decoration: none; transition: opacity 0.15s, transform 0.12s;
+      letter-spacing: -0.01em;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 14px; font-weight: 500;
+      color: var(--text-secondary); background: transparent;
+      border: 1px solid var(--border-medium);
+      padding: 11px 20px; border-radius: 8px; cursor: pointer;
+      text-decoration: none; transition: border-color 0.15s, color 0.15s;
+      letter-spacing: -0.01em;
+    }
+    .btn-ghost:hover { border-color: var(--border-bright); color: var(--text-primary); }
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: inherit; font-size: 13.5px; font-weight: 600;
+      color: #fff; background: var(--btn-indigo); border: none;
+      padding: 8.5px 17px; border-radius: 7px; cursor: pointer;
+      text-decoration: none; transition: opacity 0.15s, transform 0.1s;
+      letter-spacing: -0.01em;
+    }
+    .btn-nav:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ─── EYEBROW ────────────────────────────────────────── */
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--indigo);
+    }
+
+    /* ════════════════ ARTICLE HEADER ════════════════════ */
+    .article-header {
+      padding: 96px 0 80px;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .header-glow {
+      position: absolute; top: -240px; right: -160px;
+      width: 800px; height: 800px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.12) 0%, transparent 62%);
+      filter: blur(80px); pointer-events: none;
+    }
+    .article-header .breadcrumb {
+      font-size: 12px; color: var(--text-muted); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 8px;
+      letter-spacing: -0.005em;
+    }
+    .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    .breadcrumb a:hover { color: var(--text-secondary); }
+    .breadcrumb .sep { color: var(--text-muted); opacity: 0.5; }
+
+    .article-header h1 {
+      font-size: clamp(40px, 5vw, 68px);
+      font-weight: 700; letter-spacing: -0.05em; line-height: 1.04;
+      color: var(--text-primary); max-width: 900px;
+      margin-bottom: 20px;
+    }
+    .article-sub {
+      font-size: 18px; line-height: 1.65; color: var(--text-secondary);
+      max-width: 680px; letter-spacing: -0.01em;
+    }
+
+    /* ─── ANSWER FIRST ───────────────────────────────────── */
+    .answer-first {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative; z-index: 1;
+    }
+    .answer-first-inner {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 64px; align-items: start;
+    }
+    .answer-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.10em; text-transform: uppercase;
+      color: var(--indigo); padding-top: 6px;
+    }
+    .answer-text {
+      font-size: 18px; line-height: 1.72; color: var(--text-primary);
+      letter-spacing: -0.015em;
+    }
+    .answer-text strong { color: var(--indigo); font-weight: 600; }
+
+    /* ════════════════ CONTENT SECTION ═══════════════════ */
+    .content-section {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative; z-index: 1;
+    }
+
+    /* ─── CLAIM / EVIDENCE ───────────────────────────────── */
+    .claim-evidence {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .claim h2 {
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08;
+      color: var(--text-primary); margin-top: 16px;
+    }
+    .evidence p {
+      font-size: 15px; line-height: 1.80; color: var(--text-secondary);
+      letter-spacing: -0.005em; margin-bottom: 20px;
+    }
+    .evidence p:last-child { margin-bottom: 0; }
+
+    /* sub-section within evidence */
+    .sub-section {
+      margin-top: 32px; padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .sub-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .sub-section h3 {
+      font-size: 16px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text-primary); margin-bottom: 12px; line-height: 1.3;
+      font-style: italic;
+    }
+    .sub-section p {
+      font-size: 15px; line-height: 1.80; color: var(--text-secondary);
+      letter-spacing: -0.005em; margin-bottom: 14px;
+    }
+    .sub-section p:last-child { margin-bottom: 0; }
+
+    /* ─── STAT STRIP ─────────────────────────────────────── */
+    .stat-strip {
+      margin-top: 64px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .stat-strip-inner {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .strip-cell {
+      padding: 36px 48px; position: relative;
+    }
+    .strip-cell + .strip-cell::before {
+      content: '';
+      position: absolute; left: 0; top: 16%; bottom: 16%;
+      width: 1px; background: var(--border-subtle);
+    }
+    .strip-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 44px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+      margin-bottom: 8px;
+    }
+    .strip-label {
+      font-size: 13.5px; font-weight: 500;
+      color: var(--text-primary); line-height: 1.45;
+      letter-spacing: -0.01em; margin-bottom: 5px;
+    }
+    .strip-source {
+      font-size: 12px; color: var(--text-muted); line-height: 1.5;
+    }
+    /* accent colors */
+    .sc-cy .strip-num { color: var(--cyan); }
+    .sc-in .strip-num { color: var(--indigo); }
+    .sc-mi .strip-num { color: var(--mint); }
+    .sc-vi .strip-num { color: #A78BFA; }
+    .sc-or .strip-num { color: #FB923C; }
+    .sc-pk .strip-num { color: #F472B6; }
+
+    /* ─── CALLOUT ────────────────────────────────────────── */
+    .callout {
+      margin-top: 48px;
+      padding: 24px 28px;
+      border-left: 3px solid var(--indigo);
+      background: rgba(79,110,247,0.06);
+      border-radius: 0 10px 10px 0;
+    }
+    .callout p {
+      font-size: 15.5px; line-height: 1.74; color: var(--text-secondary);
+      letter-spacing: -0.01em;
+    }
+    .callout strong { color: var(--text-primary); }
+    .callout.mint { border-left-color: var(--mint); background: rgba(52,211,153,0.05); }
+    .callout.orange { border-left-color: #FB923C; background: rgba(251,146,60,0.05); }
+
+    /* ════════════════ COMPARISON / TIMELINE TABLE ════════ */
+    .table-wrap { overflow-x: auto; margin-top: 28px; }
+    .comparison-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 14px; letter-spacing: -0.005em;
+    }
+    .comparison-table caption {
+      text-align: left; font-size: 13px; color: var(--text-muted);
+      padding-bottom: 12px; caption-side: top;
+    }
+    .comparison-table thead th {
+      padding: 14px 20px; text-align: left;
+      font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-muted);
+      border-bottom: 1px solid var(--border-medium);
+    }
+    .comparison-table tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .comparison-table tbody tr:last-child { border-bottom: none; }
+    .comparison-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+    .comparison-table td {
+      padding: 16px 20px; vertical-align: top;
+      line-height: 1.60; color: var(--text-secondary);
+      transition: background 0.15s;
+    }
+    .comparison-table td:first-child {
+      font-size: 12.5px; font-weight: 600;
+      color: var(--text-muted); white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+    .comparison-table td.bright-col { color: var(--text-primary); }
+
+    /* Timeline table — third column is indigo */
+    .timeline-table thead th:nth-child(3) { color: var(--indigo); }
+
+    /* ════════════════ SEQUENCE STEPS ════════════════════ */
+    .sequence-intro {
+      font-size: 15px; line-height: 1.80; color: var(--text-secondary);
+      letter-spacing: -0.005em; margin-bottom: 32px;
+    }
+
+    .journey-steps {
+      display: flex; flex-direction: column; gap: 0;
+      list-style: none; padding: 0;
+    }
+    .journey-step {
+      display: flex; gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .journey-step:first-child { padding-top: 0; }
+    .journey-step:last-child { border-bottom: none; }
+    .journey-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 700;
+      color: var(--indigo); min-width: 24px; padding-top: 2px;
+      flex-shrink: 0;
+    }
+    .journey-text {
+      font-size: 15px; line-height: 1.72; color: var(--text-secondary);
+      letter-spacing: -0.005em;
+    }
+    .journey-text em {
+      color: var(--text-primary); font-style: normal; font-weight: 600;
+    }
+
+    /* ════════════════ TIMELINE + SEQUENCE BLOCK ════════ */
+    .timeline-block {
+      margin-top: 64px;
+      padding-top: 56px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .timeline-block .eyebrow { margin-bottom: 16px; display: block; }
+
+    /* ════════════════ CTA BLOCK ════════════════════════ */
+    .cta-section {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 800px; height: 360px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.10) 0%, transparent 65%);
+      filter: blur(64px); pointer-events: none;
+    }
+    .cta-inner {
+      position: relative; z-index: 2; text-align: center; max-width: 680px; margin: 0 auto;
+    }
+    .cta-inner h2 {
+      font-size: clamp(28px, 3.2vw, 40px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
+      color: var(--text-primary); margin-bottom: 16px;
+    }
+    .cta-inner p {
+      font-size: 16px; line-height: 1.70; color: var(--text-secondary);
+      margin-bottom: 36px; letter-spacing: -0.01em;
+    }
+    .cta-checks {
+      display: flex; justify-content: center; gap: 22px;
+      margin-bottom: 36px; flex-wrap: wrap;
+    }
+    .cta-check {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--text-secondary);
+    }
+    .ck { color: var(--mint); }
+    .cta-sub { margin-top: 14px; font-size: 12.5px; color: var(--text-muted); }
+    .cta-sub a { color: var(--text-secondary); text-decoration: none; transition: color 0.15s; }
+    .cta-sub a:hover { color: var(--text-primary); }
+
+    /* ════════════════ FAQ (ALL OPEN) ════════════════════ */
+    .faq-section {
+      padding: 96px 0;
+      position: relative; z-index: 1;
+    }
+    .faq-section-head { margin-bottom: 56px; }
+    .faq-section-head h2 {
+      font-size: clamp(26px, 2.8vw, 36px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.12;
+      color: var(--text-primary); margin-top: 14px;
+    }
+    .faq-section-head p {
+      font-size: 15px; line-height: 1.72; color: var(--text-secondary);
+      margin-top: 12px; max-width: 600px; letter-spacing: -0.005em;
+    }
+    .faq-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border: 1px solid var(--border-subtle);
+      border-radius: 14px; overflow: hidden;
+    }
+    .faq-entry {
+      padding: 32px 36px;
+      border-right: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .faq-entry:nth-child(2n) { border-right: none; }
+    .faq-entry:nth-last-child(1),
+    .faq-entry:nth-last-child(2) { border-bottom: none; }
+    .faq-entry:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      border-right: none;
+    }
+    .faq-entry h3 {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--text-primary); line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .faq-entry p {
+      font-size: 14px; line-height: 1.78; color: var(--text-secondary);
+      letter-spacing: -0.005em;
+    }
+
+    /* ════════════════ FOOTER ════════════════════════════ */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0; position: relative; z-index: 1;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-size: 14.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none;
+      display: flex; align-items: baseline;
+    }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 12.5px; color: var(--text-muted); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+
+    /* ─── REDUCED MOTION ─────────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .container { padding: 0 40px; }
+      .claim-evidence { grid-template-columns: 1fr; gap: 40px; }
+      .answer-first-inner { grid-template-columns: 1fr; gap: 16px; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .faq-entry:nth-child(2n) { border-right: 1px solid var(--border-subtle); }
+      .faq-entry:nth-last-child(2) { border-bottom: 1px solid var(--border-subtle); }
+      .faq-entry { border-right: none; }
+      .faq-entry:last-child { border-bottom: none; }
+      .stat-strip-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .container { padding: 0 24px; }
+      .nav-links, .btn-nav { display: none; }
+      .article-header { padding: 64px 0 56px; }
+      .article-header h1 { font-size: 40px; }
+      .content-section { padding: 64px 0; }
+      .stat-strip-inner { grid-template-columns: 1fr; }
+      .strip-cell + .strip-cell::before { display: none; }
+      .strip-cell { padding: 24px 0; border-top: 1px solid var(--border-subtle); }
+      .strip-cell:first-child { border-top: none; }
+      .strip-num { font-size: 36px; }
+      .faq-section { padding: 64px 0; }
+      .cta-section { padding: 64px 0; }
+      .cta-checks { flex-direction: column; align-items: center; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<nav aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Quint·IA Vantage — home">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage">Vantage</span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="/why-aeo-matters">Why AEO Matters</a></li>
+        <li><a href="/how-aeo-works" aria-current="page">How It Works</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+      </ul>
+      <a href="/quick-start-blueprint" class="btn-nav">
+        Get the Blueprint
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 6h7M6.5 3L9.5 6l-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content">
+
+  <!-- ═══ ARTICLE HEADER ═══ -->
+  <header class="article-header">
+    <div class="header-glow" aria-hidden="true"></div>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">/</span>
+        <span aria-current="page">How AEO Works</span>
+      </nav>
+      <span class="eyebrow">The Methodology</span>
+      <h1>How answer engine optimization works</h1>
+      <p class="article-sub">There are four parts to making your business show up in AI-generated answers. Here is the full methodology, with the trade-offs explained.</p>
+    </div>
+  </header>
+
+  <!-- ═══ ANSWER FIRST ═══ -->
+  <div class="answer-first">
+    <div class="container">
+      <div class="answer-first-inner">
+        <div class="answer-label" aria-label="The short answer">The short answer</div>
+        <p class="answer-text">To be cited reliably by ChatGPT, Claude, Perplexity, and Google AI Overviews, four things have to be true. Your site has to be technically readable by AI crawlers. Your content has to be shaped for extraction. You have to own a coherent entity layer — an <strong>"owned knowledge graph"</strong> — on your domain. And you have to earn citations from the surfaces LLMs actually read: Reddit, review platforms, YouTube, and category-specific publications. Each of these is an executable program.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PILLAR 1: TECHNICAL FOUNDATION ═══ -->
+  <section class="content-section" aria-labelledby="pillar1-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">Pillar 1 of 4 — Technical Foundation</span>
+          <h2 id="pillar1-heading">If AI crawlers can't read your site, citations don't happen — regardless of your content quality</h2>
+        </div>
+        <div class="evidence">
+
+          <div class="sub-section">
+            <h3>What this means</h3>
+            <p>Large language models crawl the web through specialized bots: GPTBot (OpenAI), ClaudeBot (Anthropic), PerplexityBot, Google-Extended, and others. These bots read your site, extract structured data, and add what they find to the context they use when answering questions.</p>
+            <p>If your site is not readable to them — whether because of robots.txt blocks, missing schema, or unclear page structure — you are invisible. No amount of good content or community presence compensates for this.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>What it looks like in practice</h3>
+            <p><strong>Schema markup (JSON-LD).</strong> Every page on your site should carry structured data via JSON-LD. Organization schema for your company, Product schema for what you sell, FAQPage schema for question-and-answer content, AboutPage for your company description, Person schema for team members. Schema is not optional in 2026. It is the most basic signal an LLM uses to attribute facts about your business to your business.</p>
+            <p><strong>llms.txt.</strong> A relatively new standard. A simple text file at /llms.txt tells AI crawlers where the canonical, source-of-truth pages on your site live — your pricing page, your about page, your product pages, your changelog. It is the equivalent of robots.txt for AI assistants.</p>
+            <p><strong>robots.txt and crawl access.</strong> Many sites unintentionally block AI crawlers. We have seen marketing teams discover their site was invisible to Perplexity for a year because PerplexityBot was on a default block list. The fix is a single line in robots.txt.</p>
+            <p><strong>Site speed and accessibility.</strong> AI crawlers sample slow pages less frequently. A page with a 4-second largest contentful paint will be crawled less often than one under 2 seconds, which means it is also cited less often. The fix is the same fix you would do for traditional SEO.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>What most companies get wrong</h3>
+            <p>The most common mistake is treating schema as a one-time SEO checkbox. AEO requires schema that is comprehensive (every page type), accurate (matches the live page content), and connected (sameAs cross-references to LinkedIn, GitHub, Crunchbase, G2, Capterra). A half-built schema layer often performs worse than no schema, because the AI engine sees inconsistencies and discounts the source.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stat-strip" aria-label="Pillar 1 key figures">
+        <div class="stat-strip-inner">
+          <div class="strip-cell sc-in">
+            <div class="strip-num">5+</div>
+            <div class="strip-label">Named AI crawlers your robots.txt should explicitly allow</div>
+            <div class="strip-source">GPTBot, ClaudeBot, PerplexityBot, Google-Extended, and others</div>
+          </div>
+          <div class="strip-cell sc-cy">
+            <div class="strip-num">&lt;2s</div>
+            <div class="strip-label">LCP target for reliable AI crawl frequency</div>
+            <div class="strip-source">Pages above 4s are crawled less often — and cited less often</div>
+          </div>
+          <div class="strip-cell sc-mi">
+            <div class="strip-num">2–4 wks</div>
+            <div class="strip-label">Time to first impact after technical foundation deployed</div>
+            <div class="strip-source">Compounding impact at 3+ months — Quint·IA Vantage data</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>The most common mistake is treating schema as a one-time SEO checkbox. AEO requires schema that is <strong>comprehensive, accurate, and connected</strong> — sameAs cross-references to LinkedIn, G2, Crunchbase, and GitHub. A half-built schema layer often performs worse than no schema, because the AI engine sees inconsistencies and discounts the source entirely.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ PILLAR 2: OWNED KNOWLEDGE GRAPH ═══ -->
+  <section class="content-section" aria-labelledby="pillar2-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">Pillar 2 of 4 — Owned Knowledge Graph</span>
+          <h2 id="pillar2-heading">An owned knowledge graph lets LLMs attribute facts to your business from a source you control</h2>
+        </div>
+        <div class="evidence">
+
+          <div class="sub-section">
+            <h3>What this means</h3>
+            <p>A knowledge graph is a structured representation of entities (companies, people, products) and their relationships. Google's Knowledge Graph powers the info boxes on the right side of search results. An owned knowledge graph is the equivalent built on your own domain rather than relying on Wikidata or Wikipedia.</p>
+            <p>In practice, this is a set of pages on your site that act as the authoritative source about your business: /about, /team, /products, /integrations, /faq, /glossary. Each page is marked up with JSON-LD schema. The pages cross-reference each other via sameAs properties. A crawler can walk from /about to /team to /products to /integrations and reconstruct your full entity graph machine-readably.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>Why this beats relying on Wikidata or Wikipedia</h3>
+            <p>Wikidata has a notability gate that excludes most B2B SaaS companies. Wikipedia is fully outside your control — anyone can edit it, the community can delete pages, and the editorial standards are enforced unevenly.</p>
+            <p>Owned knowledge graphs sidestep both problems. You write it. You maintain it. It lives on a domain you control. LLMs treat structured first-party data as high-trust, especially when it is internally consistent across multiple pages.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>What it looks like in practice</h3>
+            <p><strong>The seed version:</strong> an updated /about page with comprehensive Organization schema, a /team page with Person schema for each leader, a /products page with Product schema for each thing you sell, and a /faq page with FAQPage schema covering 20 to 40 buyer questions. The seed takes a week to spec and another week to deploy.</p>
+            <p><strong>The full version:</strong> add /integrations linked to partner organizations, /customers linked to case studies, /glossary with DefinedTerm schema for category-specific vocabulary, and /alternatives pages that compare you to competitors. Each page is structured so an AI engine reading any one of them can find the others. The full version takes four to eight weeks to deploy depending on your CMS.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stat-strip" aria-label="Pillar 2 key figures">
+        <div class="stat-strip-inner">
+          <div class="strip-cell sc-cy">
+            <div class="strip-num">2 wks</div>
+            <div class="strip-label">To spec and deploy the seed knowledge graph</div>
+            <div class="strip-source">1 week to spec, 1 week to deploy — straightforward CMS work</div>
+          </div>
+          <div class="strip-cell sc-mi">
+            <div class="strip-num">5</div>
+            <div class="strip-label">Core entity pages in the seed version</div>
+            <div class="strip-source">/about, /team, /products, /faq, /glossary — all schema-marked</div>
+          </div>
+          <div class="strip-cell sc-in">
+            <div class="strip-num">4–8 wks</div>
+            <div class="strip-label">To deploy the full knowledge graph</div>
+            <div class="strip-source">With /integrations, /customers, /alternatives — varies by CMS</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout mint">
+        <p>You write it. You maintain it. It lives on a domain you control. <strong>LLMs treat structured first-party data as high-trust</strong> — especially when it is internally consistent across multiple pages. This is a meaningful AEO advantage that almost no competitor in the productized lane explicitly sells.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ PILLAR 3: CONTENT FOR EXTRACTION ═══ -->
+  <section class="content-section" aria-labelledby="pillar3-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">Pillar 3 of 4 — Content for Extraction</span>
+          <h2 id="pillar3-heading">Content shape matters more than content volume — and the shapes AI engines extract are specific</h2>
+        </div>
+        <div class="evidence">
+
+          <div class="sub-section">
+            <h3>What this means</h3>
+            <p>Large language models extract specific shapes of content disproportionately. The first 200 words of a page get sampled more than the rest. FAQ blocks get extracted as discrete question-answer pairs. Comparison tables get cited verbatim for "X vs Y" queries. Definitional content gets cited for category vocabulary.</p>
+            <p>If your blog reads like a typical SaaS marketing blog — feature announcements, customer stories, narrative thought leadership — it is poorly shaped for AEO. Not because the content is bad, but because the shape does not extract cleanly.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>What content actually performs in AEO</h3>
+            <p><strong>Comparison and alternative pages.</strong> "[Competitor] alternative", "Best [category] for [segment]", "[Product] pricing explained". These pages dominate citations for commercial queries. If your category has obvious comparisons to make, you should have a dedicated /alternatives page for each top competitor.</p>
+            <p><strong>FAQ libraries.</strong> A /faq page with 30 to 60 question-answer pairs, each marked up with FAQPage schema, is one of the highest-leverage AEO assets you can build. It compounds slowly and reliably.</p>
+            <p><strong>Glossary and definitions.</strong> A /glossary page with 20 to 40 entries of category vocabulary becomes a quotable source for any prompt that touches your industry. Works especially well in technical or jargon-heavy categories.</p>
+            <p><strong>Buyer's guides and decision frameworks.</strong> "How to choose a [category] tool", "Buyer's guide to [problem]". These get cited disproportionately for top-of-funnel commercial queries because they answer the buyer's actual mental model.</p>
+            <p><strong>Stats and data-driven pieces.</strong> Original or curated industry statistics with sources are heavily cited by Perplexity in particular.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>Content shape rules that apply to everything new</h3>
+            <p>Lead with the answer — two to three sentences of direct answer at the top of every page, before any narrative. Add a FAQ block at the bottom of every post, even if the post is not a Q&amp;A piece. Use comparison tables for any feature, plan, or product comparison. Cite first-party data and customer outcomes inline. Always include an author byline with credentials and Person schema.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stat-strip" aria-label="Pillar 3 key figures">
+        <div class="stat-strip-inner">
+          <div class="strip-cell sc-pk">
+            <div class="strip-num">200</div>
+            <div class="strip-label">First words of every page sampled most heavily</div>
+            <div class="strip-source">Lead with the direct answer — before any narrative or context</div>
+          </div>
+          <div class="strip-cell sc-cy">
+            <div class="strip-num">30–60</div>
+            <div class="strip-label">FAQ entries for a compounding FAQ library</div>
+            <div class="strip-source">Each entry marked up with FAQPage schema — highest-leverage AEO asset</div>
+          </div>
+          <div class="strip-cell sc-or">
+            <div class="strip-num">5</div>
+            <div class="strip-label">Content formats that dominate AEO citations</div>
+            <div class="strip-source">Comparison pages, FAQ libraries, glossary, buyer's guides, stats pieces</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>A typical SaaS marketing blog is poorly shaped for AEO. Not because the content is bad — but because <strong>the shape does not extract cleanly</strong>. The fix is not more content. It is a different structure applied to every new piece you publish, and a prioritized rewrite plan for the existing pages that matter most.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ PILLAR 4: OFF-SITE CITATIONS ═══ -->
+  <section class="content-section" aria-labelledby="pillar4-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">Pillar 4 of 4 — Off-site Citations</span>
+          <h2 id="pillar4-heading">This is the part most agencies skip — and the part that drives compounding citation authority</h2>
+        </div>
+        <div class="evidence">
+
+          <div class="sub-section">
+            <h3>Reddit</h3>
+            <p>Reddit accounts for approximately 47% of Perplexity's top citations and 21% of Google AI Overview sources. Building a credible presence on category-relevant subreddits is the single highest-leverage off-site activity in AEO.</p>
+            <p>The mechanics are not complicated: identify the subs your buyers actually post in, set up a transparent team profile, post substantive answers two to four times per month, build karma over six to nine months. The trap is treating Reddit as a marketing channel — it punishes that immediately. The discipline is treating Reddit as community participation and letting the citation lift compound.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>Review platforms (G2, Capterra, Trustpilot)</h3>
+            <p>Reviews on G2 and Capterra are treated as authoritative by ChatGPT and Google AI Overviews for category queries. The work is real-customer activation: identify your top 50 to 200 customers, run a structured email campaign requesting reviews, follow up on no-replies. A 90-day campaign can credibly take a company from 5 reviews to 50.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>YouTube and video transcripts</h3>
+            <p>Perplexity in particular cites YouTube transcripts heavily for tooling and product comparison queries. A handful of videos — a five-minute product overview, a comparison demo, a customer interview, a setup tutorial — can establish citation surface area in 30 to 60 days.</p>
+            <p>The format note: always upload a transcript. LLMs cite YouTube via transcripts more than via the video content itself.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>Quora</h3>
+            <p>A smaller signal than Reddit, but not zero. Long-form answers under a real-name profile to category questions get cited by Perplexity and Google AI Overviews. Five high-quality answers over a quarter is sufficient volume to establish citation presence.</p>
+          </div>
+
+          <div class="sub-section">
+            <h3>Category-specific publications</h3>
+            <p>Different from press relations. We are not pitching journalists. We are identifying the publications, podcasts, and newsletters where your competitors already have presence and you do not — then briefing your founder or VP of marketing to pitch a substantive guest contribution.</p>
+            <p>The angle matters more than the relationship. A data-led guest post on DEV.to or InfoQ outperforms a press release in TechCrunch for AEO purposes.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="stat-strip" aria-label="Pillar 4 key figures">
+        <div class="stat-strip-inner">
+          <div class="strip-cell sc-or">
+            <div class="strip-num">47%</div>
+            <div class="strip-label">of Perplexity citations come from Reddit</div>
+            <div class="strip-source">Also ~21% of Google AI Overview sources — Profound / Digital Bloom, 2025</div>
+          </div>
+          <div class="strip-cell sc-vi">
+            <div class="strip-num">90 days</div>
+            <div class="strip-label">To go from 5 to 50 reviews on G2 or Capterra</div>
+            <div class="strip-source">Structured email campaign to your top 50–200 customers</div>
+          </div>
+          <div class="strip-cell sc-cy">
+            <div class="strip-num">30–60d</div>
+            <div class="strip-label">For YouTube transcript citations to appear</div>
+            <div class="strip-source">Always upload a transcript — LLMs cite via text, not the video itself</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout orange">
+        <p><strong>What about traditional digital PR?</strong> Press releases, journalist pitching, HARO. These produce backlinks (helpful for SEO) and short-term citation lift (helpful for the first six weeks). They do not produce the structured, durable citations that LLMs prefer. If your goal is being quoted in TechCrunch, hire a PR firm. <strong>If your goal is being the answer ChatGPT gives, the budget is better spent on the four pillars above.</strong></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ TIMELINE + SEQUENCE ═══ -->
+  <section class="content-section" aria-labelledby="timeline-heading">
+    <div class="container">
+
+      <div class="claim-evidence">
+        <div class="claim">
+          <span class="eyebrow">Putting it together</span>
+          <h2 id="timeline-heading">The first visible lift appears at week six to eight. Compounding visibility takes six to twelve months.</h2>
+        </div>
+        <div class="evidence">
+          <p style="font-size: 15px; line-height: 1.80; color: var(--text-secondary); margin-bottom: 28px;">Each pillar has a different timeline. The first noticeable visibility lift typically appears after the technical foundation is in place and the first comparison page or FAQ library is live. Meaningful share of voice across your full category prompt universe takes sustained execution across all four pillars.</p>
+
+          <div class="table-wrap" role="region" aria-label="AEO pillar timeline expectations">
+            <table class="comparison-table timeline-table">
+              <caption>Expected timeline for each AEO pillar — first impact vs. compounding impact</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Pillar</th>
+                  <th scope="col">First impact</th>
+                  <th scope="col">Compounding impact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Site readable to AI</td>
+                  <td>2 to 4 weeks</td>
+                  <td class="bright-col">3+ months</td>
+                </tr>
+                <tr>
+                  <td>Owned knowledge graph</td>
+                  <td>4 to 8 weeks</td>
+                  <td class="bright-col">6+ months</td>
+                </tr>
+                <tr>
+                  <td>Content shaped for extraction</td>
+                  <td>4 to 12 weeks</td>
+                  <td class="bright-col">6 to 18 months</td>
+                </tr>
+                <tr>
+                  <td>Citations from off-site surfaces</td>
+                  <td>8 to 16 weeks</td>
+                  <td class="bright-col">12+ months</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- What to do in what order -->
+      <div class="timeline-block">
+        <span class="eyebrow">What to do in what order</span>
+        <div class="claim-evidence" style="margin-top: 24px;">
+          <div class="claim">
+            <h2 style="font-size: clamp(24px, 2.6vw, 34px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; color: var(--text-primary); margin-top: 0;">Five steps. Start here, go in this order.</h2>
+          </div>
+          <div class="evidence" style="padding-top: 0;">
+            <ol class="journey-steps" aria-label="AEO implementation sequence — five steps in order">
+              <li class="journey-step">
+                <span class="journey-num" aria-hidden="true">01</span>
+                <p class="journey-text"><em>Audit first.</em> Test 20 prompts in ChatGPT and Perplexity against your top three competitors. If you do not know where you stand, you cannot prioritize the work.</p>
+              </li>
+              <li class="journey-step">
+                <span class="journey-num" aria-hidden="true">02</span>
+                <p class="journey-text"><em>Fix the technical foundation.</em> Schema, llms.txt, robots.txt, owned knowledge graph seed. This is week one through week six work.</p>
+              </li>
+              <li class="journey-step">
+                <span class="journey-num" aria-hidden="true">03</span>
+                <p class="journey-text"><em>Ship the comparison page and FAQ library.</em> These are the two highest-leverage content assets and should ship in months one and two.</p>
+              </li>
+              <li class="journey-step">
+                <span class="journey-num" aria-hidden="true">04</span>
+                <p class="journey-text"><em>Start the off-site work.</em> Reddit profile, review activation campaign, first YouTube videos. These run in parallel with the content work and take 90 days to start showing up.</p>
+              </li>
+              <li class="journey-step">
+                <span class="journey-num" aria-hidden="true">05</span>
+                <p class="journey-text"><em>Measure and iterate.</em> Track prompt-level visibility weekly, branded search monthly. Adjust the content roadmap based on which prompts move first.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section" aria-labelledby="cta-heading">
+    <div class="cta-glow" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-inner">
+        <span class="eyebrow">Ready to start</span>
+        <h2 id="cta-heading">Get a personalized 90-day AEO action plan built from a real diagnostic of your site.</h2>
+        <p>The Quick-Start Blueprint runs the full audit — 20 prompts tested across ChatGPT and Perplexity, schema gaps identified, content priorities ranked, and a week-by-week sequence built for your specific category and current visibility.</p>
+        <div class="cta-checks">
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> 20-prompt visibility baseline</div>
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> Schema + llms.txt gap audit</div>
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> 5–10 business day turnaround</div>
+          <div class="cta-check"><span class="ck" aria-hidden="true">✓</span> $500 credits toward month one</div>
+        </div>
+        <a href="/quick-start-blueprint" class="btn-primary">
+          Get the Blueprint — $500
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="cta-sub">Also see: <a href="/services">Our services →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ — ALL OPEN, FULLY IN DOM ═══ -->
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="container">
+
+      <div class="faq-section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2 id="faq-heading">Common questions about the AEO methodology</h2>
+        <p>Eight questions we hear most often from founders and marketing leaders trying to understand what AEO execution actually looks like in practice.</p>
+      </div>
+
+      <div class="faq-grid" role="list">
+
+        <div class="faq-entry" role="listitem">
+          <h3>Do I need to do all four pillars at once?</h3>
+          <p>No. Most companies get the technical foundation and content shape right first, then layer the off-site work on. If you only have budget for one pillar, start with the technical foundation — the off-site work has nowhere to point if your site is not readable.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>How is AEO different from SEO?</h3>
+          <p>The technical pillar overlaps significantly with SEO. The content pillar overlaps partially — SEO rewards depth, AEO rewards extractability, and good content does both. The owned knowledge graph and off-site citation work are largely AEO-specific. SEO has its own off-site work (link building) which is mostly orthogonal.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>Why not just do digital PR?</h3>
+          <p>Press coverage helps for the first few weeks after a story runs and produces backlinks. It does not produce the structured, durable citations LLMs prefer. The same budget spent on Reddit operations, review activation, and structured content produces more compounding AEO lift. We refer prospects to PR partners when their goals are PR-shaped, but we do not run PR ourselves.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>What does an llms.txt file look like?</h3>
+          <p>It is a plain text file at /llms.txt that lists the canonical pages on your site for AI crawlers. Format is simple: a heading describing your business, then a list of page URLs grouped by category (Pricing, Products, FAQ, Documentation). Most companies can write theirs in 30 minutes.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>How do I write content that LLMs extract well?</h3>
+          <p>Lead with a two-to-three-sentence direct answer at the top of every page. Use FAQ blocks at the bottom of every post. Use comparison tables for any X vs Y content. Add author bylines with Person schema. Keep paragraphs short. Use H2 and H3 headings as questions. Include relevant numbers and dates inline.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>Is Reddit really that important?</h3>
+          <p>For most B2B categories, yes. The citation studies are consistent: Reddit is the single most-cited source in Perplexity and a top-three source in Google AI Overviews. The mechanics are not promotional posting — they are sustained, transparent participation in subs your buyers actually use.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>Can my dev team handle the technical implementation?</h3>
+          <p>Yes if they are competent and have CMS access. Schema deployment is mostly templating work. llms.txt is a single static file. The owned knowledge graph requires more design and content work but is technically straightforward. Most of our clients deploy the technical foundation themselves and pay us for the spec, the content, and the off-site work.</p>
+        </div>
+
+        <div class="faq-entry" role="listitem">
+          <h3>What is the difference between an audit and a strategy?</h3>
+          <p>An audit tells you where you are. A strategy tells you where to go and in what order. A good AEO engagement starts with an audit (the diagnostic), produces a strategy (the prioritized plan), and then executes the plan. Skipping the audit means executing without context. Skipping the strategy means executing without prioritization.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="/" class="footer-logo" aria-label="Quint·IA Vantage — home">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <nav aria-label="Footer navigation">
+        <div class="footer-links">
+          <a href="/why-aeo-matters">Why AEO Matters</a>
+          <a href="/how-aeo-works" aria-current="page">How It Works</a>
+          <a href="/services">Services</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/quick-start-blueprint">Blueprint</a>
+        </div>
+      </nav>
+      <span class="footer-copy">© 2026 Quint·IA Vantage</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

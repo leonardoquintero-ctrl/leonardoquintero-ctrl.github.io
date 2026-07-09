@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quint·IA Vantage — Answer Engine Optimization for Startups</title>
+  <meta name="description" content="AEO services for startups and small businesses. Get cited by ChatGPT, Claude, and Perplexity. Productized retainers from $950/mo. Start with the $500 Quick-Start Blueprint.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://quintiavantage.com/#organization",
+        "name": "Quint·IA Vantage",
+        "url": "https://quintiavantage.com",
+        "description": "Answer engine optimization agency for startups and small businesses. Productized AEO retainers from $950/month.",
+        "areaServed": "US",
+        "knowsAbout": ["Answer Engine Optimization","AI Search Visibility","Schema Markup","LLM Citation Strategy"],
+        "offers": { "@type": "Offer", "name": "Quick-Start Blueprint", "price": "500", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://quintiavantage.com/#website",
+        "url": "https://quintiavantage.com",
+        "name": "Quint·IA Vantage",
+        "publisher": { "@id": "https://quintiavantage.com/#organization" },
+        "potentialAction": { "@type": "SearchAction", "target": "https://quintiavantage.com/?s={search_term_string}", "query-input": "required name=search_term_string" }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What is answer engine optimization?", "acceptedAnswer": { "@type": "Answer", "text": "Answer engine optimization (AEO) is the practice of making your business cited by AI assistants like ChatGPT, Claude, Perplexity, and Google AI Overviews when buyers ask category questions. It overlaps with SEO but rewards different signals: structured data, user-generated content on Reddit and review platforms, and consistent entity information across the web." } },
+      { "@type": "Question", "name": "How is AEO different from SEO?", "acceptedAnswer": { "@type": "Answer", "text": "SEO optimizes for ranking links in Google's blue-link results. AEO optimizes for being cited inside an AI-generated answer. The technical foundation overlaps. The off-site signals do not. SEO rewards backlinks and domain authority. AEO rewards Reddit threads, review sites, structured first-party data, and YouTube transcripts." } },
+      { "@type": "Question", "name": "Do I need AEO if my SEO is working?", "acceptedAnswer": { "@type": "Answer", "text": "Probably yes. Searches that show an AI Overview have an 83 percent zero-click rate. AI referrals to top sites grew 357 percent year over year in June 2025. If you are not visible in AI answers, you are losing share of an increasingly large slice of your buyers' research." } },
+      { "@type": "Question", "name": "How long does AEO take to show results?", "acceptedAnswer": { "@type": "Answer", "text": "First citations typically appear in 30 to 60 days after the technical foundation is in place. Compounding visibility across multiple engines takes 90 to 180 days." } },
+      { "@type": "Question", "name": "Is this just SEO with a new label?", "acceptedAnswer": { "@type": "Answer", "text": "No. The technical foundation overlaps but the off-site signals are different. We do not pitch journalists, do not chase backlinks, and do not bolt AEO onto an SEO retainer. We work the surfaces LLMs actually read." } }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ─── VARIABLES ─────────────────────────────────────── */
+    :root {
+      --bg-base:      #0B0E11;
+      --bg-surface:   #12151B;
+      --bg-elevated:  #161A22;
+      --bg-code:      #0D1117;
+      --indigo:       #4F6EF7;
+      --indigo-dim:   rgba(79,110,247,0.12);
+      --cyan:         #00D4FF;
+      --mint:         #34D399;
+      --text-primary:   #FAFBFC;
+      --text-secondary: #8B92A0;
+      --text-muted:     #747F8F; /* lightened from #5A6270 → 4.77:1 on bg-base, 4.50:1 on bg-surface — WCAG AA */
+      --btn-indigo:     #4866F4; /* button-only blue — 4.68:1 with white text — WCAG AA */
+      --border-subtle:  rgba(255,255,255,0.07);
+      --border-medium:  rgba(255,255,255,0.12);
+      --border-bright:  rgba(255,255,255,0.16);
+    }
+
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ─── GLOBAL GLOSS: varnish stripe ──────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background:
+        linear-gradient(120deg,
+          transparent 0%, transparent 44%,
+          rgba(255,255,255,0.008) 47%,
+          rgba(255,255,255,0.055) 50%,
+          rgba(255,255,255,0.008) 53%,
+          transparent 56%, transparent 100%
+        ),
+        linear-gradient(120deg,
+          transparent 0%, transparent 63%,
+          rgba(79,110,247,0.020) 65.5%,
+          rgba(79,110,247,0.042) 67%,
+          rgba(79,110,247,0.020) 68.5%,
+          transparent 71%, transparent 100%
+        );
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* ─── GLOBAL GLOSS: top atmospheric ─────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 480px;
+      background: radial-gradient(ellipse 70% 55% at 72% -8%,
+        rgba(79,110,247,0.10) 0%, transparent 70%);
+      filter: blur(48px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 64px;
+    }
+    section { position: relative; z-index: 1; }
+
+    /* ─── EYEBROW ────────────────────────────────────────── */
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--indigo);
+    }
+
+    /* ─── SECTION HEADER ─────────────────────────────────── */
+    .section-head { margin-bottom: 64px; }
+    .section-head.centered { text-align: center; }
+    .section-head h2 {
+      font-size: clamp(30px, 3.4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--text-primary);
+      margin-top: 14px;
+    }
+    .section-head p {
+      font-size: 16px;
+      line-height: 1.72;
+      color: var(--text-secondary);
+      margin-top: 14px;
+      max-width: 560px;
+    }
+    .section-head.centered p { margin-left: auto; margin-right: auto; }
+
+    /* ─── SKIP LINK (ADA: WCAG 2.4.1 Level A) ───────────── */
+    .skip-link {
+      position: absolute; top: -100%; left: 16px;
+      background: var(--indigo); color: #fff;
+      font-size: 14px; font-weight: 600;
+      padding: 10px 18px; border-radius: 0 0 8px 8px;
+      text-decoration: none; z-index: 9999;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ─── FOCUS VISIBLE (ADA: WCAG 2.4.7 Level AA) ──────── */
+    :focus-visible {
+      outline: 2px solid var(--indigo);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .faq-q:focus-visible { outline-offset: 0; }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      color: #fff; background: var(--btn-indigo); border: none; /* #4866F4 = 4.68:1 with white — WCAG AA */
+      padding: 13px 24px; border-radius: 8px; cursor: pointer;
+      text-decoration: none; transition: opacity 0.15s, transform 0.12s;
+      letter-spacing: -0.01em;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-primary-lg {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: inherit; font-size: 16px; font-weight: 600;
+      color: #fff; background: var(--btn-indigo); border: none; /* #4866F4 = 4.68:1 with white — WCAG AA */
+      padding: 15px 30px; border-radius: 9px; cursor: pointer;
+      text-decoration: none; transition: opacity 0.15s, transform 0.12s;
+      letter-spacing: -0.01em;
+    }
+    .btn-primary-lg:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-size: 15px; font-weight: 500;
+      color: var(--text-secondary); background: transparent;
+      border: 1px solid var(--border-medium);
+      padding: 13px 22px; border-radius: 8px; cursor: pointer;
+      text-decoration: none; transition: border-color 0.15s, color 0.15s;
+      letter-spacing: -0.01em;
+    }
+    .btn-ghost:hover { border-color: var(--border-bright); color: var(--text-primary); }
+
+    .btn-nav {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: inherit; font-size: 13.5px; font-weight: 600;
+      color: #fff; background: var(--btn-indigo); border: none; /* #4866F4 = 4.68:1 with white — WCAG AA */
+      padding: 8.5px 17px; border-radius: 7px; cursor: pointer;
+      text-decoration: none; transition: opacity 0.15s, transform 0.1s;
+      letter-spacing: -0.01em;
+    }
+    .btn-nav:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ─── GLOSS CARD ─────────────────────────────────────── */
+    .gloss-card {
+      background: var(--bg-surface);
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      border-top-color: rgba(255,255,255,0.13);
+      border-bottom-color: rgba(0,0,0,0.35);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.09),
+        0 4px 20px rgba(0,0,0,0.45),
+        0 1px 4px rgba(0,0,0,0.32);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s;
+    }
+    /* diagonal varnish stripe */
+    .gloss-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(128deg,
+        transparent 0%, transparent 46%,
+        rgba(255,255,255,0.013) 48%,
+        rgba(255,255,255,0.060) 50%,
+        rgba(255,255,255,0.013) 52%,
+        transparent 54%, transparent 100%
+      );
+      pointer-events: none;
+      z-index: 2;
+      border-radius: inherit;
+    }
+    /* top specular */
+    .gloss-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 42%;
+      background: linear-gradient(180deg,
+        rgba(255,255,255,0.048) 0%,
+        rgba(255,255,255,0.014) 52%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+      border-radius: inherit;
+    }
+    .gloss-card:hover {
+      transform: translateY(-3px);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.13),
+        0 16px 40px rgba(0,0,0,0.60),
+        0 2px 8px rgba(0,0,0,0.42);
+    }
+
+    /* ════════════════════ NAV ════════════════════ */
+    nav {
+      position: sticky; top: 0; z-index: 800;
+      height: 64px;
+      background: rgba(11,14,17,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner {
+      height: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-size: 15.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none;
+      display: flex; align-items: baseline; gap: 0;
+    }
+    .logo .dot     { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .logo .ia      { color: var(--indigo); }
+    .logo .vantage { color: var(--text-secondary); font-weight: 500; margin-left: 5px; }
+
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 13.5px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s; letter-spacing: -0.01em;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+
+    /* ════════════════════ HERO ════════════════════ */
+    .hero {
+      padding: 104px 0 112px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute; top: -260px; right: -200px;
+      width: 900px; height: 900px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.13) 0%, transparent 60%);
+      filter: blur(80px); pointer-events: none;
+    }
+    .hero-glow-b {
+      position: absolute; bottom: -120px; left: -60px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse, rgba(0,212,255,0.035) 0%, transparent 70%);
+      filter: blur(60px); pointer-events: none;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: grid;
+      grid-template-columns: 56fr 44fr;
+      gap: 72px; align-items: center;
+    }
+    .hero-text { display: flex; flex-direction: column; gap: 26px; }
+
+    .hero-text h1 {
+      font-size: clamp(48px, 5.8vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1.03;
+      color: var(--text-primary);
+    }
+    .hero-text h1 .accent { color: var(--indigo); }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.68;
+      color: var(--text-secondary);
+      max-width: 390px;
+      letter-spacing: -0.01em;
+    }
+    .hero-ctas { display: flex; align-items: center; gap: 12px; padding-top: 4px; flex-wrap: wrap; }
+    .hero-note {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      letter-spacing: -0.005em;
+    }
+    .hero-note span { color: var(--text-secondary); }
+
+    /* Code window */
+    .code-wrap {
+      position: relative;
+    }
+    .code-wrap::before {
+      content: '';
+      position: absolute; inset: -32px;
+      background: radial-gradient(ellipse at 50% 50%,
+        rgba(79,110,247,0.10) 0%, transparent 65%);
+      filter: blur(24px);
+      pointer-events: none; z-index: -1;
+    }
+    .code-window {
+      background: var(--bg-code);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-top-color: rgba(255,255,255,0.12);
+      border-bottom-color: rgba(0,0,0,0.45);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 28px 72px rgba(0,0,0,0.70),
+        0 4px 16px rgba(0,0,0,0.45);
+      overflow: hidden;
+    }
+    .win-bar {
+      display: flex; align-items: center; gap: 7px;
+      padding: 11px 16px;
+      background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .win-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .win-dot:nth-child(1) { background: #FF5F57; }
+    .win-dot:nth-child(2) { background: #FEBC2E; }
+    .win-dot:nth-child(3) { background: #28C840; }
+    .win-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-muted); margin-left: 8px;
+    }
+    .code-body {
+      padding: 22px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; line-height: 1.82;
+      overflow-x: auto;
+    }
+    .code-body pre { white-space: pre; }
+
+    /* syntax tokens — all ≥ 4.5:1 on code backgrounds (WCAG AA) */
+    .t-k  { color: #79C0FF; }              /* 7.9:1 ✅ */
+    .t-s  { color: #A8D8FF; }             /* 11.8:1 ✅ */
+    .t-u  { color: #7B9EF8; }             /* 5.6:1 ✅ */
+    .t-b  { color: #747F8F; }             /* 4.6:1 ✅  was #5A6270 (3.4:1 fail) */
+    .t-c  { color: #717D8E; font-style: italic; } /* 4.5:1 ✅  was #3D434F (1.7:1 fail) */
+    .t-g  { color: #34D399; }             /* 10.1:1 ✅ */
+    .t-cy { color: #00D4FF; }             /* 10.9:1 ✅ */
+    .t-w  { color: #FBBF24; }             /* 9.7:1 ✅ */
+    .t-er { color: #F87171; }             /* 5.1:1 ✅ */
+    .t-tp { color: #7B9EF8; }             /* 5.6:1 ✅ */
+    .t-tc { color: #FAFBFC; }             /* 18.7:1 ✅ */
+    .t-tm { color: var(--text-muted); }   /* #747F8F = 4.6:1 ✅ */
+
+    /* ════════════════════ STATS STRIP ════════════════════ */
+    .stats-strip {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      position: relative; z-index: 1;
+    }
+    .stats-strip-inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .strip-cell {
+      padding: 44px 56px;
+      position: relative;
+    }
+    .strip-cell + .strip-cell::before {
+      content: '';
+      position: absolute; left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: var(--border-subtle);
+    }
+    .strip-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 48px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+      margin-bottom: 10px;
+    }
+    .strip-cell:nth-child(1) .strip-num { color: var(--cyan); }
+    .strip-cell:nth-child(2) .strip-num { color: var(--indigo); }
+    .strip-cell:nth-child(3) .strip-num { color: var(--mint); }
+    .strip-label {
+      font-size: 14px; font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.4; letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    .strip-source {
+      font-size: 12px; color: var(--text-muted); /* min 12px; #747F8F = 4.77:1 ✅ */
+      line-height: 1.55;
+    }
+
+    /* ════════════════════ WHY SECTION ════════════════════ */
+    .why-section {
+      padding: 104px 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .why-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+    .why-text {}
+    .why-text h2 {
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.1;
+      color: var(--text-primary); margin-top: 14px; margin-bottom: 20px;
+    }
+    .why-text p {
+      font-size: 15px; line-height: 1.78; color: var(--text-secondary);
+      letter-spacing: -0.005em;
+    }
+    .why-callout {
+      margin-top: 32px;
+      padding: 22px 24px;
+      background: rgba(79,110,247,0.07);
+      border: 1px solid rgba(79,110,247,0.15);
+      border-left: 3px solid var(--indigo);
+      border-radius: 0 10px 10px 0;
+    }
+    .why-callout p {
+      font-size: 14px; line-height: 1.72;
+      color: var(--text-secondary);
+    }
+    .why-callout strong { color: var(--text-primary); }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      border-radius: 14px; overflow: hidden;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-subtle);
+    }
+    .stat-cell {
+      background: var(--bg-surface);
+      padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: background 0.2s;
+    }
+    .stat-cell:hover { background: var(--bg-elevated); }
+    .stat-cell::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--ac, transparent);
+    }
+    .ac-cy  { --ac: var(--cyan); }
+    .ac-in  { --ac: var(--indigo); }
+    .ac-mi  { --ac: var(--mint); }
+    .ac-vi  { --ac: #A78BFA; }
+    .ac-or  { --ac: #FB923C; }
+    .ac-pk  { --ac: #F472B6; }
+
+    .stat-big {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 38px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+      margin-bottom: 10px;
+    }
+    .ac-cy .stat-big { color: var(--cyan); }
+    .ac-in .stat-big { color: var(--indigo); }
+    .ac-mi .stat-big { color: var(--mint); }
+    .ac-vi .stat-big { color: #A78BFA; }
+    .ac-or .stat-big { color: #FB923C; }
+    .ac-pk .stat-big { color: #F472B6; }
+
+    .stat-desc { font-size: 13px; line-height: 1.58; color: var(--text-secondary); margin-bottom: 8px; }
+    .stat-src  { font-size: 12px; color: var(--text-muted); font-style: italic; } /* min 12px for readability */
+
+    /* ════════════════════ WHAT WE DO ════════════════════ */
+    .what-section {
+      padding: 104px 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .cards-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .svc-card { padding: 36px 32px; }
+    .card-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--indigo); margin-bottom: 20px; display: block;
+    }
+    .card-title {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); margin-bottom: 12px; line-height: 1.3;
+    }
+    .card-body {
+      font-size: 13.5px; line-height: 1.74; color: var(--text-secondary);
+      margin-bottom: 24px; letter-spacing: -0.005em;
+    }
+    .card-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; line-height: 1.76;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-top-color: rgba(255,255,255,0.07);
+      border-radius: 8px; padding: 14px 16px;
+      position: relative; z-index: 3; overflow-x: auto;
+    }
+    .card-code pre { white-space: pre; }
+
+    /* ════════════════════ HOW IT WORKS ════════════════════ */
+    .how-section {
+      padding: 104px 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .how-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .how-steps { display: flex; flex-direction: column; }
+    .step {
+      display: flex; gap: 24px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .step:first-child { padding-top: 0; }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; font-weight: 700; color: var(--indigo);
+      min-width: 28px; padding-top: 3px; letter-spacing: 0.02em;
+    }
+    .step-content h3 {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); margin-bottom: 9px; line-height: 1.25;
+    }
+    .step-content p {
+      font-size: 14px; line-height: 1.74; color: var(--text-secondary);
+      letter-spacing: -0.005em;
+    }
+    .price-pill {
+      display: inline-block; margin-top: 13px;
+      font-family: 'JetBrains Mono', monospace; font-size: 11px;
+      color: var(--mint); background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.18);
+      padding: 4px 11px; border-radius: 4px;
+    }
+
+    /* terminal window */
+    .term-window {
+      background: #09090C;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top-color: rgba(255,255,255,0.10);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.045),
+        0 28px 72px rgba(0,0,0,0.70),
+        0 4px 16px rgba(0,0,0,0.48);
+      overflow: hidden;
+      position: sticky; top: 80px;
+    }
+    .term-bar {
+      display: flex; align-items: center; gap: 7px;
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.022);
+      border-bottom: 1px solid rgba(255,255,255,0.045);
+    }
+    .term-body {
+      padding: 22px 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px; line-height: 1.86; color: var(--text-secondary);
+    }
+    .term-body pre { white-space: pre; }
+
+    /* ════════════════════ WHO WE WORK WITH ════════════════════ */
+    .who-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .who-inner {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 64px; align-items: center;
+    }
+    .who-label h3 {
+      font-size: 18px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); line-height: 1.3;
+      margin-top: 12px;
+    }
+    .who-label p {
+      font-size: 13.5px; line-height: 1.7; color: var(--text-secondary);
+      margin-top: 10px;
+    }
+    .who-tags {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .who-tag {
+      font-size: 13px; font-weight: 500; letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-top-color: rgba(255,255,255,0.10);
+      padding: 9px 16px; border-radius: 8px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .who-tag:hover { color: var(--text-primary); border-color: var(--border-medium); }
+
+    /* ════════════════════ CTA SECTION ════════════════════ */
+    .cta-section {
+      padding: 104px 0;
+      border-top: 1px solid var(--border-subtle);
+      position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 880px; height: 420px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.10) 0%, transparent 65%);
+      filter: blur(64px); pointer-events: none;
+    }
+    .cta-inner { position: relative; z-index: 2; max-width: 780px; margin: 0 auto; }
+    .cta-card { padding: 60px 64px; text-align: center; }
+    .cta-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px; letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--indigo); margin-bottom: 20px; display: block;
+    }
+    .cta-card h2 {
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.13;
+      color: var(--text-primary); margin-bottom: 16px;
+    }
+    .cta-card > p {
+      font-size: 15.5px; line-height: 1.72; color: var(--text-secondary);
+      max-width: 500px; margin: 0 auto 36px;
+      letter-spacing: -0.01em;
+    }
+    .cta-checks {
+      display: flex; justify-content: center; gap: 24px;
+      margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .cta-check {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; color: var(--text-secondary);
+      letter-spacing: -0.005em;
+    }
+    .ck { color: var(--mint); }
+    .cta-sub {
+      margin-top: 16px; font-size: 12.5px;
+      color: var(--text-muted); letter-spacing: -0.005em;
+    }
+
+    /* ════════════════════ FAQ ════════════════════ */
+    .faq-section {
+      padding: 104px 0;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .faq-inner {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: 88px; align-items: start;
+    }
+    .faq-sidebar {
+      position: sticky; top: 80px;
+    }
+    .faq-sidebar h2 {
+      font-size: clamp(22px, 2.4vw, 32px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.18;
+      color: var(--text-primary); margin-top: 12px; margin-bottom: 14px;
+    }
+    .faq-sidebar p {
+      font-size: 14.5px; line-height: 1.72; color: var(--text-secondary);
+      margin-bottom: 28px; letter-spacing: -0.005em;
+    }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { border-bottom: 1px solid var(--border-subtle); }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 22px 0;
+      font-family: inherit; font-size: 15px; font-weight: 600;
+      color: var(--text-primary); text-align: left;
+      transition: color 0.15s; letter-spacing: -0.02em; line-height: 1.3;
+    }
+    .faq-q:hover { color: var(--indigo); }
+    .faq-icon {
+      flex-shrink: 0; width: 22px; height: 22px;
+      border: 1px solid var(--border-medium); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 17px; line-height: 1;
+      transition: all 0.22s;
+    }
+    .faq-item.open .faq-icon {
+      border-color: var(--indigo); color: var(--indigo);
+      transform: rotate(45deg);
+    }
+    .faq-a {
+      font-size: 14px; line-height: 1.80; color: var(--text-secondary);
+      padding: 0 0 22px; display: none; max-width: 600px;
+      letter-spacing: -0.005em;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ════════════════════ FOOTER ════════════════════ */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 40px 0;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-size: 14.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none;
+      display: flex; align-items: baseline;
+    }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 12.5px; color: var(--text-muted); text-decoration: none;
+      transition: color 0.15s; letter-spacing: -0.005em;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); letter-spacing: -0.005em; }
+
+    /* ════════════════════ RESPONSIVE ════════════════════ */
+    /* ─── REDUCED MOTION (WCAG 2.3.3 / best practice) ──── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    @media (max-width: 1100px) {
+      .container { padding: 0 40px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { display: none; }
+      .why-layout { grid-template-columns: 1fr; gap: 56px; }
+      .cards-grid { grid-template-columns: 1fr; gap: 16px; }
+      .how-grid { grid-template-columns: 1fr; gap: 56px; }
+      .term-window { position: static; }
+      .faq-inner { grid-template-columns: 1fr; gap: 52px; }
+      .faq-sidebar { position: static; }
+      .who-inner { grid-template-columns: 1fr; gap: 32px; }
+      .stats-strip-inner { grid-template-columns: 1fr; }
+      .strip-cell + .strip-cell::before { display: none; }
+      .strip-cell { padding: 32px 0; border-top: 1px solid var(--border-subtle); }
+      .strip-cell:first-child { border-top: none; }
+    }
+    @media (max-width: 680px) {
+      .container { padding: 0 24px; }
+      .nav-links, .btn-nav { display: none; }
+      .hero { padding: 64px 0 72px; }
+      .hero-text h1 { font-size: 48px; }
+      .why-section, .what-section, .how-section,
+      .cta-section, .faq-section, .who-section { padding: 72px 0; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .cta-card { padding: 40px 28px; }
+      .cta-checks { flex-direction: column; align-items: center; gap: 10px; }
+      .strip-num { font-size: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ SKIP LINK (ADA: keyboard users jump to content) ═══ -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage">Vantage</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/why-aeo-matters">Why AEO Matters</a></li>
+        <li><a href="/how-aeo-works">How It Works</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/pricing">Pricing</a></li>
+      </ul>
+      <a href="#blueprint" class="btn-nav">
+        Get the Blueprint
+        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M2.5 6h7M6.5 3L9.5 6l-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ MAIN CONTENT (ADA: landmark region) ═══ -->
+<main id="main-content">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-b"></div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-text">
+        <span class="eyebrow">Answer Engine Optimization Agency</span>
+        <h1>Answer Engine<br>Optimization for<br><span class="accent">Startups &amp; SMBs</span></h1>
+        <p class="hero-sub">Your customers are asking ChatGPT, Claude, and Perplexity. Make sure you're the answer — not your competitor.</p>
+        <div class="hero-ctas">
+          <a href="#blueprint" class="btn-primary">
+            Get the $500 Blueprint
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#how-it-works" class="btn-ghost">How it works</a>
+        </div>
+        <p class="hero-note">
+          <span>5–10 business days</span> · $500 credits toward retainer · no PR required
+        </p>
+      </div>
+
+      <!-- Hero visual: JSON-LD schema window -->
+      <div class="hero-visual">
+        <div class="code-wrap">
+          <div class="code-window">
+            <div class="win-bar">
+              <span class="win-dot"></span>
+              <span class="win-dot"></span>
+              <span class="win-dot"></span>
+              <span class="win-title">schema.json — Organization + FAQPage</span>
+            </div>
+            <div class="code-body"><pre><span class="t-b">{</span>
+  <span class="t-k">"@context"</span><span class="t-b">:</span> <span class="t-s">"https://schema.org"</span><span class="t-b">,</span>
+  <span class="t-k">"@graph"</span><span class="t-b">: [</span>
+    <span class="t-b">{</span>
+      <span class="t-k">"@type"</span><span class="t-b">:</span> <span class="t-s">"Organization"</span><span class="t-b">,</span>
+      <span class="t-k">"name"</span><span class="t-b">:</span> <span class="t-s">"Acme Software"</span><span class="t-b">,</span>
+      <span class="t-k">"description"</span><span class="t-b">:</span> <span class="t-s">"Project mgmt for eng teams"</span><span class="t-b">,</span>
+      <span class="t-k">"sameAs"</span><span class="t-b">: [</span>
+        <span class="t-u">"https://g2.com/products/acme"</span><span class="t-b">,</span>
+        <span class="t-u">"https://reddit.com/r/projectmgmt"</span><span class="t-b">,</span>
+        <span class="t-u">"https://linkedin.com/company/acme"</span>
+      <span class="t-b">]</span>
+    <span class="t-b">},</span>
+    <span class="t-b">{</span>
+      <span class="t-k">"@type"</span><span class="t-b">:</span> <span class="t-s">"FAQPage"</span><span class="t-b">,</span>
+      <span class="t-k">"mainEntity"</span><span class="t-b">: [{</span>
+        <span class="t-k">"@type"</span><span class="t-b">:</span> <span class="t-s">"Question"</span><span class="t-b">,</span>
+        <span class="t-k">"name"</span><span class="t-b">:</span> <span class="t-s">"Best tool for eng teams?"</span><span class="t-b">,</span>
+        <span class="t-k">"acceptedAnswer"</span><span class="t-b">: {</span>
+          <span class="t-k">"text"</span><span class="t-b">:</span> <span class="t-s">"Direct answer first..."</span>
+        <span class="t-b">}</span>
+      <span class="t-b">}]</span>
+    <span class="t-b">}</span>
+  <span class="t-b">]</span>
+<span class="t-b">}</span>
+<span class="t-c">// ✓ GPTBot  ✓ ClaudeBot  ✓ PerplexityBot  ✓ Google-Extended</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS STRIP ═══ -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-strip-inner">
+      <div class="strip-cell">
+        <div class="strip-num">357%</div>
+        <div class="strip-label">AI referral growth year-over-year</div>
+        <div class="strip-source">1.13B AI-driven visits to top sites monthly — TechCrunch / Similarweb, June 2025</div>
+      </div>
+      <div class="strip-cell">
+        <div class="strip-num">94%</div>
+        <div class="strip-label">of B2B buyers used LLMs in 2025 purchases</div>
+        <div class="strip-source">Adopting at 3× the rate of consumers — Forrester B2B Predictions 2026</div>
+      </div>
+      <div class="strip-cell">
+        <div class="strip-num">4.4×</div>
+        <div class="strip-label">AI visitor conversion vs. organic search</div>
+        <div class="strip-source">Buyers arrive pre-qualified by the LLM shortlist — Search Engine Land, 2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WHY DIFFERENT FROM SEO ═══ -->
+<section class="why-section" id="why-aeo">
+  <div class="container">
+    <div class="why-layout">
+
+      <div class="why-text">
+        <span class="eyebrow">Why this is different from SEO</span>
+        <h2>The math on traditional SEO doesn't work for new companies anymore</h2>
+        <p>Traditional SEO has gotten brutal for new companies. Only 1.74% of newly published web pages reach Google's top 10 within a year, and the average #1 ranking page is five years old.</p>
+        <p style="margin-top: 16px;">AI search is different. Large language models cite Reddit, Wikipedia, G2, Capterra, and structured first-party content far more than established corporate websites. For the first time in over a decade, being smaller is not a structural disadvantage.</p>
+        <div class="why-callout">
+          <p>AI engines pick different sources than traditional search — and <strong>brand search volume correlates with LLM citations more strongly than backlink count</strong>. A 200-person SaaS company with clean structured data and thoughtful Reddit participation can be cited alongside competitors who outspend them 50× on traditional SEO.</p>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-cell ac-cy">
+          <div class="stat-big">1.74%</div>
+          <div class="stat-desc">of newly published pages reach Google's top 10 within a year — down from 5.7% in 2017</div>
+          <div class="stat-src">Ahrefs, 2M+ keyword study, 2024</div>
+        </div>
+        <div class="stat-cell ac-in">
+          <div class="stat-big">5 yrs</div>
+          <div class="stat-desc">Average age of the #1 ranking Google page. 72.9% of top-10 results are older than 3 years.</div>
+          <div class="stat-src">Ahrefs, 2024</div>
+        </div>
+        <div class="stat-cell ac-mi">
+          <div class="stat-big">17–38%</div>
+          <div class="stat-desc">of AI Overview citations also rank in Google's top 10. AI engines pick different sources.</div>
+          <div class="stat-src">Seer Interactive, Feb 2026</div>
+        </div>
+        <div class="stat-cell ac-vi">
+          <div class="stat-big">46.7%</div>
+          <div class="stat-desc">of Perplexity citations come from Reddit alone. Community content outranks corporate sites.</div>
+          <div class="stat-src">Profound / Digital Bloom, 2025</div>
+        </div>
+        <div class="stat-cell ac-or">
+          <div class="stat-big">−61%</div>
+          <div class="stat-desc">Organic CTR drop on queries triggering AI Overviews, mid-2024 to Sep 2025</div>
+          <div class="stat-src">Seer Interactive via Search Engine Land</div>
+        </div>
+        <div class="stat-cell ac-pk">
+          <div class="stat-big">4.4×</div>
+          <div class="stat-desc">AI search visitors convert at 4.4× the rate of traditional organic search visitors</div>
+          <div class="stat-src">Search Engine Land, 2025</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT WE DO ═══ -->
+<section class="what-section" id="services">
+  <div class="container">
+    <div class="section-head centered">
+      <span class="eyebrow">What we do</span>
+      <h2>Three programs. One goal: get you cited.</h2>
+    </div>
+
+    <div class="cards-grid">
+
+      <div class="gloss-card svc-card">
+        <span class="card-num">01 — Technical Foundation</span>
+        <h3 class="card-title">Spec the technical foundation</h3>
+        <p class="card-body">Schema, llms.txt, robots.txt, and an owned knowledge graph structured so ChatGPT, Claude, Perplexity, and Google AI can accurately identify and cite you. We audit and spec everything; your team or ours deploys.</p>
+        <div class="card-code"><pre><span class="t-c"># /llms.txt — AI crawler index</span>
+<span class="t-g"># Acme Software — project management</span>
+
+<span class="t-k">## Core Pages</span>
+- <span class="t-u">/about</span>: Organization + founding info
+- <span class="t-u">/team</span>: Leadership with Person schema
+- <span class="t-u">/products</span>: Product catalog
+
+<span class="t-k">## Buyer Resources</span>
+- <span class="t-u">/faq</span>: 40 buyer Q&amp;As (FAQPage schema)
+- <span class="t-u">/alternatives</span>: Category comparisons
+- <span class="t-u">/glossary</span>: 30 defined terms</pre>
+        </div>
+      </div>
+
+      <div class="gloss-card svc-card">
+        <span class="card-num">02 — Citation Mapping</span>
+        <h3 class="card-title">Map where you need to show up</h3>
+        <p class="card-body">We identify the Reddit threads, review platforms, podcasts, newsletters, and YouTube channels that LLMs actually pull from in your category — then give you a ranked, prioritized plan for getting there.</p>
+        <div class="card-code"><pre><span class="t-c">Citation surface audit — Q2 2026</span>
+
+<span class="t-k">Surface            Weight  Status</span>
+<span class="t-b">────────────────────────────────────</span>
+reddit/r/saas      <span class="t-cy">HIGH</span>    <span class="t-er">not present</span>
+g2.com/acme        <span class="t-cy">HIGH</span>    <span class="t-w">3 reviews</span>
+capterra listing   <span class="t-cy">MED</span>     <span class="t-er">unclaimed</span>
+youtube/channel    <span class="t-cy">MED</span>     <span class="t-er">no transcript</span>
+quora/eng-tools    <span class="t-cy">LOW</span>     <span class="t-er">0 answers</span></pre>
+        </div>
+      </div>
+
+      <div class="gloss-card svc-card">
+        <span class="card-num">03 — AI-Shaped Content</span>
+        <h3 class="card-title">Produce content AI engines extract</h3>
+        <p class="card-body">Comparison pages, FAQ libraries, glossary entries, decision frameworks, buyer's guides. The formats LLMs quote, written, structured, and published every month.</p>
+        <div class="card-code"><pre><span class="t-b">{</span>
+  <span class="t-k">"@type"</span><span class="t-b">:</span> <span class="t-s">"FAQPage"</span><span class="t-b">,</span>
+  <span class="t-k">"mainEntity"</span><span class="t-b">: [{</span>
+    <span class="t-k">"@type"</span><span class="t-b">:</span> <span class="t-s">"Question"</span><span class="t-b">,</span>
+    <span class="t-k">"name"</span><span class="t-b">:</span> <span class="t-s">"Best [category] for eng teams?"</span><span class="t-b">,</span>
+    <span class="t-k">"acceptedAnswer"</span><span class="t-b">: {</span>
+      <span class="t-k">"@type"</span><span class="t-b">:</span> <span class="t-s">"Answer"</span><span class="t-b">,</span>
+      <span class="t-k">"text"</span><span class="t-b">:</span> <span class="t-s">"Answer first. Then context."</span>
+    <span class="t-b">}</span>
+  <span class="t-b">}]</span>
+<span class="t-b">}</span>
+<span class="t-c">// 30–60 Q&amp;As per FAQ library, monthly</span></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <div class="section-head centered" style="margin-bottom: 64px;">
+      <span class="eyebrow">How it works</span>
+      <h2>Three steps. 90 days to first citations.</h2>
+    </div>
+
+    <div class="how-grid">
+
+      <div class="how-steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-content">
+            <h3>Diagnose</h3>
+            <p>We test 20 prompts across the AI engines your buyers use — ChatGPT, Perplexity, Claude, Google AI Overviews. We tell you exactly where you are and are not being cited, and why. Competitors benchmarked.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-content">
+            <h3>Plan</h3>
+            <p>You get a 90-day action list with technical, content, third-party publication, and user-generated content tracks. Each item is tagged DIY, partner, or done-for-you so you know exactly what to hand off.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-content">
+            <h3>Execute</h3>
+            <p>Pick the path that fits your team. Run it yourselves with the Blueprint. Bring in a partner. Or hire us on a productized monthly retainer starting at $950.</p>
+            <span class="price-pill">Retainers from $950 / month</span>
+          </div>
+        </div>
+        <div style="padding-top: 32px;">
+          <a href="#blueprint" class="btn-ghost">
+            See the Quick-Start Blueprint
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Terminal visual -->
+      <div class="term-window">
+        <div class="term-bar">
+          <span class="win-dot"></span>
+          <span class="win-dot"></span>
+          <span class="win-dot"></span>
+          <span class="win-title" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);margin-left:8px;">aeo-audit — prompt-visibility-check</span>
+        </div>
+        <div class="term-body"><pre><span class="t-tp">$</span> <span class="t-tc">quintia audit --domain acme.io --prompts 20</span>
+
+<span class="t-tm">━━━ PROMPT VISIBILITY BASELINE ━━━━━━━━━━━━━
+Testing 20 buyer prompts · 4 AI engines</span>
+
+<span class="t-b">Engine: ChatGPT-4o</span>
+  "best project mgmt for eng teams"
+  <span class="t-er">→ NOT CITED</span>  <span class="t-w">competitor A, B, C cited</span>
+  "how to reduce sprint carryover"
+  <span class="t-er">→ NOT CITED</span>  <span class="t-w">Reddit r/agile cited instead</span>
+
+<span class="t-b">Engine: Perplexity Pro</span>
+  "project management alternatives"
+  <span class="t-g">→ CITED</span>  position 4 of 6 sources
+  "agile tools for small teams"
+  <span class="t-er">→ NOT CITED</span>
+
+<span class="t-b">Engine: Claude.ai</span>
+  "lightweight jira alternative"
+  <span class="t-er">→ NOT CITED</span>  <span class="t-w">no FAQPage schema found</span>
+
+<span class="t-tm">━━━ SUMMARY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>
+Your citations:   <span class="t-cy">3</span> / 20 prompts
+Competitor avg:   <span class="t-cy">11</span> / 20 prompts
+Gap:              <span class="t-w">−8 prompts behind</span>
+Top opportunity:  <span class="t-g">Reddit + G2 reviews</span>
+Est. timeline:    <span class="t-g">60–90 days to first lift</span>
+
+<span class="t-tm">→ acme-90day-aeo-plan.pdf ready in 5 days</span></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BLOCK ═══ -->
+<section class="cta-section" id="blueprint">
+  <div class="cta-glow"></div>
+  <div class="container">
+    <div class="cta-inner">
+      <div class="gloss-card cta-card">
+        <span class="cta-eyebrow">Quick-Start Blueprint — $500 one-time</span>
+        <h2>See exactly where you stand in AI search. Get a plan to fix it.</h2>
+        <p>We test 20 prompts across ChatGPT, Claude, and Perplexity — audit your technical foundation, identify your top 5 content priorities, and deliver a personalized 90-day action plan with DIY-vs-done-for-you tagging on every item.</p>
+        <div class="cta-checks">
+          <div class="cta-check"><span class="ck">✓</span> 20-prompt visibility baseline</div>
+          <div class="cta-check"><span class="ck">✓</span> Schema + llms.txt gap audit</div>
+          <div class="cta-check"><span class="ck">✓</span> 5–10 business day turnaround</div>
+          <div class="cta-check"><span class="ck">✓</span> 30-min readout call included</div>
+          <div class="cta-check"><span class="ck">✓</span> $500 credits toward month one</div>
+        </div>
+        <div>
+          <a href="/quick-start-blueprint" class="btn-primary-lg">
+            Start with the Blueprint — $500
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3.5 8h9M8.5 4L12.5 8l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <p class="cta-sub">No retainer required. The Blueprint is a complete deliverable you can execute on your own or with any partner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO WE WORK WITH ═══ -->
+<section class="who-section">
+  <div class="container">
+    <div class="who-inner">
+      <div class="who-label">
+        <span class="eyebrow">Who we work with</span>
+        <h3>B2B companies where buyers research via AI before they ever hit a vendor site</h3>
+        <p>Series A & B US SaaS, bootstrapped founders, SMBs with $1M–$10M revenue, and marketing teams that have been quoted $10k+/month for AEO and need a productized middle option.</p>
+      </div>
+      <div class="who-tags">
+        <span class="who-tag">Series A & B SaaS</span>
+        <span class="who-tag">Bootstrapped founders</span>
+        <span class="who-tag">US SMBs (10–150 employees)</span>
+        <span class="who-tag">$1M–$10M revenue</span>
+        <span class="who-tag">B2B tech companies</span>
+        <span class="who-tag">Marketing teams w/ plateauing SEO</span>
+        <span class="who-tag">Pre-retainer diagnostics</span>
+        <span class="who-tag">LatAm brands entering US market</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-inner">
+
+      <div class="faq-sidebar">
+        <span class="eyebrow">FAQ</span>
+        <h2>Common questions about AEO</h2>
+        <p>Everything you need to know before deciding whether AEO is the right investment for your company right now.</p>
+        <a href="/why-aeo-matters" class="btn-ghost">
+          Full AEO explainer
+          <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span>What is answer engine optimization?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <p>Answer engine optimization (AEO) is the practice of making your business cited by AI assistants like ChatGPT, Claude, Perplexity, and Google AI Overviews when buyers ask category questions. It overlaps with SEO but rewards different signals: structured data, user-generated content on Reddit and review platforms, and consistent entity information across the web.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span>How is AEO different from SEO?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <p>SEO optimizes for ranking links in Google's blue-link results. AEO optimizes for being cited inside an AI-generated answer. The technical foundation overlaps — schema, content quality, site speed. The off-site signals do not. SEO rewards backlinks and domain authority. AEO rewards Reddit threads, review sites, structured first-party data, and YouTube transcripts.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span>Do I need AEO if my SEO is working?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <p>Probably yes. Searches that show an AI Overview have an 83% zero-click rate, compared to roughly 60% for traditional queries. AI referrals to top sites grew 357% year over year in June 2025. If you are not visible in AI answers, you are losing share of an increasingly large slice of your buyers' research.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span>How long does AEO take to show results?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <p>First citations typically appear in 30 to 60 days after the technical foundation is in place. Compounding visibility across multiple engines takes 90 to 180 days. We provide month-one deliverables so you see motion quickly even though the citation lift compounds over quarters.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
+            <span>Is this just SEO with a new label?</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" role="region">
+            <p>No. The technical foundation overlaps but the off-site signals are different. We do not pitch journalists, do not chase backlinks, and do not bolt AEO onto an SEO retainer. We work the surfaces LLMs actually read — Reddit, G2 and Capterra reviews, YouTube transcripts, and structured first-party data.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</main><!-- end #main-content -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <div class="footer-links">
+        <a href="/why-aeo-matters">Why AEO Matters</a>
+        <a href="/how-aeo-works">How It Works</a>
+        <a href="/services">Services</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/quick-start-blueprint">Blueprint</a>
+      </div>
+      <span class="footer-copy">© 2026 Quint·IA Vantage</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    if (!isOpen) {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+</script>
+
+</body>
+</html>
