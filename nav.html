@@ -1,0 +1,231 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --nav-h:64px;
+  --indigo:#4F6EF7;
+  --bg:rgba(8,11,20,0.92);
+  --font:'Inter',-apple-system,sans-serif;
+  --text:rgba(255,255,255,0.75);
+  --text-active:#fff;
+}
+.nav{
+  width:100%;height:var(--nav-h);
+  background:var(--bg);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  font-family:var(--font);
+  display:flex;align-items:center;
+  position:relative;z-index:1000;
+}
+.nav-inner{
+  width:100%;max-width:1200px;
+  margin:0 auto;padding:0 40px;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:32px;
+}
+.nav-logo{
+  font-size:16px;font-weight:700;
+  color:#fff;text-decoration:none;
+  letter-spacing:-0.02em;white-space:nowrap;flex-shrink:0;
+}
+.nav-logo em{font-style:normal;color:var(--indigo);}
+.nav-links{
+  display:flex;align-items:center;
+  gap:32px;flex:1;justify-content:center;
+}
+.nav-link{
+  font-size:14px;font-weight:500;
+  color:var(--text);text-decoration:none;
+  white-space:nowrap;letter-spacing:-0.005em;
+  position:relative;transition:color 0.15s;padding-bottom:2px;
+}
+.nav-link::after{
+  content:'';position:absolute;
+  bottom:-4px;left:0;right:0;height:1.5px;
+  background:var(--indigo);border-radius:2px;
+  transform:scaleX(0);transition:transform 0.2s ease;
+  transform-origin:center;
+}
+.nav-link:hover{color:var(--text-active);}
+.nav-link:hover::after{transform:scaleX(1);}
+.nav-link.active{color:var(--text-active);font-weight:600;}
+.nav-link.active::after{transform:scaleX(1);}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 20px;border-radius:999px;
+  background:var(--indigo);
+  font-size:13px;font-weight:700;
+  color:#fff;text-decoration:none;
+  white-space:nowrap;letter-spacing:-0.01em;
+  flex-shrink:0;border:none;cursor:pointer;
+  transition:opacity 0.15s,transform 0.1s;
+}
+.nav-cta:hover{opacity:0.88;transform:translateY(-1px);}
+.nav-burger{
+  display:none;flex-direction:column;
+  justify-content:center;align-items:center;
+  gap:5px;width:36px;height:36px;
+  cursor:pointer;background:none;border:none;
+  padding:0;flex-shrink:0;
+}
+.nav-burger span{
+  display:block;width:20px;height:1.5px;
+  background:rgba(255,255,255,0.85);border-radius:2px;
+  transition:transform 0.28s ease,opacity 0.2s;
+  transform-origin:center;
+}
+.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-overlay{
+  display:none;position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgb(8,11,20);z-index:999;
+  flex-direction:column;padding:0 28px 48px;
+  transform:translateY(-100%);
+  transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  overflow-y:auto;
+}
+.nav-overlay.ready{display:flex;}
+.nav-overlay.open{transform:translateY(0);}
+.nav-overlay-top{
+  height:var(--nav-h);flex-shrink:0;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-overlay-logo{
+  font-size:16px;font-weight:700;
+  color:#fff;text-decoration:none;letter-spacing:-0.02em;
+}
+.nav-overlay-logo em{font-style:normal;color:var(--indigo);}
+.nav-overlay-divider{
+  height:1px;background:rgba(255,255,255,0.08);
+  margin-bottom:36px;flex-shrink:0;
+}
+.nav-overlay-links{display:flex;flex-direction:column;gap:0;flex:1;}
+.nav-overlay-link{
+  font-size:24px;font-weight:600;
+  color:rgba(255,255,255,0.78);text-decoration:none;
+  padding:20px 0;border-bottom:1px solid rgba(255,255,255,0.07);
+  letter-spacing:-0.02em;transition:color 0.15s;
+}
+.nav-overlay-link:first-child{border-top:1px solid rgba(255,255,255,0.07);}
+.nav-overlay-link.active{color:#fff;}
+.nav-overlay-link:active{color:var(--indigo);}
+.nav-overlay-cta{margin-top:40px;flex-shrink:0;}
+.nav-overlay-cta a{
+  display:flex;align-items:center;justify-content:center;
+  padding:16px 24px;border-radius:12px;
+  background:var(--indigo);
+  font-size:15px;font-weight:700;
+  color:#fff;text-decoration:none;
+  letter-spacing:-0.01em;gap:8px;
+}
+@media(max-width:768px){
+  .nav-inner{padding:0 20px;}
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .nav-burger{display:flex;}
+}
+</style>
+
+<div class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">Quint-<em>IA</em> Vantage</a>
+    <div class="nav-links">
+      <a class="nav-link" href="/why-aeo-matters">Why AEO Matters</a>
+      <a class="nav-link" href="/how-aeo-works">How AEO Works</a>
+      <a class="nav-link" href="/services">Services</a>
+      <a class="nav-link" href="/pricing">Pricing</a>
+    </div>
+    <a class="nav-cta" href="/quick-start-blueprint">
+      Start your Blueprint
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+        <path d="M2 6h8M6 2.5l3.5 3.5L6 9.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</div>
+
+<div class="nav-overlay" id="nav-overlay" role="dialog" aria-label="Mobile navigation">
+  <div class="nav-overlay-top">
+    <a class="nav-overlay-logo" href="/">Quint-<em>IA</em> Vantage</a>
+    <button class="nav-burger open" id="nav-close" aria-label="Close menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-overlay-divider"></div>
+  <nav class="nav-overlay-links">
+    <a class="nav-overlay-link" href="/why-aeo-matters">Why AEO Matters</a>
+    <a class="nav-overlay-link" href="/how-aeo-works">How AEO Works</a>
+    <a class="nav-overlay-link" href="/services">Services</a>
+    <a class="nav-overlay-link" href="/pricing">Pricing</a>
+  </nav>
+  <div class="nav-overlay-cta">
+    <a href="/quick-start-blueprint">
+      Start your Blueprint
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var burger = document.getElementById('nav-burger');
+  var closeBtn = document.getElementById('nav-close');
+  var overlay = document.getElementById('nav-overlay');
+
+  function openMenu(){
+    overlay.classList.add('ready');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        overlay.classList.add('open');
+        burger.classList.add('open');
+        burger.setAttribute('aria-expanded','true');
+        document.body.style.overflow='hidden';
+      });
+    });
+  }
+
+  function closeMenu(){
+    overlay.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    setTimeout(function(){ overlay.classList.remove('ready'); }, 350);
+  }
+
+  burger.addEventListener('click', function(){
+    overlay.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  closeBtn.addEventListener('click', closeMenu);
+
+  // Fix navigation — target="_parent" is blocked by Framer's iframe sandbox
+  document.querySelectorAll('a').forEach(function(link){
+    link.removeAttribute('target');
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      window.top.location.href = link.getAttribute('href');
+    });
+  });
+
+  // Close mobile menu on link click
+  overlay.querySelectorAll('.nav-overlay-link').forEach(function(link){
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Active state — use window.top instead of window.parent
+  try {
+    var path = window.top.location.pathname.replace(/\/$/, '');
+    document.querySelectorAll('.nav-link, .nav-overlay-link').forEach(function(link){
+      var href = link.getAttribute('href').replace(/\/$/, '');
+      if(href && path === href) link.classList.add('active');
+    });
+  } catch(e){}
+})();
+</script>
