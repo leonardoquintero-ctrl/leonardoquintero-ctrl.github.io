@@ -128,22 +128,53 @@ Full detail in `docs/ivia-part0-prebuild-findings.md`. The short version:
 
 ## 5. Suggested build order
 
-**Phase A — safe refactors, no decisions needed.** Do these first; everything else
-depends on them.
+**Phase A — foundation work.** Do these first; everything else depends on them.
+
+⚠️ **Read this before starting.** Phase A touches nothing in
+`quint-ia-blueprint-funnel` (inaccessible anyway) — but it *does* modify
+`quint-ia-report-generator`, which is **the paid Blueprint's live engine**. "No
+decisions needed" is not the same as "no effect on the paid product." Split
+accordingly:
+
+### A1 — purely additive, zero paid-product impact. Do freely.
 
 1. **Shared `normalizeRootDomain()`** with a public-suffix list. Must collapse
    `company.com/page`, `sales@company.com`, `blog.company.com` → `company.com`.
    *Critical:* LatAm means `.com.mx`, `.com.co`, `.com.ar`, `.com.br` — naive
    last-two-labels collapses every Mexican company to `com.mx` and locks out the
-   country after one scan. Extract to a shared module both apps use.
-2. **Fix `isDomainCited`** (`engines/citation.ts:20`) — it uses
+   country after one scan.
+   *Additive:* new module. Leave the existing `extractDomain()`
+   (`engines/citation.ts:3`) and `normalizeUrl()` (`siteChecks.ts:14`,
+   `fastpass/checks.ts:8`) untouched — do **not** rewire existing callers in A1.
+2. **Engine filter on `getEngineAdapters()`** (`visibility.ts:19-25`) — it constructs
+   `ClaudeEngineAdapter` unconditionally with no key check, so 5 prompts fires **15**
+   calls, not 10. IVIA Lite needs scored-engines-only (`chatgpt` + `perplexity` =
+   5 prompts × 2 = exactly 10).
+   *Additive:* `getEngineAdapters()` is module-private (never exported), so an
+   optional parameter defaulting to today's 3-adapter list is invisible to the paid
+   path.
+3. **HTML + attachment support** on `EmailProvider`.
+   *Additive:* optional fields; keep `text` required. Both existing callers
+   (`fastpass/email.ts:79`, `runFullPass.ts:73`) pass text only.
+
+### A2 — changes paid-product output. Separate, reviewed change.
+
+4. **Fix `isDomainCited`** (`engines/citation.ts:20`) — it uses
    `citedDomain.includes(target)`, so `notacme.com` matches `acme.com`. Tolerable for
    citation matching, a security bug as a cooldown key. Make it exact-or-subdomain.
-3. **Engine filter on `getEngineAdapters()`** (`visibility.ts:19-25`) — it constructs
-   `ClaudeEngineAdapter` unconditionally with no key check, so 5 prompts fires **15**
-   calls, not 10. IVIA Lite's budget needs scored-engines-only (`chatgpt` +
-   `perplexity` = 5 prompts × 2 = exactly 10).
-4. **HTML + attachment support** on `EmailProvider`.
+
+   **Blast radius (verified):** `isDomainCited` has exactly one consumer —
+   `visibility.ts:51` → `runPromptVisibilityChecks` → `runFullPass.ts:43`, the paid
+   full pass. It computes `visibility_score` and `competitor_share_of_voice`, both
+   rendered on the client's `/report/[token]` page. Fixing it **changes real
+   client-facing numbers**, downward (today's substring test counts false citations).
+
+   **Do not fold this into A1.** Run before/after on real client domains first and
+   know which reports move, and by how much, before shipping.
+
+   IVIA is not blocked by this: the mini app uses `normalizeRootDomain()` for
+   cooldowns regardless, and can use a corrected matcher locally while the paid path
+   keeps current behavior pending review.
 
 **Phase B — scope the new methodology.** Prompt generation for cold domains, and the
 directory data source. Both block downstream work; neither is a small task.
