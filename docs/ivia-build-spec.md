@@ -171,15 +171,28 @@ the paid Blueprint's value and must not be given away here.
 | 3 | Verificador de Presencia en Directorios | revisa tu presencia en plataformas como Crunchbase, G2 y LinkedIn | `runOffsiteChecks()` — `offsite.ts:53` | ⛔ **stub, all-false** |
 | 4 | Verificador de Comparación | revisa si tu sitio ayuda a un comprador a compararte con otras opciones | `analyzeContentShape()` → `comparison_tables_found` | ✅ ready |
 | 5 | ¿Apareces en ChatGPT / Claude / Perplexity? | prueba si tu marca aparece al preguntar por tu categoría | `runPromptVisibilityChecks()` at 1 prompt × 1 engine | ✅ ready |
-| 6 | Verificador de Dialecto en IA | revisa si tu español suena auténticamente latinoamericano ante la IA | nothing | 🆕 **new methodology** |
+| 6 | Verificador de Dialecto en IA | revisa si tu copy en inglés suena nativo o si tiene señales de traducción/no-nativo que reducen la confianza de la IA | nothing | 🆕 **new methodology (corrected direction — see note below)** |
 
 - **Checkers 1–4** reuse existing rule-based crawl logic — cheap, no LLM calls.
 - **Checker 5** reuses citation testing at minimal scale: **1 prompt × 1 engine per
   run** — the cheapest possible version of the citation test.
-- **Checker 6 is new.** Not a repackaging of existing pillar data — it needs its own
-  lightweight analysis comparing content against LatAm-Spanish vs.
-  Peninsular/neutral-Spanish markers. **Scope and estimate separately before
-  building.**
+- **Checker 6 is new.** ⚠️ **Corrected 2026-08-18** — the original brief's wording
+  ("revisa si tu español suena auténticamente latinoamericano ante la IA", ES-dialect
+  authenticity) was a misstatement of intent. The actual product angle, confirmed by
+  Leonardo: this checks whether a LatAm company's **English-language copy** reads as
+  native/natural English versus carrying non-native-speaker signals (translation
+  artifacts, calques, unnatural phrasing) — the theory being that AI engines trust
+  and cite copy that reads as fluent, native English less readily when it doesn't.
+  The sellable hook: findings here become the entry point for Quint·IA's own
+  copywriters to fix the client's English copy, which the site's existing content
+  already frames as a known LatAm-expanding-to-US pain point (see
+  `index.html`: "English copy by non-native speaker" listed as a gap alongside
+  missing hreflang and entity inconsistency).
+
+  Not a repackaging of existing pillar data — needs its own lightweight analysis
+  (native-vs-non-native English signal detection, not ES dialect classification).
+  **Scope and estimate separately before building** — same caution as before, just
+  pointed at the right target.
 - **Rate limiting:** each checker respects the same principles as the main IVIA scan
   (reasonable per-domain cooldowns) to control cost. Exact limits may be lighter than
   the main scan given narrower scope. ⚠️ **Numbers not yet specified — confirm
