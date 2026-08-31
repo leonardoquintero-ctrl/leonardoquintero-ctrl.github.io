@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refund &amp; Cancellation Policy — Quint·IA Vantage</title>
+  <meta name="description" content="Refund and cancellation policy for the Quint·IA Vantage Quick-Start Blueprint.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!--
+    DRAFT PAGE — not reviewed by an attorney. Written to exactly match the
+    refund language already shown to every client pre-purchase in
+    src/components/funnel/DisclaimerStep.tsx (quint-ia-blueprint-funnel repo)
+    and Section 5 of /terms. If one changes, update all three.
+  -->
+
+  <style>
+    :root {
+      --bg-base:        #0B0E11;
+      --bg-surface:     #12151B;
+      --bg-elevated:    #161A22;
+      --indigo:         #4F6EF7;
+      --btn-indigo:     #4866F4;
+      --cyan:           #00D4FF;
+      --mint:           #34D399;
+      --amber:          #F5B942;
+      --text-primary:   #FAFBFC;
+      --text-secondary: #8B92A0;
+      --text-muted:     #747F8F;
+      --border-subtle:  rgba(255,255,255,0.07);
+      --border-medium:  rgba(255,255,255,0.12);
+      --border-bright:  rgba(255,255,255,0.16);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base); color: var(--text-primary);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      background: var(--btn-indigo); color: #fff;
+      font-size: 14px; font-weight: 600; padding: 10px 18px;
+      border-radius: 0 0 8px 8px; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 4px; }
+
+    nav {
+      position: sticky; top: 0; z-index: 800; height: 64px;
+      background: rgba(11,14,17,0.88);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 64px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-size: 15.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none; display: flex; align-items: baseline;
+    }
+    .logo .dot { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .logo .ia { color: var(--indigo); }
+    .logo .vantage { color: var(--text-secondary); font-weight: 500; margin-left: 5px; }
+    .nav-back {
+      font-size: 13.5px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--text-primary); }
+
+    main { padding: 72px 0 96px; }
+
+    .draft-notice {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: rgba(245,185,66,0.08); border: 1px solid rgba(245,185,66,0.28);
+      border-radius: 10px; padding: 16px 18px; margin-bottom: 40px;
+      font-size: 13.5px; line-height: 1.6; color: var(--text-secondary);
+    }
+    .draft-notice strong { color: var(--amber); }
+
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--indigo);
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08;
+      margin-bottom: 10px;
+    }
+    .meta { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+
+    .legal-content h2 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      margin-top: 40px; margin-bottom: 14px; color: var(--text-primary);
+    }
+    .legal-content p, .legal-content li {
+      font-size: 15px; line-height: 1.75; color: var(--text-secondary);
+    }
+    .legal-content p { margin-bottom: 16px; }
+    .legal-content ul { margin: 0 0 16px 22px; }
+    .legal-content li { margin-bottom: 8px; }
+    .legal-content strong { color: var(--text-primary); font-weight: 600; }
+    .legal-content a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
+    .legal-content a:hover { color: var(--indigo); }
+
+    .callout {
+      background: rgba(79,110,247,0.06); border: 1px solid rgba(79,110,247,0.2);
+      border-radius: 10px; padding: 20px 22px; margin: 16px 0 24px;
+    }
+    .callout p { margin-bottom: 0; color: var(--text-secondary); }
+    .callout strong { color: var(--text-primary); }
+
+    footer { border-top: 1px solid var(--border-subtle); padding: 40px 0; margin-top: 40px; }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 64px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none;
+    }
+    .footer-logo .dot { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .footer-logo .ia { color: var(--indigo); }
+    .footer-logo .vantage { color: var(--text-secondary); font-weight: 500; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+
+    @media (max-width: 640px) {
+      .nav-inner, .footer-inner { padding: 0 20px; }
+      main { padding: 48px 0 72px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav aria-label="Primary">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Quint·IA Vantage — home">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <a href="/" class="nav-back">← Back to home</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <div class="container">
+      <div class="draft-notice">
+        <span aria-hidden="true">⚠</span>
+        <span><strong>Draft — under legal review.</strong> This matches the refund terms already shown to every client before they pay, but hasn't been reviewed by an attorney yet. Questions in the meantime: <a href="mailto:team@quintiavantage.com" style="color: var(--text-secondary); text-decoration: underline;">team@quintiavantage.com</a>.</span>
+      </div>
+
+      <span class="eyebrow">Legal</span>
+      <h1>Refund &amp; Cancellation Policy</h1>
+      <p class="meta">Quick-Start Blueprint · Last updated [DATE]</p>
+
+      <div class="legal-content">
+        <h2>The short version</h2>
+        <div class="callout">
+          <p><strong>The $500 Quick-Start Blueprint is non-refundable.</strong> Work begins immediately on your automated diagnostic, and full-Blueprint work begins within two business days of your intake form — most of the effort is spent up front so your deliverable is ready on the 5–10 business day timeline we promise.</p>
+        </div>
+
+        <h2>Why</h2>
+        <p>Unlike a subscription you can cancel before the next charge, the Blueprint is a fixed-scope, one-time engagement. By the time you'd typically ask for a refund, the work — the automated scan, and often meaningful progress on the human-written recommendations — has already been done.</p>
+
+        <h2>The retainer credit</h2>
+        <p>If you sign a retainer agreement with us within 30 days of your Blueprint readout call, the full $500 you paid is credited toward your first month. This is the one way your $500 converts into ongoing value beyond the Blueprint itself.</p>
+
+        <h2>If something actually goes wrong on our end</h2>
+        <p>This policy is about changing your mind, not about us failing to deliver. If we are unable to deliver your automated report or your full Blueprint at all because of a failure on our side — not because the findings weren't what you hoped — contact us at <a href="mailto:team@quintiavantage.com">team@quintiavantage.com</a>. We'll investigate, and where we genuinely didn't deliver what we promised, we'll make it right: a refund or a re-run, at our discretion.</p>
+
+        <h2>What this policy does not cover</h2>
+        <ul>
+          <li>Disagreement with the report's findings or score</li>
+          <li>A lower score than expected, or one that changes on a later re-scan</li>
+          <li>Changing your mind after purchase but before any work has started</li>
+        </ul>
+
+        <h2>Questions</h2>
+        <p><a href="mailto:team@quintiavantage.com">team@quintiavantage.com</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <div class="footer-links">
+        <a href="/why-aeo-matters">Why AEO Matters</a>
+        <a href="/how-aeo-works">How It Works</a>
+        <a href="/services">Services</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/quick-start-blueprint">Blueprint</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/refund-policy">Refunds</a>
+      </div>
+      <span class="footer-copy">© 2026 Quint·IA Vantage</span>
+    </div>
+  </footer>
+</body>
+</html>

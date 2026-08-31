@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Quint·IA Vantage</title>
+  <meta name="description" content="Terms of Service for the Quint·IA Vantage Quick-Start Blueprint.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!--
+    DRAFT PAGE — not reviewed by an attorney. The legal entity name and
+    governing-law jurisdiction are intentionally left unstated below (see the
+    "Who this agreement is with" and "Governing law" sections) rather than
+    invented. Fill those in — and get real legal review — before removing the
+    on-page draft notice.
+  -->
+
+  <style>
+    :root {
+      --bg-base:        #0B0E11;
+      --bg-surface:     #12151B;
+      --bg-elevated:    #161A22;
+      --indigo:         #4F6EF7;
+      --btn-indigo:     #4866F4;
+      --cyan:           #00D4FF;
+      --mint:           #34D399;
+      --amber:          #F5B942;
+      --text-primary:   #FAFBFC;
+      --text-secondary: #8B92A0;
+      --text-muted:     #747F8F;
+      --border-subtle:  rgba(255,255,255,0.07);
+      --border-medium:  rgba(255,255,255,0.12);
+      --border-bright:  rgba(255,255,255,0.16);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base); color: var(--text-primary);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      background: var(--btn-indigo); color: #fff;
+      font-size: 14px; font-weight: 600; padding: 10px 18px;
+      border-radius: 0 0 8px 8px; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 4px; }
+
+    nav {
+      position: sticky; top: 0; z-index: 800; height: 64px;
+      background: rgba(11,14,17,0.88);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 64px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-size: 15.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none; display: flex; align-items: baseline;
+    }
+    .logo .dot { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .logo .ia { color: var(--indigo); }
+    .logo .vantage { color: var(--text-secondary); font-weight: 500; margin-left: 5px; }
+    .nav-back {
+      font-size: 13.5px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--text-primary); }
+
+    main { padding: 72px 0 96px; }
+
+    .draft-notice {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: rgba(245,185,66,0.08); border: 1px solid rgba(245,185,66,0.28);
+      border-radius: 10px; padding: 16px 18px; margin-bottom: 40px;
+      font-size: 13.5px; line-height: 1.6; color: var(--text-secondary);
+    }
+    .draft-notice strong { color: var(--amber); }
+
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--indigo);
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08;
+      margin-bottom: 10px;
+    }
+    .meta { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+
+    .legal-content h2 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      margin-top: 40px; margin-bottom: 14px; color: var(--text-primary);
+    }
+    .legal-content p, .legal-content li {
+      font-size: 15px; line-height: 1.75; color: var(--text-secondary);
+    }
+    .legal-content p { margin-bottom: 16px; }
+    .legal-content ul, .legal-content ol { margin: 0 0 16px 22px; }
+    .legal-content li { margin-bottom: 8px; }
+    .legal-content strong { color: var(--text-primary); font-weight: 600; }
+    .legal-content a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
+    .legal-content a:hover { color: var(--indigo); }
+    .pending {
+      background: rgba(255,255,255,0.04); border: 1px dashed var(--border-bright);
+      border-radius: 8px; padding: 14px 16px; font-size: 13.5px;
+      color: var(--text-muted); margin: 16px 0;
+    }
+
+    footer { border-top: 1px solid var(--border-subtle); padding: 40px 0; margin-top: 40px; }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 64px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none;
+    }
+    .footer-logo .dot { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .footer-logo .ia { color: var(--indigo); }
+    .footer-logo .vantage { color: var(--text-secondary); font-weight: 500; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+
+    @media (max-width: 640px) {
+      .nav-inner, .footer-inner { padding: 0 20px; }
+      main { padding: 48px 0 72px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav aria-label="Primary">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Quint·IA Vantage — home">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <a href="/" class="nav-back">← Back to home</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <div class="container">
+      <div class="draft-notice">
+        <span aria-hidden="true">⚠</span>
+        <span><strong>Draft — under legal review.</strong> This page describes how the Quick-Start Blueprint works today, but hasn't been reviewed by an attorney yet. Questions in the meantime: <a href="mailto:team@quintiavantage.com" style="color: var(--text-secondary); text-decoration: underline;">team@quintiavantage.com</a>.</span>
+      </div>
+
+      <span class="eyebrow">Legal</span>
+      <h1>Terms of Service</h1>
+      <p class="meta">Quick-Start Blueprint · Last updated [DATE]</p>
+
+      <div class="legal-content">
+        <h2>1. Who this agreement is with</h2>
+        <p>These Terms of Service ("Terms") are a contract between you ("Client," "you") and Quint·IA Vantage ("we," "us"), governing your purchase of the Quick-Start Blueprint (the "Service") through blueprint.quintiavantage.com or blueprint.aeolatam.com (the "Site").</p>
+        <p>By completing the intake form, checking the acknowledgment box, and completing payment, you agree to these Terms.</p>
+        <div class="pending">Pending: formal legal entity name and registration details.</div>
+
+        <h2>2. What the Service is</h2>
+        <p>The Quick-Start Blueprint is a paid, one-time AI-visibility diagnostic and strategy service consisting of two deliverables:</p>
+        <ol>
+          <li><strong>Automated diagnostic report</strong> — delivered by email as soon as your scan completes, with a downloadable PDF. It tests your brand and the competitor domains you list against buyer-intent prompts across ChatGPT, Claude, Perplexity, and Gemini, plus domain authority, crawlability, and technical checks.</li>
+          <li><strong>Full Blueprint</strong> — a human-prepared set of prioritized recommendations and a 90-day action plan, delivered within 5–10 business days of purchase, followed by a 30-minute call to walk through it.</li>
+        </ol>
+        <p>Google AI Overviews is not included, as Google does not offer a public API to test it. This is disclosed, not a defect.</p>
+
+        <h2>3. What the Service does not guarantee</h2>
+        <p>The automated report is a snapshot at a single point in time, not a permanent ranking. AI engines change how they answer over time; a score at delivery is not a promise of any future score. The report and Blueprint are diagnostic and directional — they are meant to guide where you invest next, not to serve as a certified or exhaustive audit, and not as a guarantee that any AI engine will cite or recommend you in the future.</p>
+
+        <h2>4. Price and payment</h2>
+        <p>The Service is a flat fee of <strong>$500 USD</strong>, charged at checkout via Stripe. We do not receive, process, or store your card details — Stripe handles payment directly and we only receive confirmation that payment succeeded.</p>
+
+        <h2>5. Refunds and cancellation</h2>
+        <p><strong>The $500 fee is non-refundable once payment is confirmed.</strong> Work on your automated diagnostic begins immediately, and work on your full Blueprint begins within two business days of your intake form — most of the effort is front-loaded to have your deliverable ready on the timeline above.</p>
+        <p>If you sign a retainer agreement with us within 30 days of your Blueprint readout call, the $500 you paid is credited in full toward your first month.</p>
+        <p>If, due to a failure on our end, we are unable to deliver either the automated report or the full Blueprint at all, contact us at <a href="mailto:team@quintiavantage.com">team@quintiavantage.com</a> — we will investigate and, where we genuinely failed to deliver, issue a refund or re-run at our discretion. This does not apply to a report or Blueprint that was delivered but didn't say what you hoped it would.</p>
+        <p>See our full <a href="/refund-policy">Refund and Cancellation Policy</a> for details.</p>
+
+        <h2>6. Your information and how we use it</h2>
+        <p>We collect the company, competitor, and contact information you provide to run your scan and generate your reports, and we retain it as a business lead so our team can follow up about next steps. See our <a href="/privacy">Privacy Policy</a> for the full detail of what we collect, which third parties we share it with, and your rights over it.</p>
+
+        <h2>7. Ownership and confidentiality of your report</h2>
+        <p>Your automated report and full Blueprint are prepared exclusively for you and become your property once delivered — yours to keep, share internally, and act on. They contain competitive research and Quint·IA Vantage's proprietary methodology; please don't republish or distribute them outside your organization.</p>
+        <p>We may use anonymized, aggregated findings across many scans (e.g., "more than 50 companies in [category] tested") for our own marketing and research. We will never publish your individual score, your domain, or named competitor data without your separate, explicit consent.</p>
+
+        <h2>8. Disclaimer of warranties</h2>
+        <p>The Service is provided "as is." To the maximum extent permitted by law, we disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that any AI engine will cite, recommend, or rank you favorably as a result of following our recommendations.</p>
+
+        <h2>9. Limitation of liability</h2>
+        <p>To the maximum extent permitted by law, our total liability arising out of or related to the Service is limited to the amount you paid us ($500). We are not liable for indirect, incidental, consequential, or punitive damages, including lost profits or lost business opportunities.</p>
+
+        <h2>10. Governing law and disputes</h2>
+        <div class="pending">Pending: governing-law jurisdiction and any dispute-resolution/arbitration clause — a decision for counsel, not left as boilerplate here.</div>
+
+        <h2>11. Changes to these Terms</h2>
+        <p>We may update these Terms from time to time. The version in effect at the time you purchase the Service governs that purchase. Material changes will be posted here with an updated "Last updated" date.</p>
+
+        <h2>12. Contact</h2>
+        <p>Questions about these Terms: <a href="mailto:team@quintiavantage.com">team@quintiavantage.com</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <div class="footer-links">
+        <a href="/why-aeo-matters">Why AEO Matters</a>
+        <a href="/how-aeo-works">How It Works</a>
+        <a href="/services">Services</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/quick-start-blueprint">Blueprint</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/refund-policy">Refunds</a>
+      </div>
+      <span class="footer-copy">© 2026 Quint·IA Vantage</span>
+    </div>
+  </footer>
+</body>
+</html>

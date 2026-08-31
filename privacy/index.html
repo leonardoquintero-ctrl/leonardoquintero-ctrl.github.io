@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Quint·IA Vantage</title>
+  <meta name="description" content="Privacy Policy for the Quint·IA Vantage Quick-Start Blueprint.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!--
+    DRAFT PAGE — not reviewed by an attorney. Two things are intentionally
+    left open rather than invented: (1) a specific data-retention window —
+    no automated retention/deletion job exists in the product yet, so
+    publishing a number the system doesn't enforce would be worse than
+    saying so plainly; (2) whether analytics/tracking cookies are in use —
+    confirm actual behavior before finalizing that section.
+  -->
+
+  <style>
+    :root {
+      --bg-base:        #0B0E11;
+      --bg-surface:     #12151B;
+      --bg-elevated:    #161A22;
+      --indigo:         #4F6EF7;
+      --btn-indigo:     #4866F4;
+      --cyan:           #00D4FF;
+      --mint:           #34D399;
+      --amber:          #F5B942;
+      --text-primary:   #FAFBFC;
+      --text-secondary: #8B92A0;
+      --text-muted:     #747F8F;
+      --border-subtle:  rgba(255,255,255,0.07);
+      --border-medium:  rgba(255,255,255,0.12);
+      --border-bright:  rgba(255,255,255,0.16);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base); color: var(--text-primary);
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .skip-link {
+      position: absolute; top: -100%; left: 16px; z-index: 9999;
+      background: var(--btn-indigo); color: #fff;
+      font-size: 14px; font-weight: 600; padding: 10px 18px;
+      border-radius: 0 0 8px 8px; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+    :focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 4px; }
+
+    nav {
+      position: sticky; top: 0; z-index: 800; height: 64px;
+      background: rgba(11,14,17,0.88);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 64px;
+      height: 100%; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-size: 15.5px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none; display: flex; align-items: baseline;
+    }
+    .logo .dot { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .logo .ia { color: var(--indigo); }
+    .logo .vantage { color: var(--text-secondary); font-weight: 500; margin-left: 5px; }
+    .nav-back {
+      font-size: 13.5px; font-weight: 500; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .nav-back:hover { color: var(--text-primary); }
+
+    main { padding: 72px 0 96px; }
+
+    .draft-notice {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: rgba(245,185,66,0.08); border: 1px solid rgba(245,185,66,0.28);
+      border-radius: 10px; padding: 16px 18px; margin-bottom: 40px;
+      font-size: 13.5px; line-height: 1.6; color: var(--text-secondary);
+    }
+    .draft-notice strong { color: var(--amber); }
+
+    .eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--indigo);
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: 700; letter-spacing: -0.04em; line-height: 1.08;
+      margin-bottom: 10px;
+    }
+    .meta { font-size: 13px; color: var(--text-muted); margin-bottom: 48px; }
+
+    .legal-content h2 {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.02em;
+      margin-top: 40px; margin-bottom: 14px; color: var(--text-primary);
+    }
+    .legal-content p, .legal-content li {
+      font-size: 15px; line-height: 1.75; color: var(--text-secondary);
+    }
+    .legal-content p { margin-bottom: 16px; }
+    .legal-content ul, .legal-content ol { margin: 0 0 16px 22px; }
+    .legal-content li { margin-bottom: 8px; }
+    .legal-content strong { color: var(--text-primary); font-weight: 600; }
+    .legal-content a { color: var(--cyan); text-decoration: underline; text-underline-offset: 2px; }
+    .legal-content a:hover { color: var(--indigo); }
+    .pending {
+      background: rgba(255,255,255,0.04); border: 1px dashed var(--border-bright);
+      border-radius: 8px; padding: 14px 16px; font-size: 13.5px;
+      color: var(--text-muted); margin: 16px 0;
+    }
+
+    .data-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13.5px; }
+    .data-table th {
+      text-align: left; padding: 10px 14px; font-weight: 600; color: var(--text-primary);
+      border-bottom: 1px solid var(--border-medium); white-space: nowrap;
+    }
+    .data-table td {
+      padding: 10px 14px; color: var(--text-secondary); border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .table-scroll { overflow-x: auto; margin: 0 0 24px; -webkit-overflow-scrolling: touch; }
+    .table-scroll .data-table { margin: 0; }
+
+    footer { border-top: 1px solid var(--border-subtle); padding: 40px 0; margin-top: 40px; }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 64px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      font-size: 15px; font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text-primary); text-decoration: none;
+    }
+    .footer-logo .dot { color: rgba(255,255,255,0.22); font-weight: 400; }
+    .footer-logo .ia { color: var(--indigo); }
+    .footer-logo .vantage { color: var(--text-secondary); font-weight: 500; }
+    .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+
+    @media (max-width: 640px) {
+      .nav-inner, .footer-inner { padding: 0 20px; }
+      main { padding: 48px 0 72px; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav aria-label="Primary">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Quint·IA Vantage — home">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <a href="/" class="nav-back">← Back to home</a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <div class="container">
+      <div class="draft-notice">
+        <span aria-hidden="true">⚠</span>
+        <span><strong>Draft — under legal review.</strong> This page accurately describes what data this product collects and shares today, but hasn't been reviewed by an attorney yet. Questions in the meantime: <a href="mailto:team@quintiavantage.com" style="color: var(--text-secondary); text-decoration: underline;">team@quintiavantage.com</a>.</span>
+      </div>
+
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy</h1>
+      <p class="meta">Quick-Start Blueprint · Last updated [DATE]</p>
+
+      <div class="legal-content">
+        <h2>1. Who we are</h2>
+        <p>This policy covers Quint·IA Vantage ("we," "us") and the data we collect through blueprint.quintiavantage.com and blueprint.aeolatam.com (the "Site") in connection with the Quick-Start Blueprint service.</p>
+
+        <h2>2. What we collect</h2>
+        <p><strong>Directly from you, at intake:</strong></p>
+        <ul>
+          <li>Company name and domain</li>
+          <li>Competitor names and domains you provide</li>
+          <li>Your contact name and email address</li>
+          <li>Any free-text context you give us about your AI-visibility goals</li>
+          <li>Your preferred language (English/Spanish)</li>
+        </ul>
+        <p><strong>From our payment processor:</strong> we never receive or store your card number. Stripe processes payment directly and passes us only confirmation that payment succeeded, a transaction reference, and the billing email you gave Stripe.</p>
+        <p><strong>Generated by running your scan:</strong> the AI engine responses, citation data, and technical findings produced when we test your domain and competitors — this is the content of your report, not separately collected personal data.</p>
+        <p>We do not knowingly collect information from anyone under 16.</p>
+
+        <h2>3. How we use it</h2>
+        <ul>
+          <li>To run your scan and generate your automated report and full Blueprint</li>
+          <li>To email you your deliverables and follow up about your Blueprint readout call</li>
+          <li>To store you as a business lead in our CRM so our team can follow up about next steps</li>
+          <li>In anonymized, aggregated form — with all company-identifying information removed — to describe category-level trends in our own marketing and research, once enough companies in a category exist that no individual company is identifiable</li>
+        </ul>
+        <p>We do not sell your personal information.</p>
+
+        <h2>4. Who we share it with</h2>
+        <p>Running your scan requires sending parts of your information to the following service providers, each acting on our instructions:</p>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr><th>Provider</th><th>What it receives</th><th>Why</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Stripe</td><td>Billing name/email, payment details</td><td>Payment processing</td></tr>
+              <tr><td>HubSpot</td><td>Name, email, company, competitors</td><td>Lead/CRM storage, follow-up</td></tr>
+              <tr><td>Anthropic (Claude)</td><td>Test prompts, your domain and competitor domains</td><td>AI visibility testing</td></tr>
+              <tr><td>OpenAI (ChatGPT)</td><td>Test prompts, your domain and competitor domains</td><td>AI visibility testing</td></tr>
+              <tr><td>Perplexity</td><td>Test prompts, your domain and competitor domains</td><td>AI visibility testing</td></tr>
+              <tr><td>Google (Gemini)</td><td>Test prompts, your domain and competitor domains</td><td>AI visibility testing</td></tr>
+              <tr><td>Moz</td><td>Your domain, competitor domains</td><td>Domain authority data</td></tr>
+              <tr><td>Resend</td><td>Your email address</td><td>Delivering your report and emails</td></tr>
+              <tr><td>Turso</td><td>All of the above</td><td>Database storage</td></tr>
+              <tr><td>Vercel</td><td>All of the above, in transit</td><td>Application hosting</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We do not send your name, email, or other directly-identifying contact information to the AI engines above — only your domain, your competitors' domains, and the test prompts themselves, which describe your product category, not you personally.</p>
+        <p>We may also disclose information if required by law, or to protect the rights, property, or safety of Quint·IA Vantage, our clients, or others.</p>
+
+        <h2>5. How long we keep it</h2>
+        <div class="pending">Pending: a specific retention window isn't published here because no automated retention or deletion process exists in the product yet. Until it does, the accurate statement is what follows.</div>
+        <p>We retain your information for as long as reasonably necessary to deliver the Service and to follow up about it, or until you ask us to delete it (see Section 6).</p>
+
+        <h2>6. Your rights</h2>
+        <p>Regardless of where you're located, you can ask us at any time to:</p>
+        <ul>
+          <li><strong>Access</strong> the personal information we hold about you</li>
+          <li><strong>Correct</strong> inaccurate information</li>
+          <li><strong>Delete</strong> your personal information, subject to what we need to retain for legitimate business or legal purposes (e.g., payment records)</li>
+          <li><strong>Opt out</strong> of any further marketing contact from us</li>
+        </ul>
+        <p>To exercise any of these, email <a href="mailto:team@quintiavantage.com">team@quintiavantage.com</a>. We will respond within 30 days.</p>
+
+        <h2>7. Contact and follow-up</h2>
+        <p>After your Blueprint is delivered, we may follow up once about next steps (e.g., a retainer conversation). We do not send ongoing marketing email beyond that unless you opt in separately. Every email we send includes a working unsubscribe or opt-out method.</p>
+
+        <h2>8. Cookies and tracking</h2>
+        <div class="pending">Pending: confirm actual cookie/analytics behavior on this domain before finalizing this section.</div>
+
+        <h2>9. Security</h2>
+        <p>We use industry-standard measures (encryption in transit, access controls) to protect your information, but no method of transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
+
+        <h2>10. Changes to this policy</h2>
+        <p>We may update this policy from time to time. Material changes will be posted here with an updated "Last updated" date.</p>
+
+        <h2>11. Contact</h2>
+        <p>Questions about this policy or your data: <a href="mailto:team@quintiavantage.com">team@quintiavantage.com</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="/" class="footer-logo">
+        Quint<span class="dot">·</span><span class="ia">IA</span><span class="vantage"> Vantage</span>
+      </a>
+      <div class="footer-links">
+        <a href="/why-aeo-matters">Why AEO Matters</a>
+        <a href="/how-aeo-works">How It Works</a>
+        <a href="/services">Services</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/quick-start-blueprint">Blueprint</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/refund-policy">Refunds</a>
+      </div>
+      <span class="footer-copy">© 2026 Quint·IA Vantage</span>
+    </div>
+  </footer>
+</body>
+</html>
