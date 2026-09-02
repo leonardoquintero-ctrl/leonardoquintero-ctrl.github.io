@@ -1,7 +1,26 @@
 # IVIA industry-aware prompt engine
 
 Implements diversified, industry-aware prompt selection for the Blueprint /
-IVIA Lite AI-visibility scan, per `ivia-prompt-bank-by-industry.md`.
+IVIA Lite AI-visibility audit, per `ivia-prompt-bank-by-industry.md`.
+
+**How this gets used:** the Blueprint audit is executed manually (by
+Claude, running the scan for a client who purchased the Blueprint), not by
+an automated backend that calls the ChatGPT/Perplexity/Claude/Google AI
+Overviews APIs. This module is the executor's tool for picking *which*
+prompts to run against those engines for a given client, so the prompt set
+is deliberately diversified by industry and buyer intent instead of ad hoc
+or clustered around one angle. The workflow:
+
+1. Fill in a client intake profile (see `example-profile.json`) from the
+   client's Blueprint intake answers/site copy.
+2. Run `node cli.js <profile.json>` to get the selected prompt set for
+   their industry, plus a blank findings worksheet.
+3. Manually run each prompt against ChatGPT, Perplexity, Claude, and
+   Google AI Overviews, and fill in the worksheet (cited Y/N + notes) per
+   engine.
+4. Roll findings up by category (e.g. "cited for Direct Comparison but not
+   for Diagnostic Narrative") for the audit report, not just a flat
+   citation-rate number.
 
 ## Why this exists / what it fixes
 
@@ -39,41 +58,23 @@ Run the acceptance check:
 node acceptance-test.js
 ```
 
-## Important — unresolved integration questions
+## Client intake profile fields
 
-This repository holds only the static Quint·IA Vantage marketing site
-(landing pages, pricing, the Blueprint sales page). **It does not contain
-the actual Blueprint/IVIA Lite scan engine** — there is no existing code
-here that builds prompts, calls ChatGPT/Perplexity/Claude/Google AI
-Overviews, scores citations, or captures client intake/competitors. So the
-four pre-implementation questions from the task brief could not be
-verified against real code and are assumed rather than confirmed:
+| Field | Source | Notes |
+|---|---|---|
+| `industry` | Blueprint intake | free text; matched against the 8 verticals, falls back to General/Fallback (optionally alongside an adjacent vertical) if no clean match |
+| `category` | Blueprint intake | client's product/service in a buyer's own words, not their company name |
+| `confirmedCompetitors` | Blueprint intake, **client-confirmed only** | never auto-filled or invented; templates needing an unconfirmed competitor slot are dropped rather than guessing |
+| `buyerContext` | client's own site copy / intake answers | short, real buyer-situation description — not a generic persona |
+| `businessSize`, `originCountry`, `market`, `coreProblem` | Blueprint intake | fill remaining placeholders where the vertical's templates use them |
+| `sourcingEthicsRelevant` | executor judgment | only set `true` if Ethics/Sustainability (category I) is a genuine buyer concern for this client's category (e.g. specialty food, apparel) — never force it onto e.g. a B2B SaaS client just to hit a prompt count |
 
-1. **Prompt-generation file(s)** — none exist in this repo. This module is
-   new and self-contained; it isn't wired into anything yet because
-   there's nothing to wire it into here.
-2. **Industry capture at intake** — assumed to be a free-text field (see
-   `vertical-lookup.js`'s tolerant keyword matching). If the real intake
-   system uses a fixed dropdown/enum, `lookupVertical` should be replaced
-   with a direct enum → vertical-key mapping instead of keyword matching.
-3. **Competitor capture** — assumed to be a list of client-confirmed
-   strings (`confirmedCompetitors` on the client profile). The module
-   never invents a competitor name: any template needing `[COMPETITOR_1]`
-   or `[COMPETITOR_2]` is dropped from the candidate pool if that slot
-   isn't confirmed.
-4. **Prompt/engine budget cap** — assumed to be 10 total, per the task
-   description (`DEFAULT_PROMPT_BUDGET` in `select-prompts.js`,
-   overridable via `selectPrompts(profile, { promptBudget })`). Not
-   confirmed against a real scan-config constant.
+## Open question for you
 
-Also unresolved, per the task brief itself: **whether category-level
-logging (item 4 in the task) should feed the client-facing report or stay
-internal-only.** `select-prompts.js` currently returns each selected
-prompt's category alongside its template/text (the data a caller would log
-next to a citation result), but nothing here decides where that surfaces —
-that's a product decision for whoever owns the real scan engine and
-report templates, not something this module should default silently.
-
-Before this is genuinely "done," it needs to be pointed at (or moved into)
-the actual scanner codebase, and the four items above need real answers
-instead of assumptions.
+Per the task brief: should the category-level findings (which intent
+category each prompt belongs to, alongside its citation result) feed the
+**client-facing report**, or stay in an **internal-only findings sheet**
+for now? `cli.js`'s worksheet currently logs category next to every
+result either way — that's just data capture. Where it's allowed to
+surface (client deliverable vs. internal only) is your call before it
+goes external.

@@ -1,0 +1,10 @@
+{
+  "industry": "specialty food",
+  "category": "single-origin specialty coffee",
+  "confirmedCompetitors": ["Counter Culture Coffee", "Stumptown Coffee"],
+  "buyerContext": "a specialty coffee roaster/retailer sourcing traceable, direct-trade beans for a US audience that cares about origin and quality",
+  "businessSize": "small",
+  "originCountry": "Colombia",
+  "market": "US",
+  "sourcingEthicsRelevant": true
+}
