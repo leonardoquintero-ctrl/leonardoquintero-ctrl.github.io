@@ -114,23 +114,34 @@ Supersedes the old 5 "blocking decisions" from the 2026-08-15 pre-build handoff 
 
 ---
 
-## Design system (Quint·IA Vantage marketing pages, this repo)
+## Design system — **current** ("Authoritative B2B Consulting meets Modern Tech")
 
+This is the live palette, defined in `quint-ia-blueprint-funnel/src/app/globals.css` (not in this repo). Its own comment is explicit: it **replaces** the older dark indigo palette this repo's 6 marketing pages still use, and calls those pages "historical, not the source of truth."
+
+```
+--bg-base:        #F8F9FA   (Alabaster)
+--bg-surface:      #FFFFFF   (white cards)
+--accent:          #047857   (Deep Emerald — primary/CTA/citation-found)
+--accent-hover:    #065F46
+--text-primary:    #1E293B   (Charcoal Navy — 13.8:1 AAA)
+--text-secondary:  #475569   (7.9:1 AAA)
+--text-muted:      #64748B   (4.9:1 AA floor)
+--border:          #E2E8F0
+```
+Fonts: **Inter** (body/heads) + **JetBrains Mono** (stats/prices/code). Squared-off 8px-radius corners everywhere — deliberately not fully-rounded, which the design comment calls "consumer," not B2B.
+
+**This repo's 6 marketing pages (`quintia-*.html`) and `index.html` have not been updated to this palette** — they still use the old dark indigo/cyan tokens below. That's a real, live inconsistency: if these pages are ever treated as the real marketing site (see the domain question above), they need this palette applied.
+
+Old tokens still in use on this repo's pages (superseded):
 ```
 --bg-base:        #0B0E11
 --bg-surface:      #12151B
---bg-elevated:     #161A22
---indigo:          #4F6EF7   (decorative)
---btn-indigo:      #4866F4   (buttons — 4.68:1 WCAG AA)
+--indigo:          #4F6EF7
 --cyan:            #00D4FF
---mint:            #34D399
 --text-primary:    #FAFBFC
---text-secondary:  #8B92A0
---text-muted:      #747F8F   (4.77:1 WCAG AA)
 ```
-Fonts: **Inter** (body/heads) + **JetBrains Mono** (stats/prices/code).
 
-Note: `vertia_labs/brand/Visual Guidelines` specifies a **different** formal brand system (DM Serif Display + DM Sans, indigo/violet/fuchsia gradient, glassmorphism cards, tier-color mapping) under the "Vertia Labs v8" name — the two design systems have never been reconciled. `index.html` here uses that older system; the 6 marketing pages use the token set above.
+Separately, `vertia_labs/brand/Visual Guidelines` specifies a **third**, still-different formal brand system (DM Serif Display + DM Sans, indigo/violet/fuchsia gradient, glassmorphism cards) under the "Vertia Labs v8" name — `index.html` here uses that one. None of the three palettes (Vertia Labs v8, the old dark indigo pages, and the current emerald system) have been reconciled with each other.
 
 ## Schema markup (this repo's 6 marketing pages)
 
