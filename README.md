@@ -2,6 +2,8 @@
 
 Last rebuilt: 2026-09-21. This file is the canonical status doc for this repo. If something here conflicts with a page's content, this file wins — update it whenever the site changes materially.
 
+There's also a browsable copy of this same content at [`source-of-truth.html`](./source-of-truth.html) (marked `noindex, nofollow`, not linked from any public nav) — same information, easier to skim/share as a page instead of a markdown file. Keep both in sync when either changes.
+
 ## What this repo actually is
 
 One GitHub Pages repo currently hosting **two unrelated things**:
