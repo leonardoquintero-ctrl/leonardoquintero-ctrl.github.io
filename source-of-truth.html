@@ -137,11 +137,12 @@
   <div class="eyebrow">Internal · Whole-Project Status</div>
   <h1>Source of Truth</h1>
   <p class="subtitle">Canonical status page for the Quint·IA Vantage project — all 6 repos, not just <code>leonardoquintero-ctrl.github.io</code>. If a page's or a repo's live content conflicts with this document, this document wins — update it whenever anything changes materially.</p>
-  <div class="meta">Last rebuilt: 2026-09-21 · Mirrors <code class="file">README.md</code> in the <code class="file">leonardoquintero-ctrl.github.io</code> repo root</div>
+  <div class="meta">Last rebuilt: 2026-09-21 · Cross-checked against the official <strong>Sales Guide v1.0</strong> (dated 2026-09-19) · Mirrors <code class="file">README.md</code> in the <code class="file">leonardoquintero-ctrl.github.io</code> repo root</div>
   <div class="headline-facts">
     <div class="fact-pill"><span class="label">Brand name (current)</span>Quint·IA Vantage — "Vertia Labs" is a legacy internal name not yet fully swept out</div>
-    <div class="fact-pill"><span class="label">Retainer pricing (current)</span>$950 / $1,750 / $2,750 (Foundation / Momentum / Citation Engine)</div>
-    <div class="fact-pill"><span class="label">Caveat</span>No live product sells retainers yet — only the $500 Blueprint is actually purchasable</div>
+    <div class="fact-pill"><span class="label">Retainer pricing (current)</span>$950 / $1,750 / $2,750 (Foundation / Momentum / Citation Engine) — confirmed against the Sales Guide, exact match</div>
+    <div class="fact-pill"><span class="label">Caveat</span>Retainers have no self-serve checkout, but ARE actively sold — by reps, manually, under a real commission plan</div>
+    <div class="fact-pill"><span class="label">ICP conflict</span>Real sales targeting is LatAm-founded companies only. The public marketing site's copy has zero LatAm framing. Unreconciled — see Go-to-market section</div>
   </div>
 </header>
 
@@ -154,6 +155,7 @@
     <li><a href="#this-repo">This repo (leonardoquintero-ctrl.github.io)</a></li>
     <li><a href="#architecture">Product architecture — what's live</a></li>
     <li><a href="#pricing">Pricing across all sources</a></li>
+    <li><a href="#gtm">Go-to-market reality (Sales Guide v1.0)</a></li>
     <li><a href="#decision-log">Decision log</a></li>
     <li><a href="#design-system">Design system</a></li>
     <li><a href="#schema">Schema markup</a></li>
@@ -231,12 +233,12 @@
 
   <div class="repo-card">
     <h3><span class="repo-name">quint-ia-mini-checkers</span> <span class="badge badge-warn">partial build</span></h3>
-    <p>"IVIA Lite" — meant to power free interactive checkers embedded on Framer <code>/ivia/*</code> pages, stateless by design (no DB). Only <strong>2 of 6</strong> planned checkers exist: directory presence (LinkedIn/Crunchbase/G2/Capterra via Serper.dev) and an <code>llms.txt</code> presence/format check, both ported unchanged from <code class="file">quint-ia-blueprint-funnel</code>. Rate limiting (10 req/min/IP, in-memory) and an SSRF guard (rejects private/reserved/metadata IP ranges, re-checked per redirect hop) are genuinely landed. No Turnstile, cooldowns, consent records, or data retention exist at all. Cold-domain prompt generation is fully spec'd in <code>docs/ivia-phase-b-scoping.md</code> but has zero corresponding code.</p>
+    <p>Powers <strong>IVIA Lite</strong> — its official name per the Sales Guide — the free interactive checkers embedded on Framer <code>/ivia/*</code> pages, stateless by design (no DB). Only <strong>2 of 6</strong> planned checkers exist: directory presence (LinkedIn/Crunchbase/G2/Capterra via Serper.dev) and an <code>llms.txt</code> presence/format check, both ported unchanged from <code class="file">quint-ia-blueprint-funnel</code>. Rate limiting (10 req/min/IP, in-memory) and an SSRF guard (rejects private/reserved/metadata IP ranges, re-checked per redirect hop) are genuinely landed. No Turnstile, cooldowns, consent records, or data retention exist at all. Cold-domain prompt generation is fully spec'd in <code>docs/ivia-phase-b-scoping.md</code> but has zero corresponding code. Separately, the business side caps usage at 75 runs/30 days + 50 per closed Blueprint (per the Sales Guide) — a policy layer this repo's own rate limiter doesn't know about or enforce.</p>
   </div>
 
   <div class="repo-card">
     <h3><span class="repo-name">cold-reach-tool</span> <span class="badge badge-warn">not yet deployed</span></h3>
-    <p>Internal sales tooling — real rep login/admin. Given a prospect domain: AI-citation check across 4 engines, DataForSEO backlink snapshot, schema/content-shape check, <code>llms.txt</code> check, generated "approach note." Just added (2026-09-21) a <strong>6-factor lead-prioritization rubric</strong>: US sell-intent, B2B, company size, reachable decision-maker, AI-visibility gap (auto-suggested from its own citation data), audience geography — each 0–2, total null until all six scored, 10–12 = "Priorizar."</p>
+    <p>Internal sales tooling — real rep login/admin. Given a prospect domain: AI-citation check across 4 engines, DataForSEO backlink snapshot, schema/content-shape check, <code>llms.txt</code> check, generated "approach note." Just added (2026-09-21) a <strong>6-factor lead-prioritization rubric</strong>: US sell-intent, B2B, company size, reachable decision-maker, AI-visibility gap (auto-suggested from its own citation data), audience geography — each 0–2, total null until all six scored, 10–12 = "Priorizar." The Sales Guide independently documents this exact same 6-factor rubric as the reps' manual qualification method — confirms it's the company-wide standard, not a one-off feature.</p>
     <p>Split out of <code class="file">quint-ia-blueprint-funnel</code> on 2026-09-17 after a shared-DB migration incident blocked both products' deploys. <strong>Per its own README, not yet functional</strong>: no dedicated Turso DB provisioned, Vercel env vars not set, DNS (<code>cold-reach.quintiavantage.com</code>) still points at blueprint-funnel, no confirmed end-to-end lookup.</p>
   </div>
 
@@ -255,12 +257,48 @@
       <tr><td><code class="file">vertia_labs</code> (2026-05, oldest)</td><td>$750/mo</td><td>$1,750/mo</td><td>$2,500/mo</td><td>Origin numbers</td></tr>
       <tr><td><code class="file">index.html</code> here (2026-07)</td><td>$950/mo</td><td>$1,750/mo</td><td>$2,500/mo</td><td>Foundation bumped, Citation Engine not carried forward</td></tr>
       <tr><td><strong>Live marketing pages (2026-07) — current</strong></td><td><strong>$950/mo</strong></td><td><strong>$1,750/mo</strong></td><td><strong>$2,750/mo</strong></td><td>Confirmed current as of this rebuild</td></tr>
-      <tr><td><code class="file">quint-ia-blueprint-funnel</code> (the live paid product)</td><td>—</td><td>—</td><td>—</td><td><strong>No retainer tiers exist in the actual product.</strong> Only the $500 one-time Blueprint is purchasable</td></tr>
+      <tr><td><code class="file">quint-ia-blueprint-funnel</code> (self-serve checkout)</td><td>—</td><td>—</td><td>—</td><td>No retainer checkout exists in the app itself. That's an online-purchase gap, not evidence the retainers aren't sold — see Go-to-market below</td></tr>
+      <tr><td><strong>Sales Guide v1.0 (2026-09-19) — what reps actually quote</strong></td><td><strong>$950/mo</strong></td><td><strong>$1,750/mo</strong></td><td><strong>$2,750/mo</strong></td><td>Exact match to the live marketing pages. Plus a 6th offering, <strong>Project Work</strong> (custom quote, $1,000 minimum), not on the marketing pages at all</td></tr>
     </tbody>
   </table>
   <div class="callout warn">
-    Action implied: <code class="file">index.html</code>'s $2,500 Citation Engine figure is stale and should be updated to $2,750, and/or "Vertia Labs" branding there should be swept to "Quint·IA Vantage" — both edits are in <code class="file">leonardoquintero-ctrl.github.io</code> only. Nothing to change in <code class="file">vertia_labs</code> (frozen/historical) or <code class="file">quint-ia-blueprint-funnel</code> (doesn't sell retainers, not affected).
+    Action implied: <code class="file">index.html</code>'s $2,500 Citation Engine figure is stale and should be updated to $2,750, and/or "Vertia Labs" branding there should be swept to "Quint·IA Vantage" — both edits are in <code class="file">leonardoquintero-ctrl.github.io</code> only. Nothing to change in <code class="file">vertia_labs</code> (frozen/historical).
   </div>
+</section>
+
+<section id="gtm">
+  <h2>Go-to-market reality — per Sales Guide v1.0 <a class="anchor" href="#gtm">#</a></h2>
+  <p>A confidential, dated (2026-09-19) rep-facing sales guide surfaced after the rest of this audit — it's the single most authoritative and current business-facing document found in the whole project, and it corrects several things this page previously got wrong from code alone. Treat it as the source of truth for anything sales/ICP/commission-related; this section summarizes it.</p>
+
+  <h3>Retainers are actively sold — just not through a checkout</h3>
+  <p>Reps close Foundation/Momentum/Citation Engine by hand — a call, then an invoice — under a real, live commission plan: a flat month-one bonus ($150 / $250 / $350 by tier) plus 2% of every monthly payment for the length of the contract. Biweekly payouts started 2026-09-18. <strong>This means the earlier "no live product sells retainers" framing on this page was wrong</strong> — corrected throughout.</p>
+
+  <h3>A sixth offering this page missed: Project Work</h3>
+  <p>Custom-quoted implementation (site restructuring, page building), priced hourly after a Blueprint, $1,000 minimum, requires Leonardo's written sign-off before a rep can quote it. The guide's own anonymized case study: a B2B coffee exporter's Blueprint found real technical debt (8 broken pages post-migration, no FAQ/glossary/comparison content, missing schema) — the recommended sequence was an 8-week, $17,300 fixed-price project to fix the foundation, <em>then</em> a $1,750/mo Momentum retainer once the site was actually citable. "Fix it, then grow it" is a deliberate, documented pattern, not a one-off.</p>
+
+  <h3>The real ICP is narrower than earlier drafts, and conflicts with the site's own copy</h3>
+  <table>
+    <thead><tr><th></th><th>Criteria</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Fits</strong></td><td>LatAm-founded B2B startup/SMB, 10–150 employees, selling or wanting to sell into the US. Signals: English site, USD pricing, US listed as a market, US-facing LinkedIn roles. Sectors: software/SaaS, B2B services, agribusiness/exporters.</td></tr>
+      <tr><td><strong>Disqualified</strong></td><td>Startups actually based in the US/Miami; no real intent to sell into the US even with zero AI visibility; mostly-B2C businesses (unless Leonardo flags one exploratory); no reachable decision-maker or budget clearly under $500.</td></tr>
+      <tr><td><strong>Geography priority</strong></td><td>Hypothesis, not a rule: Mexico, Colombia, Chile first; then Argentina, Peru. Brazil excluded for now (first outreach goes out in Spanish).</td></tr>
+      <tr><td><strong>Qualification score</strong></td><td>Same 6-factor, 0–2-point rubric as <code class="file">cold-reach-tool</code>: US sell-intent, B2B, company size, reachable decision-maker, AI-visibility gap, audience geography. 10–12 = prioritize, 6–9 = light-touch, &lt;6 = pass.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout risk">
+    <strong>Unreconciled conflict:</strong> the public marketing site's copy (<code class="file">quintia-*.html</code> here, and presumably the real Framer site) reads as written for any US buyer, with zero LatAm framing anywhere. Actual sales targeting is LatAm-founded companies exclusively. This could be a deliberate SEO/AEO choice (site copy written to rank for how a US buyer searches) or a real inconsistency nobody's resolved — worth a direct answer from Leonardo, not an assumption either way.
+  </div>
+
+  <h3>IVIA Lite — the free checkers' official name and real limits</h3>
+  <p>The guide calls the free-tool suite <strong>IVIA Lite</strong>: three free measurements on a domain plus six single-function checker tools (matches the 6 checkers planned in <code class="file">quint-ia-mini-checkers</code>, 2 of which are built). It's meant for genuine prospects only — capped at <strong>75 runs per rolling 30 days, plus 50 more per closed Blueprint</strong> — not an open public tool. This is a business-policy cap layered on top of that repo's own technical rate limit (10 req/min/IP).</p>
+
+  <h3>Other things worth knowing</h3>
+  <ul class="checklist">
+    <li>AEO and GEO are stated explicitly as "the same work" — confirms the earlier reasoning on this page.</li>
+    <li>Rep messaging rules: max 50 new contacts/day, one message + one follow-up per prospect, CAN-SPAM compliant, no result/citation guarantees ever, no claiming clients/results that don't exist yet — <strong>the guide states plainly there are no retainer clients to reference yet</strong>, consistent with the company being early-stage.</li>
+    <li>Domain-registration-in-CRM-first rule (Sec. 6 of the guide) opens a 60-day exclusivity window per rep — an actual lead-deduplication mechanism, not just a scoring rubric.</li>
+  </ul>
 </section>
 
 <section id="decision-log">
@@ -282,7 +320,9 @@
     <li><strong>Archive or make <code class="file">quint-ia-report-generator</code> private.</strong> Dead, still public, unauthenticated <code>/api/intake</code>, unfixed citation bug. Its own sibling repo already recommends this.</li>
     <li><strong>Confirm what <code>quintiavantage.com</code> (root domain) actually serves.</strong> If Framer as hypothesized, decide what this repo's 6 marketing pages are for going forward.</li>
     <li>Sweep "Vertia Labs" branding and the stale $2,500 Citation Engine figure out of <code class="file">index.html</code> in this repo.</li>
-    <li>Decide whether the retainer tiers need a real checkout path, or the product strategy is Blueprint-only for now.</li>
+    <li>Decide whether the retainer tiers need a real self-serve checkout path — they're already sold manually by reps, so this is an efficiency/scale question, not a "does this product exist" question.</li>
+    <li><strong>Resolve the ICP conflict</strong>: reconcile the public site's LatAm-free copy with the sales team's LatAm-only actual targeting (see Go-to-market section).</li>
+    <li>Add <code class="file">quintia-quick-start-blueprint.html</code>'s missing offering, <strong>Project Work</strong>, if these pages are ever treated as the real marketing site — it doesn't appear anywhere in this repo's copy today.</li>
     <li>Finish deploying <code class="file">cold-reach-tool</code> — dedicated Turso DB, Vercel env vars, DNS repoint, one confirmed end-to-end lookup.</li>
     <li>Pull <code class="file">vertia_labs/delivery-templates/</code> and <code>brand/Visual Guidelines</code> into an active repo.</li>
     <li>Everything previously listed for this repo: robots.txt, llms.txt, sitemap.xml, GA4, CNAME (pending the domain question above).</li>
@@ -290,22 +330,27 @@
 </section>
 
 <section id="design-system">
-  <h2>Design system <a class="anchor" href="#design-system">#</a></h2>
-  <p>Tokens used across the 6 Quint·IA Vantage marketing pages (and this page):</p>
+  <h2>Design system — three unreconciled palettes <a class="anchor" href="#design-system">#</a></h2>
+  <p><strong>Current, confirmed twice over</strong> — in <code class="file">quint-ia-blueprint-funnel/src/app/globals.css</code>'s own comment, and independently by the Sales Guide's own tables using the same green — "Authoritative B2B Consulting meets Modern Tech," and it's what this page now uses:</p>
+  <pre>--bg-base:        #F8F9FA   (Alabaster)
+--bg-surface:      #FFFFFF   (white cards)
+--accent:          #047857   (Deep Emerald — primary/CTA/citation-found)
+--accent-hover:    #065F46
+--text-primary:    #1E293B   (Charcoal Navy — 13.8:1 AAA)
+--text-secondary:  #475569   (7.9:1 AAA)
+--text-muted:      #64748B   (4.9:1 AA floor)
+--border:          #E2E8F0</pre>
+  <p>Fonts: <strong>Inter</strong> (body/heads) + <strong>JetBrains Mono</strong> (stats/prices/code). Squared-off 8px-radius corners everywhere — deliberately not fully rounded, which the source comment calls "consumer," not B2B.</p>
+
+  <p><strong>Not yet migrated to this palette:</strong> this repo's 6 marketing pages (<code>quintia-*.html</code>) still use an older dark palette:</p>
   <pre>--bg-base:        #0B0E11
---bg-surface:      #12151B
---bg-elevated:     #161A22
---indigo:          #4F6EF7   (decorative)
---btn-indigo:      #4866F4   (buttons — 4.68:1 WCAG AA)
+--indigo:          #4F6EF7
 --cyan:            #00D4FF
---mint:            #34D399
---text-primary:    #FAFBFC
---text-secondary:  #8B92A0
---text-muted:      #747F8F   (4.77:1 WCAG AA)</pre>
-  <p>Fonts: <strong>Inter</strong> (body/heads) + <strong>JetBrains Mono</strong> (stats/prices/code).</p>
-  <p>Accessibility: WCAG 2.1 AA across all 6 pages — skip link, <code>:focus-visible</code> outlines, <code>prefers-reduced-motion</code>, ≥4.5:1 contrast, semantic landmarks, all FAQ content live in the DOM.</p>
+--text-primary:    #FAFBFC</pre>
+  <p>Accessibility on those 6 pages: WCAG 2.1 AA — skip link, <code>:focus-visible</code> outlines, <code>prefers-reduced-motion</code>, ≥4.5:1 contrast, semantic landmarks, all FAQ content live in the DOM.</p>
+
   <div class="callout warn">
-    <code class="file">vertia_labs/brand/Visual Guidelines</code> specifies a <strong>different</strong> formal brand system (DM Serif Display + DM Sans, indigo/violet/fuchsia gradient, glassmorphism cards, tier-color mapping) under the "Vertia Labs v8" name — never reconciled with the token set above. <code class="file">index.html</code> here uses that older system; the 6 marketing pages use the tokens above.
+    A <strong>third</strong> system exists: <code class="file">vertia_labs/brand/Visual Guidelines</code> specifies yet another formal brand system (DM Serif Display + DM Sans, indigo/violet/fuchsia gradient, glassmorphism cards, tier-color mapping) under the "Vertia Labs v8" name. <code class="file">index.html</code> here uses that one. None of the three (current emerald, old dark-indigo marketing pages, Vertia Labs v8) have been reconciled with each other.
   </div>
 </section>
 
@@ -328,17 +373,20 @@
   <h2>Open tasks <a class="anchor" href="#open-tasks">#</a></h2>
   <p>Full list is under <a href="#decision-log">Decision log</a> above; the short version, in rough priority order:</p>
   <ul class="checklist">
+    <li>Resolve the ICP conflict between the site's copy and actual sales targeting (see Go-to-market)</li>
     <li>Archive/privatize <code class="file">quint-ia-report-generator</code></li>
     <li>Confirm the real <code>quintiavantage.com</code> deployment (Framer hypothesis)</li>
     <li>Fix <code class="file">index.html</code>'s stale brand name and Citation Engine price</li>
     <li>Finish deploying <code class="file">cold-reach-tool</code></li>
-    <li>Decide the retainer-tier checkout strategy</li>
+    <li>Add Project Work as a real self-serve or at-least-documented offering wherever the marketing site ends up living</li>
     <li>Add robots.txt / llms.txt / sitemap.xml / GA4 / CNAME to whichever repo ends up being the real marketing site</li>
   </ul>
 </section>
 
 <section id="prior-docs">
   <h2>Prior docs <a class="anchor" href="#prior-docs">#</a></h2>
+  <p><strong>Sales Guide v1.0</strong> (dated 2026-09-19, confidential rep reference) — the most current and authoritative business-facing document found across the project. Supersedes this page's own earlier assumptions about ICP and retainer-sale status; see the Go-to-market section above for what it corrected.</p>
+  <p>A companion business playbook (proposal structure, module-pricing toolkit, discovery questions, cold-email templates) exists alongside it — useful for proposal/scoping work, not repeated here since it doesn't change this page's technical or GTM facts.</p>
   <p><code class="file">QUINTIA-HANDOFF.md</code> — original 2026-07-09 build handoff for the 6 marketing pages. Historical; domain/pricing notes superseded by this page.</p>
   <p>PR #1 (<code>claude/ivia-mini-app-prebuild-review-afavy8</code>, still open on <code class="file">leonardoquintero-ctrl.github.io</code>) — the original IVIA pre-build review this rebuild supersedes. Its findings are captured/updated above; the PR itself can stay open for its commit history or be closed as superseded.</p>
 </section>
