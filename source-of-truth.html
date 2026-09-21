@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Source of Truth — leonardoquintero-ctrl.github.io</title>
+<title>Source of Truth — Quint·IA Vantage</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -40,7 +40,7 @@
   }
   .skip-link:focus { left: 0; }
   header.hero {
-    max-width: 880px; margin: 0 auto; padding: 56px 0 32px;
+    max-width: 920px; margin: 0 auto; padding: 56px 0 32px;
     border-bottom: 1px solid var(--border);
   }
   .eyebrow {
@@ -48,12 +48,18 @@
     text-transform: uppercase; color: var(--cyan); font-weight: 600;
   }
   h1 { font-size: clamp(28px, 4vw, 40px); margin: 10px 0 8px; font-weight: 800; }
-  .subtitle { color: var(--text-secondary); font-size: 16px; max-width: 60ch; }
+  .subtitle { color: var(--text-secondary); font-size: 16px; max-width: 65ch; }
   .meta {
     font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text-muted);
     margin-top: 16px;
   }
-  main { max-width: 880px; margin: 0 auto; }
+  .headline-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .fact-pill {
+    background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; font-size: 13.5px; max-width: 420px;
+  }
+  .fact-pill .label { color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; display: block; margin-bottom: 3px; }
+  main { max-width: 920px; margin: 0 auto; }
   nav.toc {
     background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px;
     padding: 20px 24px; margin: 32px 0; font-size: 14px;
@@ -65,6 +71,7 @@
   h2 { font-size: 22px; font-weight: 700; margin: 0 0 6px; scroll-margin-top: 24px; }
   h2 .anchor { color: var(--text-muted); font-weight: 400; font-size: 15px; margin-left: 8px; text-decoration: none; }
   h3 { font-size: 16px; font-weight: 700; margin: 24px 0 8px; }
+  h4 { font-size: 14px; font-weight: 700; margin: 18px 0 6px; color: var(--text-primary); }
   p { color: var(--text-secondary); }
   strong { color: var(--text-primary); }
   code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; background: var(--bg-elevated); padding: 1px 6px; border-radius: 4px; color: var(--mint); }
@@ -81,6 +88,7 @@
   }
   .callout.warn { border-color: var(--amber); }
   .callout.risk { border-color: var(--red); }
+  .callout.ok { border-color: var(--mint); }
   table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; }
   caption { text-align: left; color: var(--text-muted); font-size: 12.5px; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; }
   th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -94,6 +102,7 @@
   .badge-ok { background: rgba(52,211,153,0.12); color: var(--mint); }
   .badge-warn { background: rgba(245,165,36,0.12); color: var(--amber); }
   .badge-risk { background: rgba(245,90,90,0.12); color: var(--red); }
+  .badge-muted { background: rgba(139,146,160,0.12); color: var(--text-secondary); }
   .issues { list-style: none; padding-left: 0; counter-reset: issue; }
   .issues li { counter-increment: issue; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px 14px 44px; margin-bottom: 10px; position: relative; }
   .issues li::before {
@@ -103,8 +112,14 @@
   .checklist { list-style: none; padding-left: 0; }
   .checklist li { padding-left: 26px; position: relative; }
   .checklist li::before { content: '☐'; position: absolute; left: 0; color: var(--text-muted); }
+  .repo-card {
+    background: var(--bg-surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 22px; margin: 18px 0;
+  }
+  .repo-card h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .repo-card .repo-name { font-family: 'JetBrains Mono', monospace; font-size: 15px; }
   footer.page-footer {
-    max-width: 880px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid var(--border);
+    max-width: 920px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid var(--border);
     color: var(--text-muted); font-size: 13px;
   }
   code.file { color: var(--cyan); }
@@ -115,10 +130,15 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header class="hero">
-  <div class="eyebrow">Internal · Repo Status</div>
+  <div class="eyebrow">Internal · Whole-Project Status</div>
   <h1>Source of Truth</h1>
-  <p class="subtitle">Canonical status page for <code>leonardoquintero-ctrl.github.io</code>. If a page's live copy conflicts with this document, this document wins — update it whenever the site changes materially.</p>
-  <div class="meta">Last rebuilt: 2026-09-21 · Mirrors <code class="file">README.md</code> in the repo root</div>
+  <p class="subtitle">Canonical status page for the Quint·IA Vantage project — all 6 repos, not just <code>leonardoquintero-ctrl.github.io</code>. If a page's or a repo's live content conflicts with this document, this document wins — update it whenever anything changes materially.</p>
+  <div class="meta">Last rebuilt: 2026-09-21 · Mirrors <code class="file">README.md</code> in the <code class="file">leonardoquintero-ctrl.github.io</code> repo root</div>
+  <div class="headline-facts">
+    <div class="fact-pill"><span class="label">Brand name (current)</span>Quint·IA Vantage — "Vertia Labs" is a legacy internal name not yet fully swept out</div>
+    <div class="fact-pill"><span class="label">Retainer pricing (current)</span>$950 / $1,750 / $2,750 (Foundation / Momentum / Citation Engine)</div>
+    <div class="fact-pill"><span class="label">Caveat</span>No live product sells retainers yet — only the $500 Blueprint is actually purchasable</div>
+  </div>
 </header>
 
 <main id="main-content">
@@ -126,128 +146,148 @@
 <nav class="toc" aria-label="Table of contents">
   <h2>On this page</h2>
   <ol>
-    <li><a href="#what-this-is">What this repo actually is</a></li>
-    <li><a href="#known-issues">Known issues</a></li>
-    <li><a href="#file-map">File map</a></li>
-    <li><a href="#brand-state">Brand state</a></li>
-    <li><a href="#product">Product &amp; business model</a></li>
-    <li><a href="#launch-sprint">Launch sprint status</a></li>
+    <li><a href="#project-map">Project map — 6 repos</a></li>
+    <li><a href="#this-repo">This repo (leonardoquintero-ctrl.github.io)</a></li>
+    <li><a href="#architecture">Product architecture — what's live</a></li>
+    <li><a href="#pricing">Pricing across all sources</a></li>
+    <li><a href="#decision-log">Decision log</a></li>
     <li><a href="#design-system">Design system</a></li>
     <li><a href="#schema">Schema markup</a></li>
-    <li><a href="#open-tasks">Open integration tasks</a></li>
-    <li><a href="#prior-handoff">Prior handoff doc</a></li>
+    <li><a href="#open-tasks">Open tasks</a></li>
+    <li><a href="#prior-docs">Prior docs</a></li>
   </ol>
 </nav>
 
-<section id="what-this-is">
-  <h2>What this repo actually is <a class="anchor" href="#what-this-is">#</a></h2>
-  <p>One GitHub Pages repo currently hosting <strong>two unrelated things</strong>:</p>
-  <ol>
-    <li><strong>Vertia Labs internal strategy doc</strong> — <code class="file">index.html</code>, served at the site root. A private-feeling business plan (market analysis, pricing logic, unit economics, a 30-day founder launch sprint checklist) for a two-person venture (Leonardo + a co-founder referred to as "Nora"). Branded <strong>Vertia Labs</strong>, not Quint·IA Vantage. This is almost certainly not meant to be public at the root of a live domain — see Known Issues.</li>
-    <li><strong>Quint·IA Vantage marketing site</strong> — 6 standalone pages (<code>quintia-*.html</code>) for an AEO (Answer Engine Optimization) agency targeting LatAm→US B2B companies. This is the product described inside the Vertia Labs strategy doc, already built out as a shippable site.</li>
-  </ol>
-  <p>Plus a handful of internal design tools that aren't part of either public surface: <code class="file">Typography-sandbox.html</code>, <code class="file">gradient-mixer.html</code>, <code class="file">namesandbox.html</code>, <code class="file">AI-engine-simulator.html</code>.</p>
-  <p>There is no build step anywhere in this repo. Every page is a single self-contained <code>.html</code> file: inline CSS, inline JSON-LD, Google Fonts via <code>&lt;link&gt;</code>, no JS framework, no bundler, no <code>package.json</code>.</p>
-</section>
-
-<section id="known-issues">
-  <h2>Known issues <a class="anchor" href="#known-issues">#</a></h2>
-  <p>These are real, currently-live problems, not hypothetical risks. Read this before touching the site.</p>
-  <ol class="issues">
-    <li><span class="badge badge-risk">root mismatch</span><br><strong>The site root doesn't serve the marketing site.</strong> GitHub Pages serves <code class="file">index.html</code> at <code>/</code>, which is the internal Vertia Labs strategy doc — not <code class="file">quintia-vantage-v2.html</code> (the actual Quint·IA homepage). Anyone hitting <code>leonardoquintero-ctrl.github.io</code> today sees founder-facing business planning, not the product.</li>
-    <li><span class="badge badge-risk">broken nav</span><br><strong>All internal nav links across the 6 Quint·IA pages are broken on this host.</strong> Every nav/footer/CTA link uses clean paths (<code>/why-aeo-matters</code>, <code>/services</code>, <code>/pricing</code>, <code>/quick-start-blueprint</code>, <code>/</code>) with no <code>.html</code> extension. GitHub Pages does no rewriting, there's no <code>CNAME</code> file, no custom domain, and no redirect config (no <code>_redirects</code>, no <code>vercel.json</code>, no <code>netlify.toml</code>). Every nav click 404s except within a platform that does clean-URL rewriting. Actual filenames: <code class="file">quintia-vantage-v2.html</code>, <code class="file">quintia-why-aeo-matters.html</code>, <code class="file">quintia-how-aeo-works.html</code>, <code class="file">quintia-services.html</code>, <code class="file">quintia-pricing.html</code>, <code class="file">quintia-quick-start-blueprint.html</code>.</li>
-    <li><span class="badge badge-warn">pricing mismatch</span><br><strong>Citation Engine price is inconsistent between the two projects.</strong> The Quint·IA pages (<code class="file">quintia-pricing.html</code>, <code class="file">quintia-services.html</code>, <code class="file">quintia-vantage-v2.html</code>) all say <strong>$2,750/mo</strong>. The internal strategy doc (<code class="file">index.html</code>) says <strong>$2,500/mo</strong>. Foundation ($950) and Momentum ($1,750) agree everywhere. This is the same class of bug as the old $750-vs-$950 Foundation mismatch already fixed — see Prior handoff doc below.</li>
-    <li><span class="badge badge-warn">domain unconfirmed</span><br><strong>Domain used in JSON-LD/canonical is <code>quintiavantage.com</code></strong> (no hyphen) — confirm this is the actual purchased domain; the original handoff doc referenced <code>quintia-vantage.com</code> (with hyphen), which was wrong/stale.</li>
-    <li><span class="badge badge-warn">no CNAME</span><br><strong>No <code>CNAME</code> file</strong> — GitHub Pages is serving off the default <code>github.io</code> subdomain, not a custom domain, regardless of what the canonical URLs claim.</li>
-    <li><span class="badge badge-warn">payment CTAs</span><br><strong>All "buy" and payment CTAs are placeholders.</strong> <code class="file">quintia-quick-start-blueprint.html</code> and <code class="file">index.html</code> both have <code>&lt;a href="#" class="btn-primary"&gt;</code> where a Stripe Checkout link or HubSpot embed should be.</li>
-    <li><span class="badge badge-warn">AEO discoverability</span><br><strong>No <code>robots.txt</code>, no <code>llms.txt</code>, no <code>sitemap.xml</code></strong> exist anywhere in the repo. For an AEO/AI-citation-focused product this is a notable gap — called out as "high priority" in the prior handoff doc and still not created.</li>
-    <li><span class="badge badge-warn">no analytics</span><br><strong>No GA4 or any analytics</strong> wired into any page.</li>
-  </ol>
-  <div class="callout risk">
-    None of the above have been fixed in this pass — this page's job is to make the state legible, not to unilaterally rewrite live pages. Issues #1 and #2 in particular imply a real decision (which page is the actual homepage, and whether this repo gets a custom domain) — confirm before fixing.
-  </div>
-</section>
-
-<section id="file-map">
-  <h2>File map <a class="anchor" href="#file-map">#</a></h2>
+<section id="project-map">
+  <h2>Project map — 6 repos <a class="anchor" href="#project-map">#</a></h2>
   <table>
-    <caption>All files in repo root</caption>
-    <thead><tr><th>File</th><th>Role</th><th>Status</th></tr></thead>
+    <thead><tr><th>Repo</th><th>Visibility</th><th>Role</th><th>Status</th></tr></thead>
     <tbody>
-      <tr><td><code class="file">index.html</code></td><td>Vertia Labs internal strategy/planning doc. Served at site root.</td><td><span class="badge badge-risk">mismatched</span></td></tr>
-      <tr><td><code class="file">quintia-vantage-v2.html</code></td><td>Quint·IA Vantage homepage</td><td><span class="badge badge-ok">complete</span></td></tr>
-      <tr><td><code class="file">quintia-why-aeo-matters.html</code></td><td>Article: SEO→AEO shift</td><td><span class="badge badge-ok">complete</span></td></tr>
-      <tr><td><code class="file">quintia-how-aeo-works.html</code></td><td>Article: 4-pillar AEO framework</td><td><span class="badge badge-ok">complete</span></td></tr>
-      <tr><td><code class="file">quintia-services.html</code></td><td>Retainer tiers (Foundation / Momentum / Citation Engine)</td><td><span class="badge badge-ok">complete</span></td></tr>
-      <tr><td><code class="file">quintia-pricing.html</code></td><td>Full pricing table + Blueprint credit mechanic</td><td><span class="badge badge-warn">see pricing mismatch</span></td></tr>
-      <tr><td><code class="file">quintia-quick-start-blueprint.html</code></td><td>$500 diagnostic conversion page</td><td><span class="badge badge-warn">CTA placeholder</span></td></tr>
-      <tr><td><code class="file">source-of-truth.html</code></td><td>This page</td><td><span class="badge badge-ok">current</span></td></tr>
-      <tr><td><code class="file">README.md</code></td><td>Markdown twin of this page (repo root doc)</td><td><span class="badge badge-ok">current</span></td></tr>
-      <tr><td><code class="file">QUINTIA-HANDOFF.md</code></td><td>Original build handoff notes (2026-07-09) for the 6 Quint·IA pages</td><td><span class="badge badge-warn">historical</span></td></tr>
-      <tr><td><code class="file">Typography-sandbox.html</code></td><td>Internal font-pairing sandbox</td><td>design tool, not public-facing</td></tr>
-      <tr><td><code class="file">gradient-mixer.html</code></td><td>Internal gradient/color tool</td><td>design tool, not public-facing</td></tr>
-      <tr><td><code class="file">namesandbox.html</code></td><td>AEO agency name-generation tool</td><td>design tool, not public-facing</td></tr>
-      <tr><td><code class="file">AI-engine-simulator.html</code></td><td>"Vertia Labs | AI Citation Strategy" simulator</td><td>internal tool, branding still says Vertia Labs</td></tr>
+      <tr><td><code class="file">leonardoquintero-ctrl.github.io</code> <span class="badge badge-muted">this repo</span></td><td>public</td><td>Marketing-site prototype + internal strategy doc + design sandboxes</td><td><span class="badge badge-warn">likely never deployed as the real site</span></td></tr>
+      <tr><td><strong><code class="file">quint-ia-blueprint-funnel</code></strong></td><td>private</td><td><strong>The actual live product.</strong> Full $500 Blueprint funnel: intake → Stripe → AI-visibility scan → report</td><td><span class="badge badge-ok">live, active</span></td></tr>
+      <tr><td><code class="file">quint-ia-report-generator</code></td><td>public ⚠️</td><td>Original standalone scan/report engine</td><td><span class="badge badge-risk">dead, recommend archiving</span></td></tr>
+      <tr><td><code class="file">quint-ia-mini-checkers</code></td><td>private</td><td>"IVIA Lite" — free checkers for Framer <code>/ivia/*</code> pages</td><td><span class="badge badge-warn">partial: 2 of 6 checkers</span></td></tr>
+      <tr><td><code class="file">cold-reach-tool</code></td><td>private</td><td>Internal sales-rep tool: lookups, AI-citation checks, lead scoring</td><td><span class="badge badge-warn">not yet deployed</span></td></tr>
+      <tr><td><code class="file">vertia_labs</code></td><td>private</td><td>Origin strategy/brand doc, frozen since 2026-05-04</td><td><span class="badge badge-muted">frozen, still useful</span></td></tr>
     </tbody>
   </table>
 </section>
 
-<section id="brand-state">
-  <h2>Brand state <a class="anchor" href="#brand-state">#</a></h2>
-  <p>Two names are in active use and not yet reconciled:</p>
-  <ul>
-    <li><strong>Vertia Labs</strong> — used in <code class="file">index.html</code> (root strategy doc) and <code class="file">AI-engine-simulator.html</code> / <code class="file">Typography-sandbox.html</code> titles.</li>
-    <li><strong>Quint·IA Vantage</strong> — used across all 6 public marketing pages and in the JSON-LD organization schema.</li>
-  </ul>
-  <p>Quint·IA Vantage reads as the settled external brand (it's what all customer-facing copy uses); Vertia Labs looks like an earlier/internal-only name that didn't get fully swept out of the planning doc and sandbox tools.</p>
-</section>
-
-<section id="product">
-  <h2>Product &amp; business model <a class="anchor" href="#product">#</a></h2>
-  <p>Answer Engine Optimization (AEO) agency helping LatAm-to-US and US B2B/SaaS companies get cited by AI answer engines (ChatGPT, Claude, Perplexity, Gemini/AI Overviews), positioned as a <strong>productized middle tier</strong> between $30–500/mo self-serve monitoring tools (Profound, Peec AI, Scrunch, Otterly) and $5K–20K+/mo full-service PR-led agencies (NP Digital, Single Grain, Siege Media).</p>
-
-  <h3>Three stated differentiators</h3>
+<section id="this-repo">
+  <h2>This repo — leonardoquintero-ctrl.github.io <a class="anchor" href="#this-repo">#</a></h2>
+  <p>One GitHub Pages repo hosting <strong>two unrelated things</strong>, plus design tools:</p>
   <ol>
-    <li>PR-free citation strategy (own Reddit/G2/YouTube/Wikidata/first-party structured content instead of press/backlinks)</li>
-    <li>Problem-specific review discovery — proprietary/unvalidated hypothesis that reviews framed around specific customer problems get cited 3–4x more than generic testimonials</li>
-    <li>Cross-lingual (ES↔EN) entity management for LatAm companies expanding into the US</li>
+    <li><strong>Vertia Labs internal strategy doc</strong> — <code class="file">index.html</code>, served at the site root. A near-byte-identical later revision of <code class="file">vertia_labs/strategic-HTML-src-of-truth.html</code>. Still branded "Vertia Labs" — legacy naming, not yet swept.</li>
+    <li><strong>Quint·IA Vantage marketing pages</strong> — 6 standalone <code>quintia-*.html</code> files. Well-built (WCAG AA, full JSON-LD) but <strong>likely a design prototype that was never actually deployed as the real site</strong> — see the domain finding below.</li>
   </ol>
+  <p>Plus internal design tools not part of either public surface: <code class="file">Typography-sandbox.html</code>, <code class="file">gradient-mixer.html</code>, <code class="file">namesandbox.html</code>, <code class="file">AI-engine-simulator.html</code>. No build step anywhere — every page is a single self-contained <code>.html</code> file.</p>
 
-  <h3>Offers</h3>
-  <table>
-    <thead><tr><th>Offer</th><th>Price</th><th>Commitment</th><th>Notes</th></tr></thead>
-    <tbody>
-      <tr><td>Quick-Start Blueprint</td><td>$500 one-time <span class="badge badge-warn">launch promo: $250 for first 5</span></td><td>5–10 business days</td><td>Front door for every engagement; credits toward month 1 if a retainer is signed within 30 days of the readout call</td></tr>
-      <tr><td>Foundation</td><td>$950/mo</td><td>3-month minimum</td><td>Audit, schema specs, owned knowledge graph seed, 2 content pieces/mo</td></tr>
-      <tr><td>Momentum</td><td>$1,750/mo</td><td>6-month minimum</td><td>4–5 pieces/mo, glossary, Reddit/Quora work, weekly tracking. "Most Popular" tier</td></tr>
-      <tr><td>Citation Engine</td><td><span class="badge badge-risk">$2,750 vs $2,500 — unresolved</span></td><td>6-month minimum</td><td>8–10 pieces, FAQ deep program, 4-engine weekly tracking, quarterly exec review</td></tr>
-    </tbody>
-  </table>
-
+  <h3>The domain finding — why the nav links are probably not "broken," just not live</h3>
+  <p>Every nav link across the 6 marketing pages uses clean paths (<code>/pricing</code>, <code>/services</code>, etc.) with no matching filename or redirect config on this host — they 404 here. That looked like a plain bug at first. But <code class="file">quint-ia-blueprint-funnel</code> deploys to <code>blueprint.quintiavantage.com</code> — a <strong>subdomain</strong> — which only makes sense if the root domain <code>quintiavantage.com</code> hosts something else, almost certainly the <strong>Framer site</strong> that <code class="file">quint-ia-mini-checkers</code> expects at <code>/ivia/*</code>.</p>
   <div class="callout warn">
-    <strong>Year-1 targets</strong> (from internal strategy doc, unvalidated): $15–20K MRR by month 6, 65%+ gross margin at scale, CAC &lt;$2K (LatAm) / &lt;$3K (US), Blueprint→retainer conversion target 30–40% within 60 days.
+    <strong>Working hypothesis, not confirmed</strong> (no access to the Framer project or DNS): the real production site is on Framer at the root domain, and the 6 HTML pages in this repo are a design reference/prototype that was never wired up as the actual site. If true, the "broken nav" was never meant to be the live site's routing. Confirm what <code>quintiavantage.com</code> actually resolves to before doing routing work here.
+  </div>
+
+  <h3>Other known issues here</h3>
+  <ul>
+    <li>Citation Engine price says <strong>$2,750</strong> on the marketing pages (matches confirmed-current pricing) but <code class="file">index.html</code>'s internal figure still says <strong>$2,500</strong> (stale).</li>
+    <li>No <code>CNAME</code>, <code>robots.txt</code>, <code>llms.txt</code>, <code>sitemap.xml</code>, GA4, or payment wiring in this repo. Payment now exists for real — in <code class="file">quint-ia-blueprint-funnel</code>, not here.</li>
+    <li>All "buy" CTAs in <code class="file">quintia-quick-start-blueprint.html</code> are still <code>href="#"</code> placeholders. If these pages ever become the real marketing site, they should point at <code>blueprint.quintiavantage.com</code> rather than reimplement checkout.</li>
+    <li>Two brand names in use: "Vertia Labs" (<code class="file">index.html</code>) vs "Quint·IA Vantage" (everything else, confirmed current).</li>
+  </ul>
+</section>
+
+<section id="architecture">
+  <h2>Product architecture — what's actually live <a class="anchor" href="#architecture">#</a></h2>
+
+  <div class="repo-card">
+    <h3><span class="repo-name">quint-ia-blueprint-funnel</span> <span class="badge badge-ok">live, paid product</span></h3>
+    <p>Real Stripe Checkout, real HubSpot lead capture (fails open if unconfigured — never blocks the funnel), real Turso DB via Drizzle. Generates 5 buyer-style prompts per company, checks citation across Claude/ChatGPT/Perplexity (Gemini mocked — no public API), computes a visibility score, produces a client-facing report (web + PDF) and an internal owner report. <code>BLUEPRINT_PRICE_CENTS = 50000</code> ($500) hardcoded in <code>src/lib/payment/provider.ts</code>. Deployed to <strong>two live domains</strong>: <code>blueprint.quintiavantage.com</code> and <code>blueprint.aeolatam.com</code>.</p>
+    <p>Recent/active work: buyer-prompt quality (industry-aware, category-diversified prompt bank, PR #7), a cold-reach admin mini-feature, a citation-intelligence subsystem, a 16-module report builder. Its own <code>PROJECT_STATUS.md</code> (dated 2026-07-25) is now stale relative to the codebase.</p>
+    <h4>Known gaps</h4>
+    <ul>
+      <li>Full Stripe Checkout round-trip never visually verified in a real browser</li>
+      <li>No staging environment — deploys go straight from <code>main</code> to production</li>
+      <li>No monitoring/alerting beyond console logs for scan/payment failures</li>
+      <li>No refund/cancellation policy, ToS, or privacy policy written</li>
+      <li>README still calls payment a "placeholder" in one spot — stale, payment is real</li>
+    </ul>
+  </div>
+
+  <div class="repo-card">
+    <h3><span class="repo-name">quint-ia-report-generator</span> <span class="badge badge-risk">dead, still public</span></h3>
+    <p>Its own sibling repo's status doc says explicitly: not active, nothing in production routes to it, recommended for archival. Known bugs never fixed:</p>
+    <ul>
+      <li><code>isDomainCited()</code> still substring-matches (<code>citedDomain.includes(target)</code>) — would false-positive e.g. "notacme.com" against "acme.com"</li>
+      <li><code>/api/intake</code> still has no auth or rate limiting</li>
+      <li>Off-site checks: YouTube is now real, but LinkedIn/Crunchbase/G2/Capterra are still hardcoded-false stubs</li>
+    </ul>
+    <p>None of this blocks anything live — the funnel repo doesn't call it — but it sits public on GitHub with a real, if abandoned, scoring methodology and an open unauthenticated endpoint.</p>
+  </div>
+
+  <div class="repo-card">
+    <h3><span class="repo-name">quint-ia-mini-checkers</span> <span class="badge badge-warn">partial build</span></h3>
+    <p>"IVIA Lite" — meant to power free interactive checkers embedded on Framer <code>/ivia/*</code> pages, stateless by design (no DB). Only <strong>2 of 6</strong> planned checkers exist: directory presence (LinkedIn/Crunchbase/G2/Capterra via Serper.dev) and an <code>llms.txt</code> presence/format check, both ported unchanged from <code class="file">quint-ia-blueprint-funnel</code>. Rate limiting (10 req/min/IP, in-memory) and an SSRF guard (rejects private/reserved/metadata IP ranges, re-checked per redirect hop) are genuinely landed. No Turnstile, cooldowns, consent records, or data retention exist at all. Cold-domain prompt generation is fully spec'd in <code>docs/ivia-phase-b-scoping.md</code> but has zero corresponding code.</p>
+  </div>
+
+  <div class="repo-card">
+    <h3><span class="repo-name">cold-reach-tool</span> <span class="badge badge-warn">not yet deployed</span></h3>
+    <p>Internal sales tooling — real rep login/admin. Given a prospect domain: AI-citation check across 4 engines, DataForSEO backlink snapshot, schema/content-shape check, <code>llms.txt</code> check, generated "approach note." Just added (2026-09-21) a <strong>6-factor lead-prioritization rubric</strong>: US sell-intent, B2B, company size, reachable decision-maker, AI-visibility gap (auto-suggested from its own citation data), audience geography — each 0–2, total null until all six scored, 10–12 = "Priorizar."</p>
+    <p>Split out of <code class="file">quint-ia-blueprint-funnel</code> on 2026-09-17 after a shared-DB migration incident blocked both products' deploys. <strong>Per its own README, not yet functional</strong>: no dedicated Turso DB provisioned, Vercel env vars not set, DNS (<code>cold-reach.quintiavantage.com</code>) still points at blueprint-funnel, no confirmed end-to-end lookup.</p>
+  </div>
+
+  <div class="repo-card">
+    <h3><span class="repo-name">vertia_labs</span> <span class="badge badge-muted">frozen since 2026-05-04</span></h3>
+    <p><code>strategic-HTML-src-of-truth.html</code> is the direct ancestor of this repo's <code class="file">index.html</code> (near byte-identical — only a CSS checklist block and a minor grid tweak differ). <code>brand/Visual Guidelines</code> is the only formal brand-identity spec in the whole project (color ratios, typography, tier-color mapping) — titled "Internal Brand Reference for Vertia Labs." <code>core-strategy/</code> holds condensed strategy docs. <code>delivery-templates/ops-blueprint.md</code> and <code>content-frameworks.md</code> are real operational SOPs — Blueprint delivery process, editorial content standards — not duplicated anywhere else in the project. Worth pulling forward rather than leaving buried in a dormant repo.</p>
   </div>
 </section>
 
-<section id="launch-sprint">
-  <h2>Launch sprint status <a class="anchor" href="#launch-sprint">#</a></h2>
-  <p><code class="file">index.html</code> contains a 30-day, ~176-hour founder launch sprint (two tracks: "Partner"/Leonardo and "Nora") with a definition-of-done of: public site live, Blueprint purchasable, HubSpot delivery-ready, first outbound motion in market.</p>
-  <p><strong>6 of 79 checklist items are marked done</strong>, all of them Week 1 kickoff items:</p>
-  <ul class="checklist">
-    <li>Read strategy doc end-to-end together</li>
-    <li>Agree on day-30 done state</li>
-    <li>Pick working brand name + domain</li>
-    <li>Lock launch pricing</li>
-  </ul>
-  <p>Everything after that — legal entity setup, HubSpot provisioning, domain DNS, MSA/SOW templates, content production, outbound — is still unchecked in the doc, even though the 6 marketing pages themselves are already built.</p>
-  <div class="callout">
-    In other words: <strong>the site is further along than the ops/business-setup track.</strong>
+<section id="pricing">
+  <h2>Pricing across all sources found <a class="anchor" href="#pricing">#</a></h2>
+  <table>
+    <caption>Reconciled 2026-09-21</caption>
+    <thead><tr><th>Source</th><th>Foundation</th><th>Momentum</th><th>Citation Engine</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code class="file">vertia_labs</code> (2026-05, oldest)</td><td>$750/mo</td><td>$1,750/mo</td><td>$2,500/mo</td><td>Origin numbers</td></tr>
+      <tr><td><code class="file">index.html</code> here (2026-07)</td><td>$950/mo</td><td>$1,750/mo</td><td>$2,500/mo</td><td>Foundation bumped, Citation Engine not carried forward</td></tr>
+      <tr><td><strong>Live marketing pages (2026-07) — current</strong></td><td><strong>$950/mo</strong></td><td><strong>$1,750/mo</strong></td><td><strong>$2,750/mo</strong></td><td>Confirmed current as of this rebuild</td></tr>
+      <tr><td><code class="file">quint-ia-blueprint-funnel</code> (the live paid product)</td><td>—</td><td>—</td><td>—</td><td><strong>No retainer tiers exist in the actual product.</strong> Only the $500 one-time Blueprint is purchasable</td></tr>
+    </tbody>
+  </table>
+  <div class="callout warn">
+    Action implied: <code class="file">index.html</code>'s $2,500 Citation Engine figure is stale and should be updated to $2,750, and/or "Vertia Labs" branding there should be swept to "Quint·IA Vantage" — both edits are in <code class="file">leonardoquintero-ctrl.github.io</code> only. Nothing to change in <code class="file">vertia_labs</code> (frozen/historical) or <code class="file">quint-ia-blueprint-funnel</code> (doesn't sell retainers, not affected).
   </div>
+</section>
+
+<section id="decision-log">
+  <h2>Decision log <a class="anchor" href="#decision-log">#</a></h2>
+  <p>Supersedes the 5 "blocking decisions" from the 2026-08-15 pre-build handoff (<code>docs/ivia-handoff-local.md</code>, PR #1 on <code class="file">leonardoquintero-ctrl.github.io</code>) — most are now resolved:</p>
+  <table>
+    <thead><tr><th>Old open question</th><th>Resolution</th></tr></thead>
+    <tbody>
+      <tr><td>"Where is <code>quint-ia-blueprint-funnel</code>? Deleted, different org, never built?"</td><td><span class="badge badge-ok">Resolved</span> — exists, is the live paid product, owns intake/payment/DB itself</td></tr>
+      <tr><td>"Make <code>quint-ia-report-generator</code> private before extending it"</td><td><span class="badge badge-warn">Superseded</span> — nobody's extending it, it's dead; new recommendation below</td></tr>
+      <tr><td>Language handling (<code>?lang=</code> param, no detection logic)</td><td><span class="badge badge-muted">Still open</span> — no repo implements detection/switching yet</td></tr>
+      <tr><td>PDF renderer (headless Chromium too heavy)</td><td><span class="badge badge-ok">Resolved differently</span> — uses <code>@react-pdf/renderer</code>, not headless Chromium</td></tr>
+      <tr><td>Directory/off-site data source for entity checks</td><td><span class="badge badge-warn">Partially resolved</span> — mini-checkers' Serper.dev-based checker covers this for free checkers; report-generator's version is still stubbed but that repo is dead anyway</td></tr>
+    </tbody>
+  </table>
+
+  <h3>New open items from this audit</h3>
+  <ul class="checklist">
+    <li><strong>Archive or make <code class="file">quint-ia-report-generator</code> private.</strong> Dead, still public, unauthenticated <code>/api/intake</code>, unfixed citation bug. Its own sibling repo already recommends this.</li>
+    <li><strong>Confirm what <code>quintiavantage.com</code> (root domain) actually serves.</strong> If Framer as hypothesized, decide what this repo's 6 marketing pages are for going forward.</li>
+    <li>Sweep "Vertia Labs" branding and the stale $2,500 Citation Engine figure out of <code class="file">index.html</code> in this repo.</li>
+    <li>Decide whether the retainer tiers need a real checkout path, or the product strategy is Blueprint-only for now.</li>
+    <li>Finish deploying <code class="file">cold-reach-tool</code> — dedicated Turso DB, Vercel env vars, DNS repoint, one confirmed end-to-end lookup.</li>
+    <li>Pull <code class="file">vertia_labs/delivery-templates/</code> and <code>brand/Visual Guidelines</code> into an active repo.</li>
+    <li>Everything previously listed for this repo: robots.txt, llms.txt, sitemap.xml, GA4, CNAME (pending the domain question above).</li>
+  </ul>
 </section>
 
 <section id="design-system">
   <h2>Design system <a class="anchor" href="#design-system">#</a></h2>
-  <p>Design tokens used across the 6 Quint·IA Vantage pages (and this page):</p>
+  <p>Tokens used across the 6 Quint·IA Vantage marketing pages (and this page):</p>
   <pre>--bg-base:        #0B0E11
 --bg-surface:      #12151B
 --bg-elevated:     #161A22
@@ -258,16 +298,15 @@
 --text-primary:    #FAFBFC
 --text-secondary:  #8B92A0
 --text-muted:      #747F8F   (4.77:1 WCAG AA)</pre>
-  <p>Fonts: <strong>Inter</strong> (body/heads) + <strong>JetBrains Mono</strong> (stats/prices/code), loaded via Google Fonts <code>&lt;link&gt;</code>.</p>
-  <p>Layout pattern (article pages): eyebrow → claim (left) + evidence (right) in a <code>5fr 7fr</code> grid → 3-column stat strip → callout. Collapses to 1 column at 1024px.</p>
-  <p>Accessibility: WCAG 2.1 AA across all 6 pages — skip link, <code>:focus-visible</code> outlines, <code>prefers-reduced-motion</code>, ≥4.5:1 contrast on body text, semantic landmarks, all FAQ content live in the DOM (no accordion-hidden content).</p>
+  <p>Fonts: <strong>Inter</strong> (body/heads) + <strong>JetBrains Mono</strong> (stats/prices/code).</p>
+  <p>Accessibility: WCAG 2.1 AA across all 6 pages — skip link, <code>:focus-visible</code> outlines, <code>prefers-reduced-motion</code>, ≥4.5:1 contrast, semantic landmarks, all FAQ content live in the DOM.</p>
   <div class="callout warn">
-    The <code class="file">index.html</code> / Vertia Labs doc uses a <strong>different, unrelated design system</strong> (DM Sans + DM Serif Display, light background <code>#f4f5fa</code>, navy/indigo/violet/fuchsia gradient brand) — it was never meant to share a visual identity with the Quint·IA pages.
+    <code class="file">vertia_labs/brand/Visual Guidelines</code> specifies a <strong>different</strong> formal brand system (DM Serif Display + DM Sans, indigo/violet/fuchsia gradient, glassmorphism cards, tier-color mapping) under the "Vertia Labs v8" name — never reconciled with the token set above. <code class="file">index.html</code> here uses that older system; the 6 marketing pages use the tokens above.
   </div>
 </section>
 
 <section id="schema">
-  <h2>Schema markup <a class="anchor" href="#schema">#</a></h2>
+  <h2>Schema markup (this repo's 6 marketing pages) <a class="anchor" href="#schema">#</a></h2>
   <table>
     <thead><tr><th>Page</th><th>JSON-LD types</th></tr></thead>
     <tbody>
@@ -282,23 +321,22 @@
 </section>
 
 <section id="open-tasks">
-  <h2>Open integration tasks <a class="anchor" href="#open-tasks">#</a></h2>
+  <h2>Open tasks <a class="anchor" href="#open-tasks">#</a></h2>
+  <p>Full list is under <a href="#decision-log">Decision log</a> above; the short version, in rough priority order:</p>
   <ul class="checklist">
-    <li>Decide what serves at <code>/</code> — the marketing homepage or the internal doc — and fix routing accordingly (custom domain + clean-URL support, or rename files to match the <code>/path</code> links already in the nav, or point the nav at real <code>.html</code> filenames)</li>
-    <li>Reconcile Citation Engine price ($2,750 vs $2,500) across <code class="file">index.html</code> and the Quint·IA pages</li>
-    <li>Reconcile/confirm real domain (<code>quintiavantage.com</code> vs <code>quintia-vantage.com</code>) and add a <code>CNAME</code> file if a custom domain is owned</li>
-    <li>Wire Stripe Checkout (or HubSpot Payments, per the internal doc's ops plan) to the Blueprint $500 CTA in <code class="file">quintia-quick-start-blueprint.html</code> and <code class="file">index.html</code></li>
-    <li>Add <code>robots.txt</code> (allow GPTBot, ClaudeBot, PerplexityBot, Google-Extended explicitly) and <code>llms.txt</code> — both high priority for an AEO product specifically, both currently missing</li>
-    <li>Add <code>sitemap.xml</code></li>
-    <li>Add GA4 (or equivalent) to all public pages</li>
-    <li>Sweep remaining "Vertia Labs" branding out of <code class="file">AI-engine-simulator.html</code> and <code class="file">Typography-sandbox.html</code> titles if Quint·IA Vantage is the final name</li>
-    <li>Move the internal strategy doc (<code class="file">index.html</code>) off the public root, or gate it, since it currently exposes founder-facing pricing logic, margin targets, and an unvalidated competitive-moat hypothesis to anyone who visits the bare domain</li>
+    <li>Archive/privatize <code class="file">quint-ia-report-generator</code></li>
+    <li>Confirm the real <code>quintiavantage.com</code> deployment (Framer hypothesis)</li>
+    <li>Fix <code class="file">index.html</code>'s stale brand name and Citation Engine price</li>
+    <li>Finish deploying <code class="file">cold-reach-tool</code></li>
+    <li>Decide the retainer-tier checkout strategy</li>
+    <li>Add robots.txt / llms.txt / sitemap.xml / GA4 / CNAME to whichever repo ends up being the real marketing site</li>
   </ul>
 </section>
 
-<section id="prior-handoff">
-  <h2>Prior handoff doc <a class="anchor" href="#prior-handoff">#</a></h2>
-  <p><code class="file">QUINTIA-HANDOFF.md</code> is the original 2026-07-09 build handoff for the 6 Quint·IA pages. It's kept for build-detail history (file map at build time, original schema notes) but its domain reference and "open tasks" list are superseded by this page — treat this page (and <code class="file">README.md</code>) as current, <code class="file">QUINTIA-HANDOFF.md</code> as historical.</p>
+<section id="prior-docs">
+  <h2>Prior docs <a class="anchor" href="#prior-docs">#</a></h2>
+  <p><code class="file">QUINTIA-HANDOFF.md</code> — original 2026-07-09 build handoff for the 6 marketing pages. Historical; domain/pricing notes superseded by this page.</p>
+  <p>PR #1 (<code>claude/ivia-mini-app-prebuild-review-afavy8</code>, still open on <code class="file">leonardoquintero-ctrl.github.io</code>) — the original IVIA pre-build review this rebuild supersedes. Its findings are captured/updated above; the PR itself can stay open for its commit history or be closed as superseded.</p>
 </section>
 
 </main>
