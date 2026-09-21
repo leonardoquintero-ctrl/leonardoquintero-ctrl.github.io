@@ -8,19 +8,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-base: #0B0E11;
-    --bg-surface: #12151B;
-    --bg-elevated: #161A22;
-    --indigo: #4F6EF7;
-    --btn-indigo: #4866F4;
-    --cyan: #00D4FF;
-    --mint: #34D399;
-    --amber: #F5A524;
-    --red: #F55A5A;
-    --text-primary: #FAFBFC;
-    --text-secondary: #8B92A0;
-    --text-muted: #747F8F;
-    --border: #22262F;
+    /* "Authoritative B2B Consulting meets Modern Tech" — the current brand system,
+       per quint-ia-blueprint-funnel/src/app/globals.css. Replaces the old dark
+       indigo palette ported from the design-reference marketing pages, which
+       that file's own comment now calls historical, not the source of truth. */
+    --bg-base: #F8F9FA;
+    --bg-surface: #FFFFFF;
+    --bg-elevated: #FFFFFF;
+    --indigo: #047857;
+    --btn-indigo: #047857;
+    --cyan: #0891B2;
+    --mint: #059669;
+    --amber: #B45309;
+    --red: #DC2626;
+    --text-primary: #1E293B;
+    --text-secondary: #475569;
+    --text-muted: #64748B;
+    --border: #E2E8F0;
   }
   * { box-sizing: border-box; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
@@ -99,10 +103,10 @@
     display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 11px;
     padding: 2px 8px; border-radius: 20px; font-weight: 600; letter-spacing: 0.02em;
   }
-  .badge-ok { background: rgba(52,211,153,0.12); color: var(--mint); }
-  .badge-warn { background: rgba(245,165,36,0.12); color: var(--amber); }
-  .badge-risk { background: rgba(245,90,90,0.12); color: var(--red); }
-  .badge-muted { background: rgba(139,146,160,0.12); color: var(--text-secondary); }
+  .badge-ok { background: rgba(5,150,105,0.1); color: var(--mint); }
+  .badge-warn { background: rgba(180,83,9,0.1); color: var(--amber); }
+  .badge-risk { background: rgba(220,38,38,0.1); color: var(--red); }
+  .badge-muted { background: rgba(71,85,105,0.08); color: var(--text-secondary); }
   .issues { list-style: none; padding-left: 0; counter-reset: issue; }
   .issues li { counter-increment: issue; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px 14px 44px; margin-bottom: 10px; position: relative; }
   .issues li::before {
