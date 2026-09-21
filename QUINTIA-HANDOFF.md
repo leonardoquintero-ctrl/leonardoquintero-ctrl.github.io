@@ -1,7 +1,9 @@
 # Quint·IA Vantage — Website Handoff
 
-**Built:** 2026-07-09  
+**Built:** 2026-07-09
 **Status:** All 6 pages complete. Deployed to GitHub Pages.
+
+> **This doc is historical build notes as of 2026-07-09.** For current project status, known issues (broken nav routing, root-page mismatch, pricing discrepancy, missing CNAME), and an up-to-date file map, see `README.md`. A few facts below are stale — noted inline.
 
 ---
 
@@ -134,16 +136,18 @@ Sitemap: https://quintia-vantage.com/sitemap.xml
 ```
 
 ### 6. Real domain / canonical URLs
-All JSON-LD `@id` and `url` fields use placeholder `https://quintia-vantage.com/`. Update these once DNS is pointed.
+All JSON-LD `@id` and `url` fields now use `https://quintiavantage.com/` (updated since this doc was written — the hyphenated `quintia-vantage.com` referenced in earlier drafts of this doc was wrong). No `CNAME` file exists in the repo, so GitHub Pages is still serving off the default `github.io` subdomain regardless of what the canonical URLs claim. Confirm the domain is actually owned and add `CNAME` once DNS is pointed.
 
 ### 7. Nav links
-All nav `<a href="#">` hrefs are placeholders. Replace with real relative paths once site is on its own domain/structure.
+Nav hrefs were since filled in with clean, extension-less paths (`/`, `/why-aeo-matters`, `/services`, etc.) rather than left as `href="#"` placeholders — but those paths don't match any real filename on this host (files are named `quintia-*.html`) and there's no rewrite/redirect config, so **every nav link currently 404s** on GitHub Pages. This needs an explicit fix, not just confirmation. See `README.md` Known Issues.
 
 ---
 
 ## Pricing note
 
-Source copy had a discrepancy: the pricing table listed Foundation at $750/mo but all descriptive text said $950/mo. **Used $950 consistently** across all pages. Confirm before launch.
+Source copy had a discrepancy: the pricing table listed Foundation at $750/mo but all descriptive text said $950/mo. **Used $950 consistently** across all pages — this was resolved and confirmed still consistent as of the 2026-09-21 README rebuild.
+
+A *different* pricing discrepancy now exists at the Citation Engine tier ($2,750 on these pages vs $2,500 in the internal Vertia Labs strategy doc at `index.html`) — see `README.md` for details. Not yet resolved.
 
 ---
 
