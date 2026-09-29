@@ -1,0 +1,69 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "@id": "https://quintiavantage.com/pricing#blueprint",
+      "name": "Quick-Start Blueprint",
+      "serviceType": "Answer engine optimization audit",
+      "provider": {"@id": "https://quintiavantage.com/#organization"},
+      "description": "One-time AI visibility diagnostic. Tests buyer-style prompts across ChatGPT, Claude and Perplexity, scores your citation visibility against named competitors, and delivers a prioritized 90-day action plan. The $500 fee credits toward month one of any retainer signed within 30 days.",
+      "offers": {
+        "@type": "Offer",
+        "name": "Quick-Start Blueprint",
+        "price": "500",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://blueprint.quintiavantage.com/"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://quintiavantage.com/pricing#foundation",
+      "name": "Foundation Retainer",
+      "serviceType": "Answer engine optimization retainer",
+      "provider": {"@id": "https://quintiavantage.com/#organization"},
+      "description": "AEO setup retainer, 3-month minimum. Technical audit, schema specs, knowledge graph seed, 2 AEO content pieces per month, monthly report.",
+      "offers": {
+        "@type": "Offer",
+        "name": "Foundation Retainer",
+        "price": "950",
+        "priceCurrency": "USD",
+        "priceSpecification": {"@type": "UnitPriceSpecification", "price": "950", "priceCurrency": "USD", "unitCode": "MON", "unitText": "month"},
+        "url": "https://quintiavantage.com/pricing"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://quintiavantage.com/pricing#momentum",
+      "name": "Momentum Retainer",
+      "serviceType": "Answer engine optimization retainer",
+      "provider": {"@id": "https://quintiavantage.com/#organization"},
+      "description": "AEO growth retainer, 6-month minimum. Full four-pillar program with 4 to 5 content pieces per month, Reddit and Quora presence, weekly prompt tracking, monthly strategy call.",
+      "offers": {
+        "@type": "Offer",
+        "name": "Momentum Retainer",
+        "price": "1750",
+        "priceCurrency": "USD",
+        "priceSpecification": {"@type": "UnitPriceSpecification", "price": "1750", "priceCurrency": "USD", "unitCode": "MON", "unitText": "month"},
+        "url": "https://quintiavantage.com/pricing"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://quintiavantage.com/pricing#citation-engine",
+      "name": "Citation Engine Retainer",
+      "serviceType": "Answer engine optimization retainer",
+      "provider": {"@id": "https://quintiavantage.com/#organization"},
+      "description": "Full-scale AEO retainer, 6-month minimum. Everything in Momentum plus comparison pages, an FAQ program, stat content, YouTube scripts, weekly tracking across 4 answer engines, and quarterly competitive analysis with an executive review.",
+      "offers": {
+        "@type": "Offer",
+        "name": "Citation Engine Retainer",
+        "price": "2750",
+        "priceCurrency": "USD",
+        "priceSpecification": {"@type": "UnitPriceSpecification", "price": "2750", "priceCurrency": "USD", "unitCode": "MON", "unitText": "month"},
+        "url": "https://quintiavantage.com/pricing"
+      }
+    }
+  ]
+}

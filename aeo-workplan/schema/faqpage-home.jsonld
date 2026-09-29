@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://quintiavantage.com/#faq",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is answer engine optimization?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Answer engine optimization (AEO) is the practice of making your business cited by AI assistants like ChatGPT, Claude, Perplexity, and Google AI Overviews when buyers ask category questions. It overlaps with SEO but rewards different signals: structured data, user-generated content on Reddit and review platforms, and consistent entity information across the web."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is AEO different from SEO?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "SEO optimizes for ranking links in Google's blue-link results. AEO optimizes for being cited inside an AI-generated answer. The technical foundation overlaps. The off-site signals do not. SEO rewards backlinks and domain authority. AEO rewards Reddit threads, review sites, structured first-party data, and YouTube transcripts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need AEO if my SEO is working?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Probably yes. In a Pew Research Center study of 900 US adults (March 2025), Google users clicked a result on 8% of visits when an AI summary appeared, versus 15% without one. In G2's 2026 buyer research, 51% of B2B software buyers start research in an AI chatbot more often than in Google."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does AEO take to show results?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "First citations typically appear in 30 to 60 days after the technical foundation is in place. Compounding visibility across multiple engines takes 90 to 180 days."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this just SEO with a new label?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The technical foundation overlaps but the off-site signals are different. We do not pitch journalists, do not chase backlinks, and do not bolt AEO onto an SEO retainer. We work the surfaces LLMs actually read."
+      }
+    }
+  ]
+}

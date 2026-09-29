@@ -1,0 +1,96 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://quintiavantage.com/#organization",
+      "name": "Quint-IA Vantage",
+      "alternateName": [
+        "Quint·IA Vantage",
+        "Quintia Vantage",
+        "QuintIA Vantage"
+      ],
+      "url": "https://quintiavantage.com/",
+      "logo": "https://quintiavantage.com/REPLACE-WITH-LOGO-URL.png",
+      "description": "Answer engine optimization (AEO) agency for LatAm-founded B2B companies that sell to US buyers. Quint-IA Vantage gets clients cited in ChatGPT, Perplexity, Claude and Google AI Overviews when US buyers research vendors. Quick-Start Blueprint $500; retainers from $950/month.",
+      "slogan": "Get cited when US buyers ask AI which vendor to hire.",
+      "knowsAbout": [
+        "Answer Engine Optimization",
+        "Generative Engine Optimization",
+        "AI search visibility",
+        "Schema markup",
+        "llms.txt",
+        "Nearshore B2B marketing to US buyers"
+      ],
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Mexico"
+        },
+        {
+          "@type": "Country",
+          "name": "Colombia"
+        },
+        {
+          "@type": "Country",
+          "name": "Chile"
+        },
+        {
+          "@type": "Country",
+          "name": "Argentina"
+        },
+        {
+          "@type": "Country",
+          "name": "Peru"
+        }
+      ],
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "LatAm-founded B2B SaaS, nearshore and export companies selling to the United States",
+        "numberOfEmployees": {
+          "@type": "QuantitativeValue",
+          "minValue": 10,
+          "maxValue": 150
+        }
+      },
+      "availableLanguage": [
+        "en",
+        "es"
+      ],
+      "founder": {
+        "@id": "https://quintiavantage.com/#founder"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/REPLACE",
+        "https://www.crunchbase.com/organization/REPLACE",
+        "https://www.g2.com/products/REPLACE",
+        "https://clutch.co/profile/REPLACE"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://quintiavantage.com/#founder",
+      "name": "Leonardo Quintero",
+      "jobTitle": "Founder",
+      "worksFor": {
+        "@id": "https://quintiavantage.com/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/REPLACE"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://quintiavantage.com/#website",
+      "url": "https://quintiavantage.com/",
+      "name": "Quint-IA Vantage",
+      "inLanguage": [
+        "en",
+        "es"
+      ],
+      "publisher": {
+        "@id": "https://quintiavantage.com/#organization"
+      }
+    }
+  ]
+}
