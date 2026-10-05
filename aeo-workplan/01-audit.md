@@ -24,7 +24,7 @@
 | Item | Where | Conflict | Fix |
 |---|---|---|---|
 | Brand name | Canonical: **Quint-IA Vantage** (confirmed by Leonardo 2026-09-29) | Repo prototypes (49 uses), `README.md`, and the `quintia-aeo-writer` skill all say "Quint·IA Vantage" | Use the hyphen everywhere. Keep "Quint·IA Vantage" only as `alternateName`. Update the writer skill's `brand-context.md` |
-| Blueprint scope | Site: "20-prompt baseline across ChatGPT + Perplexity" | The live funnel scans **5** buyer prompts across Claude/ChatGPT/Perplexity | Decide which is true and make copy, schema and llms.txt match. The drafts here avoid naming a prompt count |
+| Blueprint scope | Site: "20-prompt baseline" | Funnel ran 5 prompts × 4 engines | **Fixed 2026-10-05:** the Blueprint now tests 20 prompts (80 engine runs) on branch `claude/blueprint-20-prompts` in `quint-ia-blueprint-funnel`. The IVIA Lite checker spec is set to 4 prompts. The site says "ChatGPT and Perplexity"; the scan also runs Claude and Gemini |
 | One-off work | Pricing FAQ: "Blueprint is the only one-off offer"; "No custom scope. No quote required" | Sales Guide sells **Project Work**, custom quote, $1,000 minimum | Rewrite that FAQ answer, or decide Project Work stays off the site |
 | Retainer prices | $950 / $1,750 / $2,750 on the site and in the Sales Guide | `index.html` says Citation Engine is $2,500 | Already tracked in README; stale internal doc only |
 | Credit offer | Blueprint/Services: "Foundation becomes $450 in month one" | Consistent with the $500 credit. OK | none |

@@ -6,7 +6,7 @@ Based in Latin America, working in English and Spanish. AEO and GEO (generative 
 
 ## Offers and prices (USD)
 
-- Quick-Start Blueprint: $500 one-time. AI visibility diagnostic across ChatGPT, Claude and Perplexity against named competitors, plus a prioritized 90-day action plan. Fee credits toward month one of any retainer signed within 30 days.
+- Quick-Start Blueprint: $500 one-time. AI visibility diagnostic testing 20 buyer prompts across ChatGPT, Claude, Perplexity and Gemini against named competitors, plus a prioritized 90-day action plan. Fee credits toward month one of any retainer signed within 30 days.
 - Foundation Retainer: $950/month, 3-month minimum. Technical audit, schema specs, knowledge graph seed, 2 AEO content pieces per month, monthly report.
 - Momentum Retainer: $1,750/month, 6-month minimum. Full four-pillar program, 4 to 5 content pieces per month, Reddit and Quora presence, weekly prompt tracking, monthly strategy call.
 - Citation Engine Retainer: $2,750/month, 6-month minimum. Everything in Momentum plus comparison pages, FAQ program, stat content, YouTube scripts, weekly tracking across 4 answer engines, quarterly competitive analysis.

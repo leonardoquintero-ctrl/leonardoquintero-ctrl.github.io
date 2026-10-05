@@ -7,7 +7,7 @@
       "name": "Quick-Start Blueprint",
       "serviceType": "Answer engine optimization audit",
       "provider": {"@id": "https://quintiavantage.com/#organization"},
-      "description": "One-time AI visibility diagnostic. Tests buyer-style prompts across ChatGPT, Claude and Perplexity, scores your citation visibility against named competitors, and delivers a prioritized 90-day action plan. The $500 fee credits toward month one of any retainer signed within 30 days.",
+      "description": "One-time AI visibility diagnostic. Tests 20 buyer-style prompts across ChatGPT, Claude, Perplexity and Gemini, scores your citation visibility against named competitors, and delivers a prioritized 90-day action plan. The $500 fee credits toward month one of any retainer signed within 30 days.",
       "offers": {
         "@type": "Offer",
         "name": "Quick-Start Blueprint",
