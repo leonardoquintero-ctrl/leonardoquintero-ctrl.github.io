@@ -1,4 +1,4 @@
-# AEO For LaTam — Website Handoff
+# AEO For LatAm — Website Handoff
 
 **Built:** 2026-07-09
 **Status:** All 6 pages complete. Deployed to GitHub Pages.
@@ -100,13 +100,13 @@ Add GA4 snippet in `<head>` of all 6 pages:
 ### 4. llms.txt (AEO — high priority)
 Create `/llms.txt` at root:
 ```
-# AEO For LaTam
+# AEO For LatAm
 
 > AEO agency helping B2B SaaS companies get cited in AI-generated answers.
 
 ## Pages
 
-- [Homepage](https://quintia-vantage.com/): What AEO For LaTam does and who it's for
+- [Homepage](https://quintia-vantage.com/): What AEO For LatAm does and who it's for
 - [Why AEO Matters](https://quintia-vantage.com/why-aeo-matters): The shift from SEO to AEO and why it matters now
 - [How AEO Works](https://quintia-vantage.com/how-aeo-works): The four-pillar framework for getting AI citations
 - [Services](https://quintia-vantage.com/services): Retainer tiers (Foundation / Momentum / Citation Engine)
@@ -156,7 +156,7 @@ A *different* pricing discrepancy now exists at the Citation Engine tier ($2,750
 ```
 leonardoquintero-ctrl.github.io/
 ├── index.html                          (pre-existing personal site)
-├── quintia-vantage-v2.html             (AEO For LaTam homepage)
+├── quintia-vantage-v2.html             (AEO For LatAm homepage)
 ├── quintia-why-aeo-matters.html        (article)
 ├── quintia-how-aeo-works.html          (article)
 ├── quintia-services.html               (services)

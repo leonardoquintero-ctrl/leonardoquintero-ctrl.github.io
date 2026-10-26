@@ -1,10 +1,10 @@
-# Source of Truth — AEO For LaTam project
+# Source of Truth — AEO For LatAm project
 
 Last rebuilt: 2026-09-21, from a full audit of all 6 repos in the project plus the official confidential **Sales Guide v1.0** (dated 2026-09-19). This file is the canonical status doc. If something here conflicts with a page's or a repo's content, this file wins — update it whenever anything changes materially.
 
 There's also a browsable copy of this same content at [`source-of-truth.html`](./source-of-truth.html) — same information, easier to skim/share as a page.
 
-**Brand name: AEO For LaTam** (renamed 2026-10-26). Previous names: **Quint·IA Vantage** (the brand until the rename) and **Vertia Labs** (an earlier internal working name, still in the frozen `vertia_labs` repo). Every visible brand mention in this repo and in `cold-reach-tool` now reads AEO For LaTam. **Not changed:** domains (`quintiavantage.com`, `blueprint.quintiavantage.com`, etc.), file names (`quintia-*.html`), and repo names (`quint-ia-*`) — those need DNS/GitHub changes, not text edits. The other repos (`quint-ia-blueprint-funnel`, `quint-ia-mini-checkers`, `quintia-outreach`, `lead-waterfall-engine`) have not been swept yet.
+**Brand name: AEO For LatAm** (renamed 2026-10-26). Previous names: **Quint·IA Vantage** (the brand until the rename) and **Vertia Labs** (an earlier internal working name, still in the frozen `vertia_labs` repo). Every visible brand mention in this repo and in `cold-reach-tool` now reads AEO For LatAm. **Not changed:** domains (`quintiavantage.com`, `blueprint.quintiavantage.com`, etc.), file names (`quintia-*.html`), and repo names (`quint-ia-*`) — those need DNS/GitHub changes, not text edits. The other repos (`quint-ia-blueprint-funnel`, `quint-ia-mini-checkers`, `quintia-outreach`, `lead-waterfall-engine`) have not been swept yet.
 
 **Retainer pricing: $950 / $1,750 / $2,750** (Foundation / Momentum / Citation Engine — confirmed as current, 2026-09-21, exact match to the Sales Guide). Important nuance, corrected from an earlier version of this file: **there's no self-serve checkout for retainers, but they ARE actively sold** — by reps, manually (a call, then an invoice), under a real, live commission plan. Only the $500 Quick-Start Blueprint has an online checkout, via `quint-ia-blueprint-funnel`. See **Go-to-market reality** below for the full picture, including a 6th offering (**Project Work**) this file previously missed entirely.
 
@@ -27,8 +27,8 @@ There's also a browsable copy of this same content at [`source-of-truth.html`](.
 
 One GitHub Pages repo hosting **two unrelated things**, plus design tools:
 
-1. **Internal strategy doc** — `index.html`, served at the site root. A near-byte-identical later revision of `vertia_labs/strategic-HTML-src-of-truth.html`. Originally branded "Vertia Labs"; now rebranded AEO For LaTam.
-2. **AEO For LaTam marketing pages** — 6 standalone `quintia-*.html` files. Well-built, WCAG AA, full JSON-LD — but **likely a design prototype that was never actually deployed as the real site**. See the domain finding below.
+1. **Internal strategy doc** — `index.html`, served at the site root. A near-byte-identical later revision of `vertia_labs/strategic-HTML-src-of-truth.html`. Originally branded "Vertia Labs"; now rebranded AEO For LatAm.
+2. **AEO For LatAm marketing pages** — 6 standalone `quintia-*.html` files. Well-built, WCAG AA, full JSON-LD — but **likely a design prototype that was never actually deployed as the real site**. See the domain finding below.
 
 Plus internal design tools not part of either public surface: `Typography-sandbox.html`, `gradient-mixer.html`, `namesandbox.html`, `AI-engine-simulator.html`.
 
@@ -45,7 +45,7 @@ Every nav link across the 6 marketing pages uses clean paths (`/pricing`, `/serv
 - **Citation Engine price says $2,750** here (matches confirmed-current pricing) but `index.html`'s internal figure still says $2,500 (stale — matches the old `vertia_labs` doc's earlier revision, minus the Foundation bump from $750→$950 that did make it into `index.html`).
 - No `CNAME`, `robots.txt`, `llms.txt`, `sitemap.xml`, GA4, or payment wiring in this repo. (Payment now exists for real, but in `quint-ia-blueprint-funnel`, not here.)
 - All "buy" CTAs in `quintia-quick-start-blueprint.html` are still `href="#"` placeholders — the real Blueprint checkout lives in `quint-ia-blueprint-funnel`, deployed separately. If this repo's pages are ever wired up as real marketing pages, these CTAs should point at `blueprint.quintiavantage.com`, not try to reimplement checkout here.
-- ~~Two brand names in use~~ — resolved 2026-10-26: `index.html` and the 6 marketing pages all read AEO For LaTam now.
+- ~~Two brand names in use~~ — resolved 2026-10-26: `index.html` and the 6 marketing pages all read AEO For LatAm now.
 
 ---
 
@@ -87,7 +87,7 @@ None of this blocks anything live — the funnel repo doesn't call it — but it
 | `quint-ia-blueprint-funnel` (self-serve checkout) | — | — | — | No retainer checkout exists in the app itself — an online-purchase gap, not evidence the retainers aren't sold (see Go-to-market below) |
 | **Sales Guide v1.0 (2026-09-19) — what reps quote** | **$950/mo** | **$1,750/mo** | **$2,750/mo** | Exact match to the live marketing pages, plus a 6th offering (**Project Work**, custom quote, $1,000 min) not on the marketing pages at all |
 
-Action implied: `index.html`'s $2,500 Citation Engine figure is stale and should be updated to $2,750 to match confirmed-current pricing (its "Vertia Labs" branding has since been swept to AEO For LaTam) — the edit are in `leonardoquintero-ctrl.github.io` only; nothing to change in `vertia_labs` (frozen/historical).
+Action implied: `index.html`'s $2,500 Citation Engine figure is stale and should be updated to $2,750 to match confirmed-current pricing (its "Vertia Labs" branding has since been swept to AEO For LatAm) — the edit are in `leonardoquintero-ctrl.github.io` only; nothing to change in `vertia_labs` (frozen/historical).
 
 ---
 
@@ -135,8 +135,8 @@ Supersedes the old 5 "blocking decisions" from the 2026-08-15 pre-build handoff 
 
 - [ ] **Archive or make `quint-ia-report-generator` private.** It's dead, still public, and carries an unauthenticated `/api/intake` endpoint plus an unfixed citation-matching bug. Its own sibling repo's status doc already recommends this — just needs doing.
 - [ ] **Confirm what `quintiavantage.com` (root domain) actually serves.** If it's a Framer site as hypothesized, decide what (if anything) this repo's 6 marketing pages are for going forward — reference/prototype, or retire.
-- [ ] **Fix the stale $2,500 Citation Engine figure in `index.html`** (current price is $2,750). Its branding is already swept to AEO For LaTam.
-- [ ] **Sweep the AEO For LaTam rename into the other repos** (`quint-ia-blueprint-funnel`, `quint-ia-mini-checkers`, `quintia-outreach`, `lead-waterfall-engine`), and decide whether to move domains off `quintiavantage.com`.
+- [ ] **Fix the stale $2,500 Citation Engine figure in `index.html`** (current price is $2,750). Its branding is already swept to AEO For LatAm.
+- [ ] **Sweep the AEO For LatAm rename into the other repos** (`quint-ia-blueprint-funnel`, `quint-ia-mini-checkers`, `quintia-outreach`, `lead-waterfall-engine`), and decide whether to move domains off `quintiavantage.com`.
 - [ ] **Decide whether the retainer tiers need a real self-serve checkout path** — they're already sold manually by reps, so this is an efficiency/scale question, not a "does this product exist" question.
 - [ ] **Resolve the ICP conflict**: reconcile the public site's LatAm-free copy with the sales team's LatAm-only actual targeting (see Go-to-market reality above).
 - [ ] **Add Project Work** as a real self-serve or at-least-documented offering wherever the marketing site ends up living — it doesn't appear anywhere in this repo's copy today.
