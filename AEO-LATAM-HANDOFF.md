@@ -11,7 +11,10 @@ Treat everything under "Unverified" as unknown, not fact. Trust the code and Ver
 - **Runtime errors, last 7 days (3 groups):**
   1. **`invalid x-api-key` (401) on `/api/scan/start`, 2026-10-29 18:28 UTC** (deployment `dpl_8RaVz3Zz98Razk9hYYvVGfG5gVMy`, commit `0ad7543`). The error format (`authentication_error`, `req_011…` request id) is the Anthropic API's. Both `[buyerPrompts] Stage classification` and `Scan start failed for lead d0f0296c-…` failed. **This is the strongest lead on "/admin/test-run not working"**: it happened 20 minutes after the ADMIN_PASSWORD change (18:08 UTC), and a scan cannot start without a valid Claude key. Next step: owner checks/re-saves `ANTHROPIC_API_KEY` in Vercel production (and that the key is active in the Anthropic console), redeploys, then runs one admin test scan. Nothing has been logged since, so it may still be broken.
   2. `[report] Module failed to build … pages_missing_meta_description`: 2 hits on `/report/[token]`, last on 2026-10-29 12:56 UTC. This is the old-report page-health bug, fixed in `11-page-health.ts`. No hits after that, so the fix is not contradicted.
-- Not checked: Cold Reach and mini-checkers deploys, Stripe, Resend, HubSpot, DNS.
+- **URL change is not broken (checked 16:10 UTC).** `blueprint.aeolatam.com` and `blueprint.quintiavantage.com` are both attached, verified and correctly set up in DNS (CNAME to Vercel). Neither redirects. Both return 200 from the current deploy, and canonical/hreflang tags point at `blueprint.aeolatam.com`. `/es` returns 200 with Spanish metadata. `/api/webhooks/stripe` exists (GET returns 405), so Stripe keeps working on either domain. `/admin/test-run` returns 401 without a password, which is the gate working. The failed 2026-10-29 scan came in on `blueprint.aeolatam.com`, so the new domain does route real traffic.
+- `ANTHROPIC_API_KEY` (production) was last edited on 2026-07-18, so the 401 was not caused by an edit in Vercel. The key was probably revoked, rotated or cut off for billing on the Anthropic side.
+- Minor: the `/es` page renders `<html lang="en">`, and its meta description lists only ChatGPT, Perplexity and Gemini (no Claude).
+- Not checked: Cold Reach and mini-checkers deploys, Stripe dashboard, Resend, HubSpot.
 
 ## Business facts
 
