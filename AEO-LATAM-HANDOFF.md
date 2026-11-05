@@ -59,7 +59,7 @@ Each full scan now makes 2 extra Claude calls: the message evaluation (#14) and 
 **Retainer re-scans (#16) in detail:**
 - **Setup:** in `/admin`, after "Retainer signed", pick the tier; the cadence comes from the tier.
 - **Daily cron** `/api/cron/rescans` (13:17 UTC, same `CRON_SECRET` check as follow-ups). It re-runs the last finished scan's inputs and links them via `rescan_of`.
-- **Volume:** max 1 re-scan per day without QStash, 10 with QStash.
+- **Volume:** up to 10 re-scans per day, because QStash is configured in production (owner confirmed 2026-11-05). Without QStash the cap would be 1.
 - **Controls:** Pause/Resume and "Re-scan now" buttons in `/admin`.
 - **Re-scans never email the client.** The owner gets a `[Re-scan]` alert with the IVIA change.
 - **Progress section** on the internal report: IVIA and per-pillar before/after, checks improved or worse (only those measured in both scans), and named-or-cited share before/after.
@@ -104,7 +104,6 @@ Each full scan now makes 2 extra Claude calls: the message evaluation (#14) and 
 ## Unverified / may be wrong
 
 - Perplexity pricing ($5 per 1,000 requests, $1 per million tokens) comes from secondary sources; docs.perplexity.ai was unreachable from the sandbox.
-- Whether QStash is active in production. `QSTASH_CALLBACK_BASE_URL` was set on 2026-11-03; `QSTASH_TOKEN` presence was not re-checked. This decides whether re-scans run 1 or 10 per day.
 - The sandbox can't reach `aeolatam.com`, DataForSEO, RDAP or public DNS, so the new checks were only tested on fixtures.
 - Not checked: HubSpot sequences/templates, Stripe settings, already-sent emails.
 
