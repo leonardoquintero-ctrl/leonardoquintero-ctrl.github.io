@@ -1,88 +1,122 @@
-# Handoff: AEO For LatAm (state as of 2026-11-03)
+# Handoff: AEO For LatAm (state as of 2026-11-05)
 
-Written at the end of a very long session, then re-checked against Vercel on 2026-11-03 (see **Verified 2026-11-03** below).
+Updated at the end of the 2026-11-03 → 11-05 session; the first version was written 2026-11-03.
 Treat everything under "Unverified" as unknown, not fact. Trust the code and Vercel over this file where they differ.
 
-## Verified 2026-11-03 (read-only Vercel checks)
+## Verified 2026-11-05 (read-only Vercel checks)
 
-- **Funnel production is on `55ee64f`** ("Redeploy to pick up the rotated CRON_SECRET"), deployment `dpl_9xwUKfdvbPYz9uqpcUWVbfKjFAcX`, state **READY**. The prior production deploy (`0ad7543`, `dpl_6xvn8mALb9QrQc6r1iR9WSTqiscP`) is also READY.
-- **CRON_SECRET matches.** On the current deployment, `/api/cron/follow-ups` ran once a day (4 log lines since 2026-10-30, all `info`). Example: 2026-10-31 15:00 UTC `[cron/follow-ups] sent=0 failed=0`. No 401s or errors.
-- **No scans have run on the current deployment.** The only request path in its logs is the cron. So nobody has seen a live Perplexity Sonar result yet, and `[perplexity] mechanism=...` has never been logged in production.
-- **Runtime errors, last 7 days (3 groups):**
-  1. **`invalid x-api-key` (401) on `/api/scan/start`, 2026-10-29 18:28 UTC** (deployment `dpl_8RaVz3Zz98Razk9hYYvVGfG5gVMy`, commit `0ad7543`). The error format (`authentication_error`, `req_011…` request id) is the Anthropic API's. Both `[buyerPrompts] Stage classification` and `Scan start failed for lead d0f0296c-…` failed. **This is the strongest lead on "/admin/test-run not working"**: it happened 20 minutes after the ADMIN_PASSWORD change (18:08 UTC), and a scan cannot start without a valid Claude key. Next step: owner checks/re-saves `ANTHROPIC_API_KEY` in Vercel production (and that the key is active in the Anthropic console), redeploys, then runs one admin test scan. Nothing has been logged since, so it may still be broken.
-  2. `[report] Module failed to build … pages_missing_meta_description`: 2 hits on `/report/[token]`, last on 2026-10-29 12:56 UTC. This is the old-report page-health bug, fixed in `11-page-health.ts`. No hits after that, so the fix is not contradicted.
-- **URL change is not broken (checked 16:10 UTC).** `blueprint.aeolatam.com` and `blueprint.quintiavantage.com` are both attached, verified and correctly set up in DNS (CNAME to Vercel). Neither redirects. Both return 200 from the current deploy, and canonical/hreflang tags point at `blueprint.aeolatam.com`. `/es` returns 200 with Spanish metadata. `/api/webhooks/stripe` exists (GET returns 405), so Stripe keeps working on either domain. `/admin/test-run` returns 401 without a password, which is the gate working. The failed 2026-10-29 scan came in on `blueprint.aeolatam.com`, so the new domain does route real traffic.
-- `ANTHROPIC_API_KEY` (production) was last edited on 2026-07-18, so the 401 was not caused by an edit in Vercel. The key was probably revoked, rotated or cut off for billing on the Anthropic side.
-- Minor: the `/es` page renders `<html lang="en">`, and its meta description lists only ChatGPT, Perplexity and Gemini (no Claude).
-- Not checked: Cold Reach and mini-checkers deploys, Stripe dashboard, Resend, HubSpot.
+- **Funnel production is on `bc95eac`** (PR #16, retainer re-scans), deployment `dpl_HW8s5Nr8BuGK6p1ppVVFDPTR5sBA`, state **READY**. The two deploys before it, `7c9dab8` (#15) and `8d294af` (#14), are also READY.
+- **No runtime errors since the fixes.** All 19 error groups in the last 48 hours are from 2026-11-04 before 04:40 UTC, on older deploys:
+  - **Anthropic** `400 … key is not scoped to a workspace` on `/api/scan/start`. Fixed: the owner created a workspace-scoped key.
+  - **OpenAI** `429 credit_balance_exhausted` on every ChatGPT call. Fixed: the owner added credits.
+  - **Perplexity Sonar** `429 rate limit`, logged as `[perplexity] mechanism=search-fallback`. So Sonar is live and the fallback works. A retry was added in #11.
+  - One Gemini 30s timeout.
+  - One HubSpot `Update contact failed (404)` on an admin test lead.
+- **Real scans have run.** The owner ran test scans on 2026-11-04, including one for AEO For LatAm itself, and got reports. The owner later confirmed "the page is working fine".
+- Not checked this session: Cold Reach and mini-checkers deploys, the Stripe dashboard, Resend.
 
 ## Business facts
 
 - Brand: **AEO For LatAm** (DBA only). The legal entity **Adeian Digital LLC** is unchanged and must not appear in the app.
-- Public domain: `aeolatam.com`. Blueprint app: `blueprint.aeolatam.com`. The old `blueprint.quintiavantage.com` is still attached on purpose so old emailed report links keep working. **Do NOT redirect it until the Stripe webhook and QStash are confirmed on the new domain.**
-- Marketing site: Framer project "AEO For LaTam" (id `ZQzjTw4DwzASA20kHAsl`; "LaTam" is a typo in the project name). Its Buy Button and Pricing Card already link to `https://blueprint.aeolatam.com`. Pages `/privacy` and `/terms` exist. No `/es/...` pages appear in its page list.
-- Blueprint: $500. A scan is 10 prompts x 4 engines (Claude, ChatGPT, Perplexity, Gemini) = 40 live calls. Scored engines for IVIA are ChatGPT + Perplexity; Claude and Gemini are bonus signals.
+- Public domain: `aeolatam.com`. Blueprint app: `blueprint.aeolatam.com`.
+  - **DNS is on Cloudflare now** (moved from GoDaddy). The `blueprint` CNAME to Vercel was missing after the move and was re-added on 2026-11-04.
+  - The old `blueprint.quintiavantage.com` is still attached on purpose so old emailed report links keep working. **Do NOT redirect it until the Stripe webhook and QStash are confirmed on the new domain.**
+- Marketing site: Framer project "AEO For LaTam" (id `ZQzjTw4DwzASA20kHAsl`; "LaTam" is a typo in the project name).
+- **Blueprint ($500, one-time):** a scan is 10 prompts × 4 engines (Claude, ChatGPT, Perplexity, Gemini) = 40 live calls. Only ChatGPT and Perplexity count toward the score; Claude and Gemini are shown but not scored. No re-scans.
+- **Retainers:**
+
+  | Tier | Price | Minimum | Re-scan cadence |
+  |---|---|---|---|
+  | Foundation | $950/mo | 3 months | every 30 days |
+  | Momentum | $1,750/mo | 6 months | every 14 days |
+  | Citation Engine | $2,750/mo | 6 months | every 14 days |
+
+  The owner confirmed the cadence on 2026-11-05. The website does not state it yet.
 
 ## Repos and deployments
 
 | Repo | Vercel project id | Notes |
 |---|---|---|
-| quint-ia-blueprint-funnel | `prj_cfveeMeesIOQjLn7mVOqb3KHZJlh` | Next.js 15, Drizzle + Turso. Auto-deploys on push to `main`. |
+| quint-ia-blueprint-funnel | `prj_cfveeMeesIOQjLn7mVOqb3KHZJlh` | Next.js 15, Drizzle + Turso. Auto-deploys on push to `main`. `scripts/ensure-schema.mjs` adds new DB columns at build. |
 | cold-reach-tool | `prj_3wCXNHcwNOMa7enGYhpOJzFjnHwx` | Standalone sales-rep tool with its own DB. |
 | quint-ia-mini-checkers | `prj_Xhw1c1iF6T9Qe4QMtWI0nmVqi9fi` | Text rebrand only; no domain refs. |
-| leonardoquintero-ctrl.github.io | n/a | Design sandbox and docs; old-brand HTML mockups. |
+| leonardoquintero-ctrl.github.io | n/a | Docs and design sandbox. Holds this file and `IVIA-PILLARS-SPEC.md`. |
 
 Vercel team: slug `aeoforlatam`, id `team_oTo6NhFMjSVfwsEKpozlnfD3`.
 
-## What was done in the previous session (all on `main` unless noted)
+## What was done 2026-11-03 → 11-05 (funnel, all squash-merged to `main`)
 
-**Funnel**
-- Rebranded to AEO For LatAm: text, wordmarks, PDFs, emails, disclaimers, bot user agents.
-- Site and email URLs moved to `aeolatam.com` (footer, nav, owner email default). The sender is `blueprint@aeolatam.com`, with a one-time retry from `blueprint@quintiavantage.com` if Resend says the domain is not verified (`src/lib/email/provider.ts`). Remove that fallback **only** after Resend shows `aeolatam.com` Verified and a real test email passes SPF/DKIM/DMARC.
-- Cleanup commit: deleted `BUILD_PROMPT*.md`, unused exports, and the AHREFS/Cold Reach env comments; updated README/PROJECT_STATUS.
-- Bug fix: the report page dropped the page-health section for old reports that lack `template_health`. Fixed with a default in `src/lib/report/modules/11-page-health.ts`.
-- Added List-Unsubscribe and one-click POST headers to follow-up emails (`src/lib/followUps/run.ts`, `src/app/api/follow-ups/unsubscribe/route.ts`).
-- Perplexity now uses the Sonar answer API with a Search API fallback (PR #10, squash-merged as `0ad7543`). `scripts/compare-perplexity.mjs` compares the two methods (billed calls, about $1).
-- Added an `/admin/test-run` page and `/api/admin/test-run` route. It runs a real scan without Stripe, behind `ADMIN_PASSWORD`, and skips HubSpot, the prompt library and follow-ups. Its leads are tagged `utm_source=admin-test`.
-- Last pushed funnel commit on `main`: `55ee64f` (empty redeploy commit). The one before it: `0ad7543`.
+| PR | Commit | What |
+|---|---|---|
+| #11 | `dcc1ef9` | **Scores no longer lie when an engine fails.** Errored calls are left out of the visibility score, share of voice and "named you in X of Y". Perplexity 429 retry. The admin test page shows real errors. |
+| #13 | `a9e4df1` | **IVIA v2: 7-pillar score** (`src/lib/synthesis/ivia.ts`).<br>• Weights: Citations 25; Trust & Presence, Message & Language and Search Foundations 15 each; AI Bridge, FAQ and Comparison 10 each.<br>• Unmeasured checks are left out, never zeroed, and the score is marked partial.<br>• G2/Capterra count only for software companies.<br>• A blocked crawl is measured and explained (Cloudflare, JS-only, unreachable…).<br>• Google + Bing brand search via DataForSEO.<br>• Old reports still render the old 4-pillar view. |
+| #14 | `8d294af` | **New checks:**<br>• domain legitimacy: HTTPS/HSTS, SPF/DMARC, domain age via RDAP;<br>• legal page links;<br>• Clutch for service firms;<br>• Claude reads the homepage + About against a fixed checklist (clarity ×5, native English, US-ready), quoting the evidence.<br>The internal report gains diagnostics and **Measurement & Martech readiness** (GA4, GTM, GSC/Bing verification, consent banner, HubSpot, Meta Pixel, LinkedIn Insight; not scored). |
+| #15 | `7c9dab8` | **Fix kit** (internal report): one task per lost check, with steps, owner, effort and the index points at stake, ordered by points per effort. Ready-to-paste drafts: Organization JSON-LD, llms.txt, robots.txt rules, FAQ + FAQPage JSON-LD, comparison outline. The drafts use only the site's own text; missing facts are marked `[CONFIRM: …]`. |
+| #16 | `bc95eac` | **Retainer re-scans** (details in the section below). |
 
-**Cold Reach** (`main` = `8b0e9da`): the rep Blueprint link now defaults to `https://blueprint.aeolatam.com`.
+Each full scan now makes 2 extra Claude calls: the message evaluation (#14) and the fix-kit drafts (#15).
 
-**Vercel env changes** (values hidden, set via API):
-- funnel production `APP_BASE_URL` = `https://blueprint.aeolatam.com`
-- funnel production `QSTASH_CALLBACK_BASE_URL` = `https://blueprint.aeolatam.com`
-- cold-reach-tool production `EXCLUDED_DOMAINS` = `quintiavantage.com,aeolatam.com`
+**Retainer re-scans (#16) in detail:**
+- **Setup:** in `/admin`, after "Retainer signed", pick the tier; the cadence comes from the tier.
+- **Daily cron** `/api/cron/rescans` (13:17 UTC, same `CRON_SECRET` check as follow-ups). It re-runs the last finished scan's inputs and links them via `rescan_of`.
+- **Volume:** max 1 re-scan per day without QStash, 10 with QStash.
+- **Controls:** Pause/Resume and "Re-scan now" buttons in `/admin`.
+- **Re-scans never email the client.** The owner gets a `[Re-scan]` alert with the IVIA change.
+- **Progress section** on the internal report: IVIA and per-pillar before/after, checks improved or worse (only those measured in both scans), and named-or-cited share before/after.
+- **New columns:** `leads.retainer_tier`, `leads.rescans_paused_at`, `visibility_reports.rescan_of` (migration `0018`; `0017` is reserved for #12).
+
+**Fixed with the owner (outside the code):**
+- the Anthropic key, now workspace-scoped;
+- OpenAI credits;
+- the `blueprint` CNAME on Cloudflare;
+- admin access: the owner signs in to `/admin` again.
+
+**Website spec:** `IVIA-PILLARS-SPEC.md` (this repo) is the content spec for rewriting the IVIA pages on aeolatam.com. The live pages still describe the old 5-pillar model, and the Message & Language and Search Foundations pages don't exist yet. The spec includes checks and points, copy, EN/ES FAQs and Framer instructions. The owner's CLI will implement it on a Framer branch.
 
 ## Open items (need the owner or still undecided)
 
-- **`/admin/test-run` "not working" is unresolved.** See the `invalid x-api-key` lead above. `ADMIN_PASSWORD` was changed on 2026-10-29 18:08 UTC (not by the agent), which could also explain a failed sign-in. It has not been tested in a browser. Ask for the exact symptom: no prompt, a 401 loop, a 404, or error text under the button.
-- **Resend:** verify `aeolatam.com` in Resend (DKIM/SPF/MX at GoDaddy; DNS is external), add a DMARC TXT record at `_dmarc`, create the mailboxes `team@aeolatam.com` and `blueprint@aeolatam.com`, send a real test, then remove the fallback.
+- **PR #12** (`claude/funnel-review-fixes`), open and not merged:
+  - holds degraded reports for review (migration `0017`, `client_held_reason`);
+  - homepage offer and FAQ rewrite;
+  - optional buyer questions;
+  - the competitor URL becomes required;
+  - a non-existent-domain check.
+
+  It touches client delivery, so it needs the owner's explicit yes. Merging it after #16 will need the `ensure-schema` steps kept in order (0017 then 0018); no conflict is expected beyond that.
+- **IVIA website pages:** implement `IVIA-PILLARS-SPEC.md`. Also add the re-scan cadence to the Framer pricing tier cards so the site, the terms and the system match. Not done; waiting for the owner.
+- **Sending re-scan progress to the client** isn't built. The team reviews it and sends the update by hand. A "Send to client" button is the next step.
+- **Not counted until configured:**
+  - Page speed needs `PAGESPEED_API_KEY`.
+  - YouTube needs `YOUTUBE_API_KEY` (not confirmed whether it's set).
+  - These checks show "not checked in this scan". Adding the keys makes them count.
+- **First live run of #14–#16 not yet observed:** legitimacy (DNS/RDAP), the message evaluation, the fix-kit drafts, the re-scan cron and the admin retainer buttons have only been tested on fixtures. Run one admin test scan and one "Re-scan now", then read the internal report.
+- **Resend:** verify `aeolatam.com` in Resend (DNS is on **Cloudflare** now), add DMARC at `_dmarc`, create `team@` and `blueprint@aeolatam.com`, send a real test, then remove the `quintiavantage.com` sender fallback in `src/lib/email/provider.ts`.
 - **Stripe webhook URL:** the owner must change it to `https://blueprint.aeolatam.com/api/webhooks/stripe`.
-- **Spanish legal links:** the funnel's Spanish footer links to `aeolatam.com/es/privacy` and `/es/terms`. Nobody has checked whether they open, and Framer shows no `/es/` pages.
-- **Perplexity (PR #10)** is merged but unproven; no live Sonar result has been seen. Secondary sources (only) report that Sonar Chat Completions was retired on 2026-09-27 in favor of Perplexity's Agent API. Watch Vercel logs for `[perplexity] mechanism=search-fallback`. Perplexity's share of IVIA will likely drop, so do not compare new scans to old reports. Consider running `scripts/compare-perplexity.mjs` from the owner's CLI.
+- **Spanish legal links:** the funnel's Spanish footer links to `aeolatam.com/es/privacy` and `/es/terms`. Nobody has checked whether they open; Framer shows no `/es/` pages.
+- **Perplexity:** Sonar is live but hits rate limits under a 40-call scan. Watch for `mechanism=search-fallback` in the logs. If it shows up often, ask Perplexity for a higher limit.
 - **Vercel hygiene** (the agent's tools cannot do these): delete the unused `MOZ_API_KEY` (prod + preview); re-save `GEMINI_API_KEY` as Sensitive.
-- **`cold_reach_lookups` table/schema** in the funnel is left over from the retired copy. Removing it from `schema.ts` would make `drizzle-kit push` offer to drop a table that holds production data. Needs an owner decision. Do not remove it casually.
-- Optional: a `cold-reach.aeolatam.com` hostname. The funnel's `middleware.ts` still redirects `cold-reach.quintiavantage.com` to the Cold Reach app.
-- Logo image files: there are none in the repos; the wordmark is text only ("AEO" + "For LatAm").
-- `design-reference/` (about 800 KB of old-brand mockups) in the funnel repo is unused. Deleting it is the owner's call.
+- **`cold_reach_lookups` table/schema** in the funnel is left over from the retired copy. Removing it from `schema.ts` would make `drizzle-kit push` offer to drop a table that holds production data. Needs an owner decision; do not remove it casually.
+- Minor:
+  - `/es` renders `<html lang="en">` (the root layout owns it).
+  - A `cold-reach.aeolatam.com` hostname is optional.
+  - `design-reference/` (about 800 KB of old mockups) is unused; deleting it is the owner's call.
 
 ## Unverified / may be wrong
 
-- ~~The last two funnel deploys were not confirmed READY.~~ **Resolved 2026-11-03:** `55ee64f` and `0ad7543` are both READY.
-- ~~CRON_SECRET match not confirmed.~~ **Resolved 2026-11-03:** the daily cron logs `sent=0 failed=0` with no 401s.
-- Perplexity pricing ($5 per 1,000 requests, $1 per million tokens) comes from secondary sources; docs.perplexity.ai was unreachable from the sandbox. The "~$0.06 per scan" figure is an estimate.
-- No `aeolatam.com` or `quintiavantage.com` URL could be reached from the sandbox (egress blocked), so no live page was ever fetched.
-- The admin gate and test-run route were only smoke-tested against a local build with an empty database (401 without the password, 200 page with it; the insert failed because the local DB had no tables).
-- The Cold Reach change was pushed without a local build (that clone had no `node_modules`). Vercel's build succeeded.
-- Not checked: HubSpot sequences/templates, Stripe settings, and already-sent emails.
+- Perplexity pricing ($5 per 1,000 requests, $1 per million tokens) comes from secondary sources; docs.perplexity.ai was unreachable from the sandbox.
+- Whether QStash is active in production. `QSTASH_CALLBACK_BASE_URL` was set on 2026-11-03; `QSTASH_TOKEN` presence was not re-checked. This decides whether re-scans run 1 or 10 per day.
+- The sandbox can't reach `aeolatam.com`, DataForSEO, RDAP or public DNS, so the new checks were only tested on fixtures.
+- Not checked: HubSpot sequences/templates, Stripe settings, already-sent emails.
 
 ## Working rules
 
 - Pushing to `main` auto-deploys production. Fast-forward only; never force-push without explicit approval. After each push, check the Vercel deployment and `get_runtime_errors`.
-- Shallow clones break merge-base checks: run `git fetch origin main --depth=50` before rebasing.
+- Shallow clones break merge-base checks: run `git fetch origin main --depth=50` before rebasing. A fresh shallow clone may also need `git config --add remote.origin.fetch "+refs/heads/<branch>:refs/remotes/origin/<branch>"` to track a branch.
+- New DB columns: add them to `src/db/schema.ts`, a `drizzle/00NN_*.sql` file **and** `scripts/ensure-schema.mjs` (additive, check-then-apply). Never drop or rename.
+- Don't run Prettier over whole files; the repo isn't formatted with it, and it rewrites hundreds of lines.
 - Never decrypt or print Vercel env values. Sensitive values read back empty.
 - The sandbox blocks many hosts (api.dataforseo.com, docs.perplexity.ai, aeolatam.com, etc.). Report the block; do not try to get around it.
 - `curl` to localhost needs `--noproxy '*'` in this sandbox.
 - Every commit needs the session's `Co-Authored-By` and `Claude-Session` trailers.
-- Do not merge or deploy changes to payment or auth behavior without the owner's explicit yes.
+- Do not merge or deploy changes to payment, auth or client-delivery behavior without the owner's explicit yes.
 - Runtime log queries over multi-day windows time out. Scope them to a `deploymentId`, or use `group_by`.
