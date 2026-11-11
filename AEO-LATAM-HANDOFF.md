@@ -1,7 +1,28 @@
-# Handoff: AEO For LatAm (state as of 2026-11-05)
+# Handoff: AEO For LatAm (state as of 2026-11-11)
 
-Updated at the end of the 2026-11-03 → 11-05 session; the first version was written 2026-11-03.
+Updated at the end of the 2026-11-03 → 11-11 session (closed because it got too long); the first version was written 2026-11-03. **Start with "Since 2026-11-05" below**, then "Open items".
 Treat everything under "Unverified" as unknown, not fact. Trust the code and Vercel over this file where they differ.
+
+## Since 2026-11-05 (latest work, read this first)
+
+**1. Website (Framer project `ZQzjTw4DwzASA20kHAsl`): live layout bug, fix waiting on a branch.**
+- Bug on the live site at 810–1399px (Framer's "Tablet" range, i.e. most laptops): the home page's AI engines row (Gemini / Perplexity / Claude / ChatGPT) collapses to letter-per-line columns. Cause: the four grid cells on the Tablet breakpoint had width `1fr`, which browsers render ~25px wide. The Framer canvas draws it correctly, so it only shows in a real browser.
+- Fixed on Framer branch **`slate-loop`** (id `j9kh3f0h9`), **not merged, not published**: https://framer.com/projects/AEO-For-LaTam--ZQzjTw4DwzASA20kHAsl-6Cxdw?branch=j9kh3f0h9&node=augiA20Il
+  - Tablet engine cells (`CRtas5wxm` + `bZFIE2eXA`, `Ur7Ca3J3e`, `HDcTKzJGj`, `AWKc8moWl`) set to width `100%`.
+  - Large screens: the engines row (`xIHRhLiCP`), stats block (`lEX8bwBMn`) and "How we measure" (`s3ZtqF2wK`) now use width `89.8%` + maxWidth `1600px` (exactly 1200px at a 1400px screen, so 1400 is unchanged); their Tablet/Phone copies use width `100%`, maxWidth `1200px`. Pricing cards (`RM2YHvRMi`) maxWidth 1400 → 1600.
+  - "Wrap" turned off on 77 vertical stacks across Home, Why AEO Matters, How AEO Works, Blog, Artículos, FAQ, Team (wrap on a vertical stack does nothing useful and can trigger the same squeeze).
+- **Next step:** publish the branch preview (doesn't touch production), load it at 1000, 1380 and 1920px to confirm, then merge `slate-loop` into main and publish. Owner had not yet said yes to publishing.
+- Text styles already scale up at ≥1600px (Hero H1 80px, Section Title 54px, etc.); no font changes were made.
+
+**2. IVIA website spec written, not yet implemented.** `IVIA-PILLARS-SPEC.md` (this repo) is the content spec for rewriting the IVIA pages to the 7-pillar model (checks and points from `ivia.ts`, page copy, EN/ES FAQs, Framer page ids, redirects, done checklist). The owner's CLI is meant to implement it on a Framer branch. The scoring itself is already live in the funnel.
+
+**3. Research query bank (separate from the scanner).**
+- Separate Turso database **`aeo-research`**: `libsql://aeo-research-leonardoquintero-ctrl.aws-us-east-2.turso.io` (use the `https://` form from the sandbox). Table **`query_bank`**, **44 rows**, all TEXT columns: `id, query, origin, language, audience, journey_stage, category, pattern, niche, notes, loaded_at`. `category` = A–I prompt category (blank for R1–R5, which are founder-to-AI, not buyer queries).
+  - R1–R5 `real_founder`; S1–S19 from the owner's `query_bank_v0.csv`; S20–S39 added 2026-11-07 for four new niches (`bilingual_support_bpo`, `specialty_coffee`, `crossborder_logistics`, `apparel_manufacturing`), all `synthetic_pattern`, `us_buyer`, EN, "drafted from patterns, not observed".
+  - Chosen niches (from the site's "Industries We Serve"): nearshore software, bilingual support/BPO, specialty coffee, cross-border logistics, apparel manufacturing. Left out: mining/oil/grains/sugar (broker-traded), tourism (B2C). Sixth pick would be general manufacturing.
+- **Owner rule: never write these to `prompt_library`**, and keep study questions separate from the scanner's citation prompts. Nothing in the funnel code reads `aeo-research`.
+- Loader: the owner's `load-csv.mjs` (dry run by default, `--apply` to write, `INSERT OR REPLACE` by `id`). From the sandbox it needs `NODE_USE_ENV_PROXY=1 NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt` and `TURSO_AUTH_TOKEN=proxy-injected`.
+- Access: the Turso token is saved as a network secret on the **"AEO For LatAm"** cloud environment (host above is allowed), so sessions on that environment can read/write it without asking. The owner pasted an earlier token in chat; they were told to revoke it in Turso.
 
 ## Verified 2026-11-05 (read-only Vercel checks)
 
@@ -83,6 +104,7 @@ Each full scan now makes 2 extra Claude calls: the message evaluation (#14) and 
   - a non-existent-domain check.
 
   It touches client delivery, so it needs the owner's explicit yes. Merging it after #16 will need the `ensure-schema` steps kept in order (0017 then 0018); no conflict is expected beyond that.
+- **Framer branch `slate-loop`:** verify and publish the layout fix (see "Since 2026-11-05").
 - **IVIA website pages:** implement `IVIA-PILLARS-SPEC.md`. Also add the re-scan cadence to the Framer pricing tier cards so the site, the terms and the system match. Not done; waiting for the owner.
 - **Sending re-scan progress to the client** isn't built. The team reviews it and sends the update by hand. A "Send to client" button is the next step.
 - **Not counted until configured:**
