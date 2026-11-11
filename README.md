@@ -1,6 +1,6 @@
 # Source of Truth — AEO For LatAm project
 
-Last rebuilt: 2026-09-21, from a full audit of all 6 repos in the project plus the official confidential **Sales Guide v1.0** (dated 2026-09-19). This file is the canonical status doc. If something here conflicts with a page's or a repo's content, this file wins — update it whenever anything changes materially.
+Last rebuilt: 2026-09-21, from a full audit of all 6 repos (Cold Reach and lead-waterfall-engine sections updated 2026-11-11) in the project plus the official confidential **Sales Guide v1.0** (dated 2026-09-19). This file is the canonical status doc. If something here conflicts with a page's or a repo's content, this file wins — update it whenever anything changes materially.
 
 There's also a browsable copy of this same content at [`source-of-truth.html`](./source-of-truth.html) — same information, easier to skim/share as a page.
 
@@ -10,7 +10,7 @@ There's also a browsable copy of this same content at [`source-of-truth.html`](.
 
 ---
 
-## Project map — 6 repos
+## Project map — 7 repos
 
 | Repo | Visibility | Role | Status |
 |---|---|---|---|
@@ -18,7 +18,8 @@ There's also a browsable copy of this same content at [`source-of-truth.html`](.
 | **`quint-ia-blueprint-funnel`** | private | **The actual live product.** Full $500 Blueprint funnel: intake → Stripe payment → AI-visibility scan → report | **Live**, actively developed, deployed to `blueprint.quintiavantage.com` and `blueprint.aeolatam.com` |
 | `quint-ia-report-generator` | public ⚠️ | Original standalone scan/report engine | **Dead.** Superseded — its pipeline was absorbed in-process into `quint-ia-blueprint-funnel`. Nothing in production routes to it. Recommend archiving/making private (see Decision log) |
 | `quint-ia-mini-checkers` | private | "IVIA Lite" — free interactive checkers meant to embed on `/ivia/*` Framer pages | Partial: 2 of 6 checkers built, rate-limiting/SSRF done, no Turnstile/cooldown/consent |
-| `cold-reach-tool` | private | Internal sales-rep tool: prospect lookups, AI-citation checks, 6-factor lead scoring | Newest (started 2026-09-17), **not yet deployed** — no dedicated DB, DNS still points at blueprint-funnel |
+| `cold-reach-tool` | private | Internal sales tool: shared company list, AI-visibility lookups, rep assignment, outreach messages, HubSpot sync | **Live** at `cold-reach-tool-psi.vercel.app` (Vercel team `aeoforlatam`); PRs #1–#48 merged as of 2026-11-10 |
+| `lead-waterfall-engine` | private | Weekly company discovery (GitHub Actions, Mondays 10:00 UTC) feeding Cold Reach | **Live**; writes only to its own Turso DB (Sheets/HubSpot pushes retired) |
 | `vertia_labs` | private | Origin strategy/brand doc, frozen since 2026-05-04 | Source of `index.html` in this repo (near-identical); holds the only formal brand guidelines and two operational SOPs not duplicated anywhere else |
 
 ---
@@ -71,7 +72,23 @@ None of this blocks anything live — the funnel repo doesn't call it — but it
 
 **`quint-ia-mini-checkers` powers "IVIA Lite" (its official name per the Sales Guide) and is a partial build.** Meant to power free interactive checkers embedded on Framer `/ivia/*` pages, stateless by design (no DB). Only 2 of 6 planned checkers exist: directory presence (LinkedIn/Crunchbase/G2/Capterra via Serper.dev) and an `llms.txt` presence/format check — both ported unchanged from `quint-ia-blueprint-funnel`. Rate limiting (10 req/min/IP, in-memory) and an SSRF guard (rejects private/reserved/metadata IP ranges, re-checked per redirect hop) are genuinely landed. No Turnstile, cooldowns, consent records, or data retention exist at all. Cold-domain prompt generation (needed since nobody supplies buyer questions for a cold domain) is fully spec'd in `docs/ivia-phase-b-scoping.md` but has zero corresponding code. Separately, the business side caps usage at 75 runs/30 days + 50 per closed Blueprint (per the Sales Guide) — a policy layer this repo's own rate limiter doesn't know about or enforce.
 
-**`cold-reach-tool` is internal sales tooling, not yet deployed.** Given a prospect domain, reps get an AI-citation check across 4 engines, a DataForSEO backlink snapshot, a schema/content-shape check, and an `llms.txt` check, plus a generated "approach note." Has real login/admin user management. Just added (2026-09-21) the 6-factor lead-prioritization rubric: US sell-intent, B2B, company size, reachable decision-maker, AI-visibility gap (auto-suggested from its own citation data), audience geography — scored 0–2 each, total null until all six are scored, 10–12 = "Priorizar." The Sales Guide independently documents this exact same 6-factor rubric as the reps' manual qualification method — confirms it's the company-wide standard, not a one-off feature. Split out of `quint-ia-blueprint-funnel` on 2026-09-17 after a shared-DB migration incident blocked both products' deploys. **Per its own README, not yet functional**: no dedicated Turso DB provisioned, Vercel env vars not set, DNS (`cold-reach.quintiavantage.com`) still points at blueprint-funnel, no confirmed end-to-end lookup.
+**`cold-reach-tool` is live internal sales tooling** (updated 2026-11-11), at `cold-reach-tool-psi.vercel.app` on Vercel team `aeoforlatam`, with its own Turso DB. Its plain-language guide is `docs/how-it-works.md` in that repo, and its punch list is `docs/audits/backlog.md`.
+
+- **What it does:** one shared company list (fed by the waterfall, Gemini/HubSpot CSV imports, HubSpot agent leads and reps' own lookups). Each company has exactly one rep, and assignment brings 60-day exclusivity.
+- **The lookup:** 1 buyer question asked of Claude, ChatGPT, Perplexity and Gemini, plus robots.txt, `llms.txt` and DataForSEO checks. It produces talking points and an approach note.
+- **Lead strength:** the same 6-factor rubric as the Sales Guide, the company-wide standard.
+- **Screens:**
+  - "Cold Reach Tool" (Today: who to contact now, follow-ups at 3 business days)
+  - "Revisión de IA" (lookups)
+  - Empresas (search, sort, import, assignment)
+  - one company page with everything (messages from admin-edited templates, Ask Claude on Haiku)
+  - Plantillas
+  - Usuarios (admin only)
+- **Guards:** daily spend caps.
+- **HubSpot:** Cold Reach is the only writer. It pushes companies, owner, status and notes. It pulls enrichment and `lead_source = hubspot-agent` leads. A daily sync runs at 11:17 UTC.
+- **Fixed 2026-11-10 (PR #48):** one invalid website (`virtustant.com}`) had blocked every new-company create in HubSpot.
+
+All Vercel environment variables are Production-only, so preview deploys can't log in or load data.
 
 **`vertia_labs` is frozen (last commit 2026-05-04) but not irrelevant.** `strategic-HTML-src-of-truth.html` is the direct ancestor of this repo's `index.html` (near byte-identical — only a CSS checklist block and a minor grid tweak differ). `brand/Visual Guidelines` is the only formal brand-identity spec in the whole project (color ratios, typography, tier-color mapping) — titled "Internal Brand Reference for Vertia Labs." `core-strategy/` holds condensed strategy docs (market thesis, 3-phase review-discovery methodology, per-tier deliverables, 4-week sprint plan). `delivery-templates/ops-blueprint.md` and `content-frameworks.md` are real operational SOPs — Blueprint delivery process, editorial content standards — that aren't duplicated anywhere else in the project. Worth pulling forward rather than leaving buried in a dormant repo.
 
@@ -136,11 +153,17 @@ Supersedes the old 5 "blocking decisions" from the 2026-08-15 pre-build handoff 
 - [ ] **Archive or make `quint-ia-report-generator` private.** It's dead, still public, and carries an unauthenticated `/api/intake` endpoint plus an unfixed citation-matching bug. Its own sibling repo's status doc already recommends this — just needs doing.
 - [ ] **Confirm what `quintiavantage.com` (root domain) actually serves.** If it's a Framer site as hypothesized, decide what (if anything) this repo's 6 marketing pages are for going forward — reference/prototype, or retire.
 - [ ] **Fix the stale $2,500 Citation Engine figure in `index.html`** (current price is $2,750). Its branding is already swept to AEO For LatAm.
-- [ ] **Sweep the AEO For LatAm rename into the other repos** (`quint-ia-blueprint-funnel`, `quint-ia-mini-checkers`, `quintia-outreach`, `lead-waterfall-engine`), and decide whether to move domains off `quintiavantage.com`.
+- [ ] **Sweep the AEO For LatAm rename into the other repos** (`quint-ia-blueprint-funnel`, `quint-ia-mini-checkers`, `quintia-outreach`, `lead-waterfall-engine`; done for this repo and `cold-reach-tool`), and decide whether to move domains off `quintiavantage.com`.
 - [ ] **Decide whether the retainer tiers need a real self-serve checkout path** — they're already sold manually by reps, so this is an efficiency/scale question, not a "does this product exist" question.
 - [ ] **Resolve the ICP conflict**: reconcile the public site's LatAm-free copy with the sales team's LatAm-only actual targeting (see Go-to-market reality above).
 - [ ] **Add Project Work** as a real self-serve or at-least-documented offering wherever the marketing site ends up living — it doesn't appear anywhere in this repo's copy today.
-- [ ] **Finish deploying `cold-reach-tool`** — dedicated Turso DB, Vercel env vars, DNS repoint from blueprint-funnel, one confirmed end-to-end lookup.
+- [x] ~~Finish deploying `cold-reach-tool`~~ — live (own Turso DB and Vercel env vars; lookups and HubSpot sync confirmed running in 2026-11).
+- [ ] **Cold Reach open items (2026-11-11):**
+  - Confirm the 28 companies held back by the `virtustant.com}` bug reached HubSpot after the next Sync now.
+  - Add a physical mailing address to the email footer (CAN-SPAM).
+  - Decide on Hunter.io: its code exists only in `lead-waterfall-engine`, and the weekly job never runs it or passes it a key. Recommended: an on-demand "Find email" button in Cold Reach.
+  - Turn off HubSpot's "Create and associate companies with contacts" setting. It creates junk companies from email.
+  - Delete the 12 merged or obsolete `lead-waterfall-engine` branches.
 - [ ] **Pull `vertia_labs/delivery-templates/`** (ops-blueprint.md, content-frameworks.md) and `brand/Visual Guidelines` **into an active repo** rather than leaving them in a frozen one nobody else seems to reference.
 - [ ] Everything previously listed for this repo specifically: robots.txt, llms.txt, sitemap.xml, GA4, CNAME (pending the domain question above).
 

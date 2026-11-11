@@ -137,7 +137,7 @@
   <div class="eyebrow">Internal · Whole-Project Status</div>
   <h1>Source of Truth</h1>
   <p class="subtitle">Canonical status page for the AEO For LatAm project — all 6 repos, not just <code>leonardoquintero-ctrl.github.io</code>. If a page's or a repo's live content conflicts with this document, this document wins — update it whenever anything changes materially.</p>
-  <div class="meta">Last rebuilt: 2026-09-21 · Cross-checked against the official <strong>Sales Guide v1.0</strong> (dated 2026-09-19) · Mirrors <code class="file">README.md</code> in the <code class="file">leonardoquintero-ctrl.github.io</code> repo root</div>
+  <div class="meta">Last rebuilt: 2026-09-21 · Cold Reach + lead-waterfall-engine updated 2026-11-11 · Cross-checked against the official <strong>Sales Guide v1.0</strong> (dated 2026-09-19) · Mirrors <code class="file">README.md</code> in the <code class="file">leonardoquintero-ctrl.github.io</code> repo root</div>
   <div class="headline-facts">
     <div class="fact-pill"><span class="label">Brand name (current)</span>AEO For LatAm — renamed 2026-10-26 from Quint·IA Vantage (earlier: "Vertia Labs"). Domains and repo names unchanged; other repos not yet swept</div>
     <div class="fact-pill"><span class="label">Retainer pricing (current)</span>$950 / $1,750 / $2,750 (Foundation / Momentum / Citation Engine) — confirmed against the Sales Guide, exact match</div>
@@ -151,7 +151,7 @@
 <nav class="toc" aria-label="Table of contents">
   <h2>On this page</h2>
   <ol>
-    <li><a href="#project-map">Project map — 6 repos</a></li>
+    <li><a href="#project-map">Project map — 7 repos</a></li>
     <li><a href="#this-repo">This repo (leonardoquintero-ctrl.github.io)</a></li>
     <li><a href="#architecture">Product architecture — what's live</a></li>
     <li><a href="#pricing">Pricing across all sources</a></li>
@@ -165,7 +165,7 @@
 </nav>
 
 <section id="project-map">
-  <h2>Project map — 6 repos <a class="anchor" href="#project-map">#</a></h2>
+  <h2>Project map — 7 repos <a class="anchor" href="#project-map">#</a></h2>
   <table>
     <thead><tr><th>Repo</th><th>Visibility</th><th>Role</th><th>Status</th></tr></thead>
     <tbody>
@@ -173,7 +173,8 @@
       <tr><td><strong><code class="file">quint-ia-blueprint-funnel</code></strong></td><td>private</td><td><strong>The actual live product.</strong> Full $500 Blueprint funnel: intake → Stripe → AI-visibility scan → report</td><td><span class="badge badge-ok">live, active</span></td></tr>
       <tr><td><code class="file">quint-ia-report-generator</code></td><td>public ⚠️</td><td>Original standalone scan/report engine</td><td><span class="badge badge-risk">dead, recommend archiving</span></td></tr>
       <tr><td><code class="file">quint-ia-mini-checkers</code></td><td>private</td><td>"IVIA Lite" — free checkers for Framer <code>/ivia/*</code> pages</td><td><span class="badge badge-warn">partial: 2 of 6 checkers</span></td></tr>
-      <tr><td><code class="file">cold-reach-tool</code></td><td>private</td><td>Internal sales-rep tool: lookups, AI-citation checks, lead scoring</td><td><span class="badge badge-warn">not yet deployed</span></td></tr>
+      <tr><td><code class="file">cold-reach-tool</code></td><td>private</td><td>Internal sales tool: shared company list, AI-visibility lookups, rep assignment, outreach messages, HubSpot sync</td><td><span class="badge badge-ok">live</span></td></tr>
+      <tr><td><code class="file">lead-waterfall-engine</code></td><td>private</td><td>Weekly company discovery (GitHub Actions, Mondays 10:00 UTC) feeding Cold Reach</td><td><span class="badge badge-ok">live</span></td></tr>
       <tr><td><code class="file">vertia_labs</code></td><td>private</td><td>Origin strategy/brand doc, frozen since 2026-05-04</td><td><span class="badge badge-muted">frozen, still useful</span></td></tr>
     </tbody>
   </table>
@@ -237,9 +238,21 @@
   </div>
 
   <div class="repo-card">
-    <h3><span class="repo-name">cold-reach-tool</span> <span class="badge badge-warn">not yet deployed</span></h3>
-    <p>Internal sales tooling — real rep login/admin. Given a prospect domain: AI-citation check across 4 engines, DataForSEO backlink snapshot, schema/content-shape check, <code>llms.txt</code> check, generated "approach note." Just added (2026-09-21) a <strong>6-factor lead-prioritization rubric</strong>: US sell-intent, B2B, company size, reachable decision-maker, AI-visibility gap (auto-suggested from its own citation data), audience geography — each 0–2, total null until all six scored, 10–12 = "Priorizar." The Sales Guide independently documents this exact same 6-factor rubric as the reps' manual qualification method — confirms it's the company-wide standard, not a one-off feature.</p>
-    <p>Split out of <code class="file">quint-ia-blueprint-funnel</code> on 2026-09-17 after a shared-DB migration incident blocked both products' deploys. <strong>Per its own README, not yet functional</strong>: no dedicated Turso DB provisioned, Vercel env vars not set, DNS (<code>cold-reach.quintiavantage.com</code>) still points at blueprint-funnel, no confirmed end-to-end lookup.</p>
+    <h3><span class="repo-name">cold-reach-tool</span> <span class="badge badge-ok">live</span></h3>
+    <p>Internal sales tool at <code>cold-reach-tool-psi.vercel.app</code> (Vercel team <code>aeoforlatam</code>, own Turso DB). Plain-language guide: <code class="file">docs/how-it-works.md</code>; punch list: <code class="file">docs/audits/backlog.md</code>. PRs #1–#48 merged as of 2026-11-10.</p>
+    <ul>
+      <li><strong>One shared company list</strong>, fed by the waterfall, Gemini/HubSpot CSV imports, HubSpot agent leads and reps' own lookups. Each company has exactly one rep; assignment gives 60-day exclusivity.</li>
+      <li><strong>Lookup:</strong> 1 buyer question asked of Claude, ChatGPT, Perplexity and Gemini, plus robots.txt, <code>llms.txt</code> and DataForSEO checks, producing talking points and an approach note. Daily spend caps.</li>
+      <li><strong>Screens:</strong> "Cold Reach Tool" (Today: who to contact now, follow-ups at 3 business days), "Revisión de IA" (lookups), Empresas (search, sort, import, assignment), one company page with everything (templated messages, Ask Claude on Haiku), Plantillas, Usuarios (admin).</li>
+      <li><strong>Lead strength:</strong> the 6-factor rubric the Sales Guide documents as the reps' qualification method, so it's the company-wide standard.</li>
+      <li><strong>HubSpot:</strong> Cold Reach is the only writer. It pushes companies, owner, status and notes, and pulls enrichment and <code>lead_source = hubspot-agent</code> leads. Daily sync at 11:17 UTC. On 2026-11-10 (PR #48), one invalid website (<code>virtustant.com}</code>) was found blocking every new-company create, and fixed.</li>
+    </ul>
+    <div class="callout warn">All Vercel environment variables are Production-only, so preview deploys can't log in or load data. Test on the live URL.</div>
+  </div>
+
+  <div class="repo-card">
+    <h3><span class="repo-name">lead-waterfall-engine</span> <span class="badge badge-ok">live</span></h3>
+    <p>Weekly discovery job (GitHub Actions, Mondays 10:00 UTC). It searches job boards via Exa for LatAm companies hiring for US go-to-market, scores and tags them, and finds missing websites. It writes only to its own Turso DB, which Cold Reach reads; its Google Sheets and HubSpot pushes were retired. Hunter.io email-pattern code exists (<code class="file">src/hunter.ts</code>) but the weekly job never runs it and passes it no key.</p>
   </div>
 
   <div class="repo-card">
@@ -320,11 +333,20 @@
     <li><strong>Archive or make <code class="file">quint-ia-report-generator</code> private.</strong> Dead, still public, unauthenticated <code>/api/intake</code>, unfixed citation bug. Its own sibling repo already recommends this.</li>
     <li><strong>Confirm what <code>quintiavantage.com</code> (root domain) actually serves.</strong> If Framer as hypothesized, decide what this repo's 6 marketing pages are for going forward.</li>
     <li>Fix the stale $2,500 Citation Engine figure in <code class="file">index.html</code> (branding already swept).</li>
-    <li>Sweep the AEO For LatAm rename into the other repos, and decide whether to move domains off <code>quintiavantage.com</code>.</li>
+    <li>Sweep the AEO For LatAm rename into the other repos (done for this repo and <code class="file">cold-reach-tool</code>), and decide whether to move domains off <code>quintiavantage.com</code>.</li>
     <li>Decide whether the retainer tiers need a real self-serve checkout path — they're already sold manually by reps, so this is an efficiency/scale question, not a "does this product exist" question.</li>
     <li><strong>Resolve the ICP conflict</strong>: reconcile the public site's LatAm-free copy with the sales team's LatAm-only actual targeting (see Go-to-market section).</li>
     <li>Add <code class="file">quintia-quick-start-blueprint.html</code>'s missing offering, <strong>Project Work</strong>, if these pages are ever treated as the real marketing site — it doesn't appear anywhere in this repo's copy today.</li>
-    <li>Finish deploying <code class="file">cold-reach-tool</code> — dedicated Turso DB, Vercel env vars, DNS repoint, one confirmed end-to-end lookup.</li>
+    <li><s>Finish deploying <code class="file">cold-reach-tool</code></s> — live (confirmed 2026-11).</li>
+    <li><strong>Cold Reach (2026-11-11):</strong>
+      <ul>
+        <li>Confirm the 28 companies held back by the <code>virtustant.com}</code> bug reached HubSpot after the next Sync now.</li>
+        <li>Add a physical mailing address to the email footer (CAN-SPAM).</li>
+        <li>Decide on Hunter.io (recommended: an on-demand "Find email" button).</li>
+        <li>Turn off HubSpot's "Create and associate companies with contacts" setting.</li>
+        <li>Delete the 12 merged or obsolete <code class="file">lead-waterfall-engine</code> branches.</li>
+      </ul>
+    </li>
     <li>Pull <code class="file">vertia_labs/delivery-templates/</code> and <code>brand/Visual Guidelines</code> into an active repo.</li>
     <li>Everything previously listed for this repo: robots.txt, llms.txt, sitemap.xml, GA4, CNAME (pending the domain question above).</li>
   </ul>
@@ -378,7 +400,7 @@
     <li>Archive/privatize <code class="file">quint-ia-report-generator</code></li>
     <li>Confirm the real <code>quintiavantage.com</code> deployment (Framer hypothesis)</li>
     <li>Fix <code class="file">index.html</code>'s stale Citation Engine price</li>
-    <li>Finish deploying <code class="file">cold-reach-tool</code></li>
+    <li>Cold Reach: confirm the HubSpot backlog synced; add the CAN-SPAM mailing address; decide on Hunter.io</li>
     <li>Add Project Work as a real self-serve or at-least-documented offering wherever the marketing site ends up living</li>
     <li>Add robots.txt / llms.txt / sitemap.xml / GA4 / CNAME to whichever repo ends up being the real marketing site</li>
   </ul>
