@@ -1,6 +1,6 @@
 # Source of Truth — AEO For LatAm project
 
-Last rebuilt: 2026-09-21, from a full audit of all 6 repos (Cold Reach and lead-waterfall-engine sections updated 2026-11-11) in the project plus the official confidential **Sales Guide v1.0** (dated 2026-09-19). This file is the canonical status doc. If something here conflicts with a page's or a repo's content, this file wins — update it whenever anything changes materially.
+Last rebuilt: 2026-09-21, from a full audit of all 6 repos (Cold Reach and lead-waterfall-engine sections updated 2026-11-25) in the project plus the official confidential **Sales Guide v1.0** (dated 2026-09-19). This file is the canonical status doc. If something here conflicts with a page's or a repo's content, this file wins — update it whenever anything changes materially.
 
 There's also a browsable copy of this same content at [`source-of-truth.html`](./source-of-truth.html) — same information, easier to skim/share as a page.
 
@@ -72,21 +72,21 @@ None of this blocks anything live — the funnel repo doesn't call it — but it
 
 **`quint-ia-mini-checkers` powers "IVIA Lite" (its official name per the Sales Guide) and is a partial build.** Meant to power free interactive checkers embedded on Framer `/ivia/*` pages, stateless by design (no DB). Only 2 of 6 planned checkers exist: directory presence (LinkedIn/Crunchbase/G2/Capterra via Serper.dev) and an `llms.txt` presence/format check — both ported unchanged from `quint-ia-blueprint-funnel`. Rate limiting (10 req/min/IP, in-memory) and an SSRF guard (rejects private/reserved/metadata IP ranges, re-checked per redirect hop) are genuinely landed. No Turnstile, cooldowns, consent records, or data retention exist at all. Cold-domain prompt generation (needed since nobody supplies buyer questions for a cold domain) is fully spec'd in `docs/ivia-phase-b-scoping.md` but has zero corresponding code. Separately, the business side caps usage at 75 runs/30 days + 50 per closed Blueprint (per the Sales Guide) — a policy layer this repo's own rate limiter doesn't know about or enforce.
 
-**`cold-reach-tool` is live internal sales tooling** (updated 2026-11-11), at `cold-reach-tool-psi.vercel.app` on Vercel team `aeoforlatam`, with its own Turso DB. Its plain-language guide is `docs/how-it-works.md` in that repo, and its punch list is `docs/audits/backlog.md`.
+**`cold-reach-tool` is live internal sales tooling** (updated 2026-11-25; PRs #1–#73 merged), at `cold-reach-tool-psi.vercel.app` on Vercel team `aeoforlatam`, with its own Turso DB. Its plain-language guide is `docs/how-it-works.md` in that repo, and its punch list is `docs/audits/backlog.md`.
 
 - **What it does:** one shared company list (fed by the waterfall, Gemini/HubSpot CSV imports, HubSpot agent leads and reps' own lookups). Each company has exactly one rep, and assignment brings 60-day exclusivity.
 - **The lookup:** 1 buyer question asked of Claude, ChatGPT, Perplexity and Gemini, plus robots.txt, `llms.txt` and DataForSEO checks. It produces talking points and an approach note.
 - **Lead strength:** the same 6-factor rubric as the Sales Guide, the company-wide standard.
 - **Screens:**
-  - "Cold Reach Tool" (Today: who to contact now, follow-ups at 3 business days)
+  - "Mis empresas" (Today) in three tabs: **Por hacer** (follow-ups at 3 business days, call-later dates, LinkedIn reminders), **Nuevas** (not contacted, no AI review; strongest lead first) and **Vistas** (AI review done, not contacted yet)
+  - **Pipeline**: companies by stage, "Atascada" after 7 days without a change (3 business days after a reply); admin sees all reps, a rep only their own
   - "Revisión de IA" (lookups)
-  - Empresas (search, sort, import, assignment)
-  - one company page with everything (messages from admin-edited templates, Ask Claude on Haiku)
-  - Plantillas
-  - Usuarios (admin only)
-- **Guards:** daily spend caps.
-- **HubSpot:** Cold Reach is the only writer. It pushes companies, owner, status and notes. It pulls enrichment and `lead_source = hubspot-agent` leads. A daily sync runs at 11:17 UTC.
-- **Fixed 2026-11-10 (PR #48):** one invalid website (`virtustant.com}`) had blocked every new-company create in HubSpot.
+  - Todas las empresas (search, sort, import, assignment) with **Posibles duplicados** (same company under two websites: keep one and merge, or dismiss)
+  - one company page with everything: templated messages (`{{reunion}}` fills the team's booking link), Ask Claude on Haiku, **Etapa en LinkedIn** (follow → request → accepted → chat → pitched), admin-only **Buscar correo** (Hunter.io, 25 searches/month, cached 90 days), and an **Actividad** timeline (who changed what; other reps shown to a rep as "Otro vendedor")
+  - Plantillas (templates + booking link), Etapas (weekly LinkedIn stages), Gasto, Usuarios (admin only)
+- **Guards:** daily spend caps. Since 2026-11-25 an AI engine that passes 75 s is cancelled, not just abandoned (it used to keep running and billing), with at most one quick retry.
+- **HubSpot (slim since 2026-11-25, for the free plan):** Cold Reach is the only writer. It sends company name, website, owner, two custom fields (Cold Reach stage, Assigned rep), contacts with native fields only, and a timeline note on every change. Everything else stays in Turso. It pulls HubSpot's company details back. A daily sync runs at 11:17 UTC. The HubSpot agent never sent a lead.
+- **Fixed 2026-11-10 (PR #48):** one invalid website (`virtustant.com}`) had blocked every new-company create in HubSpot; the 28 held-back companies were confirmed in HubSpot on 2026-11-11.
 
 All Vercel environment variables are Production-only, so preview deploys can't log in or load data.
 
@@ -158,12 +158,14 @@ Supersedes the old 5 "blocking decisions" from the 2026-08-15 pre-build handoff 
 - [ ] **Resolve the ICP conflict**: reconcile the public site's LatAm-free copy with the sales team's LatAm-only actual targeting (see Go-to-market reality above).
 - [ ] **Add Project Work** as a real self-serve or at-least-documented offering wherever the marketing site ends up living — it doesn't appear anywhere in this repo's copy today.
 - [x] ~~Finish deploying `cold-reach-tool`~~ — live (own Turso DB and Vercel env vars; lookups and HubSpot sync confirmed running in 2026-11).
-- [ ] **Cold Reach open items (2026-11-11):**
-  - Confirm the 28 companies held back by the `virtustant.com}` bug reached HubSpot after the next Sync now.
-  - Add a physical mailing address to the email footer (CAN-SPAM).
-  - Decide on Hunter.io: its code exists only in `lead-waterfall-engine`, and the weekly job never runs it or passes it a key. Recommended: an on-demand "Find email" button in Cold Reach.
+- [ ] **Cold Reach open items (2026-11-25):**
+  - Add a physical mailing address to the email footer (CAN-SPAM). Only Leonardo can supply it.
+  - Confirm the first real "Buscar correo" works with the replaced `HUNTER_API_KEY` (the first key was rejected by Hunter).
+  - Before downgrading HubSpot to free: press Sync now once (moves every company to the slim format), then optionally archive the old Cold Reach properties in HubSpot (keep Cold Reach stage and Assigned rep).
+  - Merge the known duplicate pairs on "Posibles duplicados" (Albo, Buk, Clip, Kushki, Kueski, Yuno, Scale Army, Plutto); dismiss Jüsto/Justo (different companies).
   - Turn off HubSpot's "Create and associate companies with contacts" setting. It creates junk companies from email.
   - Delete the 12 merged or obsolete `lead-waterfall-engine` branches.
+  - ~~Confirm the 28 held-back companies reached HubSpot~~ (done 2026-11-11). ~~Decide on Hunter.io~~ (built as admin-only "Buscar correo", 2026-11-11).
 - [ ] **Pull `vertia_labs/delivery-templates/`** (ops-blueprint.md, content-frameworks.md) and `brand/Visual Guidelines` **into an active repo** rather than leaving them in a frozen one nobody else seems to reference.
 - [ ] Everything previously listed for this repo specifically: robots.txt, llms.txt, sitemap.xml, GA4, CNAME (pending the domain question above).
 
