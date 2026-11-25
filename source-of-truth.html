@@ -137,7 +137,7 @@
   <div class="eyebrow">Internal · Whole-Project Status</div>
   <h1>Source of Truth</h1>
   <p class="subtitle">Canonical status page for the AEO For LatAm project — all 6 repos, not just <code>leonardoquintero-ctrl.github.io</code>. If a page's or a repo's live content conflicts with this document, this document wins — update it whenever anything changes materially.</p>
-  <div class="meta">Last rebuilt: 2026-09-21 · Cold Reach + lead-waterfall-engine updated 2026-11-11 · Cross-checked against the official <strong>Sales Guide v1.0</strong> (dated 2026-09-19) · Mirrors <code class="file">README.md</code> in the <code class="file">leonardoquintero-ctrl.github.io</code> repo root</div>
+  <div class="meta">Last rebuilt: 2026-09-21 · Cold Reach + lead-waterfall-engine updated 2026-11-25 · Cross-checked against the official <strong>Sales Guide v1.0</strong> (dated 2026-09-19) · Mirrors <code class="file">README.md</code> in the <code class="file">leonardoquintero-ctrl.github.io</code> repo root</div>
   <div class="headline-facts">
     <div class="fact-pill"><span class="label">Brand name (current)</span>AEO For LatAm — renamed 2026-10-26 from Quint·IA Vantage (earlier: "Vertia Labs"). Domains and repo names unchanged; other repos not yet swept</div>
     <div class="fact-pill"><span class="label">Retainer pricing (current)</span>$950 / $1,750 / $2,750 (Foundation / Momentum / Citation Engine) — confirmed against the Sales Guide, exact match</div>
@@ -239,13 +239,14 @@
 
   <div class="repo-card">
     <h3><span class="repo-name">cold-reach-tool</span> <span class="badge badge-ok">live</span></h3>
-    <p>Internal sales tool at <code>cold-reach-tool-psi.vercel.app</code> (Vercel team <code>aeoforlatam</code>, own Turso DB). Plain-language guide: <code class="file">docs/how-it-works.md</code>; punch list: <code class="file">docs/audits/backlog.md</code>. PRs #1–#48 merged as of 2026-11-10.</p>
+    <p>Internal sales tool at <code>cold-reach-tool-psi.vercel.app</code> (Vercel team <code>aeoforlatam</code>, own Turso DB). Plain-language guide: <code class="file">docs/how-it-works.md</code>; punch list: <code class="file">docs/audits/backlog.md</code>. PRs #1–#73 merged as of 2026-11-25.</p>
     <ul>
       <li><strong>One shared company list</strong>, fed by the waterfall, Gemini/HubSpot CSV imports, HubSpot agent leads and reps' own lookups. Each company has exactly one rep; assignment gives 60-day exclusivity.</li>
       <li><strong>Lookup:</strong> 1 buyer question asked of Claude, ChatGPT, Perplexity and Gemini, plus robots.txt, <code>llms.txt</code> and DataForSEO checks, producing talking points and an approach note. Daily spend caps.</li>
-      <li><strong>Screens:</strong> "Cold Reach Tool" (Today: who to contact now, follow-ups at 3 business days), "Revisión de IA" (lookups), Empresas (search, sort, import, assignment), one company page with everything (templated messages, Ask Claude on Haiku), Plantillas, Usuarios (admin).</li>
+      <li><strong>Screens:</strong> "Mis empresas" in three tabs (<strong>Por hacer</strong>: follow-ups at 3 business days, call-later dates, LinkedIn reminders; <strong>Nuevas</strong>: no AI review yet; <strong>Vistas</strong>: AI review done, not contacted), <strong>Pipeline</strong> (by stage, "Atascada" after 7 days), "Revisión de IA" (lookups), Todas las empresas (search, sort, import, assignment, <strong>Posibles duplicados</strong>), one company page with everything (templated messages with <code>{{reunion}}</code> booking link, Ask Claude on Haiku, Etapa en LinkedIn, admin-only Hunter "Buscar correo", <strong>Actividad</strong> timeline), Plantillas, Etapas, Gasto, Usuarios (admin).</li>
       <li><strong>Lead strength:</strong> the 6-factor rubric the Sales Guide documents as the reps' qualification method, so it's the company-wide standard.</li>
-      <li><strong>HubSpot:</strong> Cold Reach is the only writer. It pushes companies, owner, status and notes, and pulls enrichment and <code>lead_source = hubspot-agent</code> leads. Daily sync at 11:17 UTC. On 2026-11-10 (PR #48), one invalid website (<code>virtustant.com}</code>) was found blocking every new-company create, and fixed.</li>
+      <li><strong>HubSpot (slim since 2026-11-25, for the free plan):</strong> Cold Reach is the only writer. It sends company name, website, owner, two custom fields (Cold Reach stage, Assigned rep), native contact fields and a timeline note on every change; everything else stays in Turso. It pulls HubSpot's company details back. Daily sync at 11:17 UTC. On 2026-11-10 (PR #48), one invalid website (<code>virtustant.com}</code>) was found blocking every new-company create, and fixed.</li>
+      <li><strong>AI cost guard (2026-11-25):</strong> an engine call that passes 75 s is now cancelled (it used to keep running and billing, with up to two SDK retries); at most one quick retry.</li>
     </ul>
     <div class="callout warn">All Vercel environment variables are Production-only, so preview deploys can't log in or load data. Test on the live URL.</div>
   </div>
@@ -338,13 +339,15 @@
     <li><strong>Resolve the ICP conflict</strong>: reconcile the public site's LatAm-free copy with the sales team's LatAm-only actual targeting (see Go-to-market section).</li>
     <li>Add <code class="file">quintia-quick-start-blueprint.html</code>'s missing offering, <strong>Project Work</strong>, if these pages are ever treated as the real marketing site — it doesn't appear anywhere in this repo's copy today.</li>
     <li><s>Finish deploying <code class="file">cold-reach-tool</code></s> — live (confirmed 2026-11).</li>
-    <li><strong>Cold Reach (2026-11-11):</strong>
+    <li><strong>Cold Reach (2026-11-25):</strong>
       <ul>
-        <li>Confirm the 28 companies held back by the <code>virtustant.com}</code> bug reached HubSpot after the next Sync now.</li>
         <li>Add a physical mailing address to the email footer (CAN-SPAM).</li>
-        <li>Decide on Hunter.io (recommended: an on-demand "Find email" button).</li>
+        <li>Confirm the first real "Buscar correo" works with the replaced <code>HUNTER_API_KEY</code>.</li>
+        <li>Before the HubSpot downgrade: Sync now once; optionally archive the old Cold Reach properties (keep Cold Reach stage, Assigned rep).</li>
+        <li>Merge the known duplicate pairs on "Posibles duplicados"; dismiss Jüsto/Justo.</li>
         <li>Turn off HubSpot's "Create and associate companies with contacts" setting.</li>
         <li>Delete the 12 merged or obsolete <code class="file">lead-waterfall-engine</code> branches.</li>
+        <li><s>Confirm the 28 held-back companies reached HubSpot</s> (done). <s>Decide on Hunter.io</s> (built).</li>
       </ul>
     </li>
     <li>Pull <code class="file">vertia_labs/delivery-templates/</code> and <code>brand/Visual Guidelines</code> into an active repo.</li>
@@ -400,7 +403,7 @@
     <li>Archive/privatize <code class="file">quint-ia-report-generator</code></li>
     <li>Confirm the real <code>quintiavantage.com</code> deployment (Framer hypothesis)</li>
     <li>Fix <code class="file">index.html</code>'s stale Citation Engine price</li>
-    <li>Cold Reach: confirm the HubSpot backlog synced; add the CAN-SPAM mailing address; decide on Hunter.io</li>
+    <li>Cold Reach: add the CAN-SPAM mailing address; Sync now before the HubSpot downgrade; merge the known duplicates</li>
     <li>Add Project Work as a real self-serve or at-least-documented offering wherever the marketing site ends up living</li>
     <li>Add robots.txt / llms.txt / sitemap.xml / GA4 / CNAME to whichever repo ends up being the real marketing site</li>
   </ul>
